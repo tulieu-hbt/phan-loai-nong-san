@@ -2,49 +2,52 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
     padding: 20px;
+    text-align: center;
 }
 
 h1 {
-    text-align: center;
     color: #333;
+}
+
+#cameraContainer {
+    position: relative;
 }
 
 #camera {
     width: 100%;
-    max-width: 640px;
+    height: auto;
     border: 2px solid #333;
-    border-radius: 8px;
 }
 
 #result {
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: 18px;
-    text-align: center;
-    color: #d9534f; /* Màu đỏ cho thông báo lỗi */
+    color: #666;
 }
 
-#predictions {
-    margin-top: 20px;
-}
-
-p {
-    margin: 5px 0;
-}
-
-#captureButton {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #5bc0de; /* Màu xanh nhạt */
+button {
+    background-color: #5cb85c;
     color: white;
     border: none;
-    border-radius: 5px;
+    padding: 10px 15px;
+    margin-top: 15px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 16px;
 }
 
-#captureButton:hover {
-    background-color: #31b0d5; /* Màu xanh đậm hơn khi hover */
+button:hover {
+    background-color: #4cae4c;
+}
+
+.predictions {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #000;
 }
