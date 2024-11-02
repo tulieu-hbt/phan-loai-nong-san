@@ -41,22 +41,21 @@ async function predict() {
     try {
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
         const image = tf.browser.fromPixels(canvas);
-        const resizedImage = tf.image.resizeBilinear(image, [224, 224]); // Thay [224, 224] bằng kích thước đầu vào của mô hình nếu cần
+        const resizedImage = tf.image.resizeBilinear(image, [224, 224]); 
         const normalizedImage = resizedImage.div(255.0);
-
-        // Thêm chiều batch_size
         const inputTensor = tf.expandDims(normalizedImage, 0); 
 
         const predictions = await model.predict(inputTensor).data();
-        // Định nghĩa mảng nhãn (thay thế bằng nhãn của mô hình của bạn)
-        const classLabels = ["dragon fruit","banana"; "tomato","grape","lemon"]; 
+
+        // Sửa lỗi: Thay thế dấu chấm phẩy bằng dấu phẩy
+        const classLabels = ["dragon fruit", "banana", "tomato", "grape", "lemon"]; 
+
         let maxProbability = 0;
         let predictedClass = "";
         for (let i = 0; i < predictions.length; i++) {
             if (predictions[i] > maxProbability) {
                 maxProbability = predictions[i];
-                /*predictedClass = model.getClassLabels()[i]; // Giả sử mô hình của bạn có phương thức getClassLabels()*/
-                predictedClass = classLabels[i]; // Lấy nhãn từ mảng classLabels
+                predictedClass = classLabels[i]; 
             }
         }
         result.innerText = `Kết quả dự đoán: ${predictedClass} (${(maxProbability * 100).toFixed(2)}%)`;
