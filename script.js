@@ -5,11 +5,14 @@ const video = document.getElementById('camera');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-// Hàm tải mô hình
+// Đảm bảo đã import thư viện Teachable Machine
+// <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest"></script> 
+
 async function loadModel() {
     const modelURL = "model/model.json"; 
     console.log("Đang tải mô hình từ:", modelURL);
     try {
+        // Sử dụng tmImage.load để tải mô hình Teachable Machine
         model = await tmImage.load(modelURL); 
         console.log("Mô hình đã được tải thành công:", model);
         result.innerText = "Mô hình đã sẵn sàng.";
