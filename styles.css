@@ -1,0 +1,21 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+
+video {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    width: 600px; /* Điều chỉnh kích thước video */
+    height: 400px; /* Điều chỉnh kích thước video */
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
