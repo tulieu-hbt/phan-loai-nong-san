@@ -2,24 +2,20 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nhận Diện Nông Sản</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Kết nối đến tệp CSS -->
-    
-    <!-- Thư viện TensorFlow.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
-    
-    <!-- Thư viện Teachable Machine -->
-    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <title>Phân Biệt Nông Sản</title>
+    <link rel="stylesheet" href="style.css"> <!-- Liên kết tới tệp CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script> <!-- Thư viện TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image"></script> <!-- Thư viện Teachable Machine -->
 </head>
 <body>
-    <h1>Nhận Diện Nông Sản</h1>
-    <video id="camera" autoplay playsinline></video>
-    <br>
-    <button id="start-button">Bắt Đầu Nhận Diện</button>
-    <div id="result">Kết quả sẽ hiển thị ở đây.</div>
-
-    <script src="script.js"></script> <!-- Kết nối đến tệp JavaScript -->
+    <div id="app">
+        <h1>Ứng Dụng Phân Biệt Nông Sản</h1>
+        <video id="camera" width="640" height="480" autoplay></video>
+        <div id="result">Đang tải mô hình...</div>
+        <button id="captureButton">Chụp Ảnh</button>
+        <div id="predictions"></div>
+    </div>
+    <script src="script.js"></script> <!-- Liên kết tới tệp JavaScript -->
 </body>
 </html>
