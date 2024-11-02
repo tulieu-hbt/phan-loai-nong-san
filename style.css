@@ -24,6 +24,10 @@ h1 {
 #result {
     font-size: 1.2em; /* Kích thước chữ cho thông báo */
     margin-bottom: 20px; /* Khoảng cách dưới thông báo */
+    padding: 10px; /* Khoảng cách bên trong */
+    background-color: #fff; /* Màu nền trắng cho thông báo */
+    border-radius: 8px; /* Bo tròn góc cho thông báo */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Đổ bóng cho thông báo */
 }
 
 button {
@@ -57,5 +61,9 @@ button:hover {
     button {
         padding: 10px 20px; /* Kích thước nút trên màn hình nhỏ */
         font-size: 14px; /* Kích thước chữ cho nút trên màn hình nhỏ */
+    }
+
+    #result {
+        font-size: 1em; /* Kích thước chữ cho thông báo trên màn hình nhỏ */
     }
 }
