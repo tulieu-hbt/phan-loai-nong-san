@@ -1,21 +1,50 @@
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
 }
 
-video {
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    width: 600px; /* Điều chỉnh kích thước video */
-    height: 400px; /* Điều chỉnh kích thước video */
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+#camera {
+    width: 100%;
+    max-width: 640px;
+    border: 2px solid #333;
+    border-radius: 8px;
 }
 
 #result {
     margin-top: 20px;
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: #d9534f; /* Màu đỏ cho thông báo lỗi */
+}
+
+#predictions {
+    margin-top: 20px;
+}
+
+p {
+    margin: 5px 0;
+}
+
+#captureButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #5bc0de; /* Màu xanh nhạt */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#captureButton:hover {
+    background-color: #31b0d5; /* Màu xanh đậm hơn khi hover */
 }
