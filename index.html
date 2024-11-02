@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phân Biệt Nông Sản</title>
-    <link rel="stylesheet" href="style.css"> <!-- Liên kết tới tệp CSS -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script> <!-- Thư viện TensorFlow.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image"></script> <!-- Thư viện Teachable Machine -->
+    <link rel="stylesheet" href="style.css">
+    <title>Ứng Dụng Phân Biệt Nông Sản</title>
 </head>
 <body>
-    <div id="app">
+    <div class="container">
         <h1>Ứng Dụng Phân Biệt Nông Sản</h1>
-        <video id="camera" width="640" height="480" autoplay></video>
-        <div id="result">Đang tải mô hình...</div>
-        <button id="captureButton">Chụp Ảnh</button>
-        <div id="predictions"></div>
+        <div id="cameraContainer">
+            <video id="camera" autoplay></video>
+            <p id="result">Đang tải mô hình...</p>
+            <button id="captureButton">Chụp Ảnh</button>
+        </div>
+        <div id="predictions" class="predictions"></div>
     </div>
-    <script src="script.js"></script> <!-- Liên kết tới tệp JavaScript -->
+
+    <script src="script.js" defer></script>
 </body>
 </html>
