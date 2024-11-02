@@ -6,9 +6,7 @@ const video = document.getElementById('camera');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-// Đảm bảo đã import thư viện Teachable Machine
-// <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest"></script> 
-
+// Hàm tải mô hình
 async function loadModel() {
     const modelURL = `${URL}model.json`; // Đường dẫn tới model.json
     console.log("Đang tải mô hình từ:", modelURL);
@@ -47,7 +45,6 @@ async function predict() {
     const image = tf.browser.fromPixels(canvas);
 
     // Tiền xử lý ảnh (nếu cần)
-    // Ví dụ: thay đổi kích thước, chuẩn hóa, ...
     const resizedImage = tf.image.resizeBilinear(image, [224, 224]); // Thay đổi kích thước ảnh thành 224x224
     const normalizedImage = resizedImage.div(255.0); // Chuẩn hóa giá trị pixel về khoảng 0-1
 
@@ -75,8 +72,8 @@ async function init() {
 }
 
 // Gọi hàm init khi trang web được tải
-// Đảm bảo rằng tmImage đã được định nghĩa
 document.addEventListener("DOMContentLoaded", async () => {
+    // Đảm bảo rằng tmImage đã được định nghĩa
     if (typeof tmImage === "undefined") {
         console.error("tmImage is not defined. Please check the library script.");
         result.innerText = "Đã có lỗi xảy ra. Vui lòng thử lại sau.";
