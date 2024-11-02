@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Teachable Machine Model</title>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
-  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest"></script>
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachable Machine Model</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest"></script>
 </head>
 <body>
   <div id="result">Loading...</div>
-  <button id="captureButton">Capture</button>
-  <video id="camera" width="224" height="224" autoplay muted></video>
-  <canvas id="canvas" width="224" height="224"></canvas>
+    <button id="captureButton">Capture</button>
+    <video id="camera" width="224" height="224" autoplay muted></video>
+    <canvas id="canvas" width="224" height="224"></canvas>
+    <script src="script.js"></script>
   <script>
     let model;
     const URL = "model/";
