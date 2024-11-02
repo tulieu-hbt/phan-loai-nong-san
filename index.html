@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ứng Dụng Phân Biệt Nông Sản</title>
-    <link rel="stylesheet" href="style.css"> <!-- Đảm bảo rằng tên và đường dẫn chính xác -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Thêm các thư viện cần thiết -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image"></script>
 </head>
 <body>
     <h1>Ứng Dụng Phân Biệt Nông Sản</h1>
     <div id="result">Đang tải mô hình...</div>
     <button id="captureButton">Chụp Ảnh</button>
     <div id="loading" class="hidden"></div>
-    <script src="script.js"></script> <!-- Đảm bảo rằng tên và đường dẫn chính xác -->
+    <script src="script.js"></script>
 </body>
 </html>
