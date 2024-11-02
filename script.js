@@ -8,10 +8,10 @@ const ctx = canvas.getContext('2d');
 
 // Hàm tải mô hình
 async function loadModel() {
-    const modelURL = `${URL}model.json`; // Đường dẫn tới model.json
+    const modelURL = `${URL}model.json`;
     console.log("Đang tải mô hình từ:", modelURL);
     try {
-        model = await tmImage.load(modelURL); // Kiểm tra xem mô hình có được tải thành công không
+        model = await tmImage.load(modelURL); // Đảm bảo tmImage đã được định nghĩa
         console.log("Mô hình đã được tải thành công:", model);
         result.innerText = "Mô hình đã sẵn sàng. Hãy đưa nông sản vào camera.";
     } catch (error) {
@@ -71,6 +71,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         result.innerText = "Đã có lỗi xảy ra. Vui lòng thử lại sau.";
     } else {
         await init();
+        captureButton.addEventListener("click", predict); // Đảm bảo sự kiện cho nút
     }
 });
-captureButton.addEventListener("click", predict); // Thêm sự kiện cho nút
