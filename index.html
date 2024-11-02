@@ -1,22 +1,91 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ứng Dụng Phân Loại Nông Sản</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.0"></script> 
-    <!--<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest"></script> -->
+  <title>Teachable Machine Model</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Ứng Dụng Phân Loại Nông Sản</h1>
-        <video id="camera" autoplay playsinline style="display: none;"></video> 
-        <canvas id="canvas" width="224" height="224"></canvas> 
-        <div id="result">Đang tải mô hình...</div>
-        <button id="captureButton">Chụp Ảnh và Phân Loại</button>
-    </div>
-    <script src="script.js"></script> 
+  <div id="result">Loading...</div>
+  <button id="captureButton">Capture</button>
+  <video id="camera" width="224" height="224" autoplay muted></video>
+  <canvas id="canvas" width="224" height="224"></canvas>
+  <script>
+    let model;
+    const URL = "model/";
+    const result = document.getElementById("result");
+    const captureButton = document.getElementById("captureButton");
+    const video = document.getElementById('camera');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+  
+    // Hàm tải mô hình
+    async function loadModel() {
+        const modelURL = `${URL}model.json`;
+        console.log("Đang tải mô hình từ:", modelURL);
+        try {
+            model = await tmImage.load(modelURL);
+            console.log("Mô hình đã được tải thành công:", model);
+            result.innerText = "Mô hình đã sẵn sàng. Hãy đưa nông sản vào camera.";
+        } catch (error) {
+            console.error("Lỗi khi tải mô hình:", error);
+            result.innerText = "Không thể tải mô hình!";
+        }
+    }
+  
+    // Hàm khởi tạo camera
+    async function setupCamera() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+            return new Promise((resolve) => {
+                video.onloadedmetadata = () => {
+                    resolve(video);
+                };
+            });
+        } catch (error) {
+            console.error("Lỗi khi khởi tạo camera:", error);
+            result.innerText = "Không thể sử dụng camera!";
+        }
+    }
+  
+    // Hàm dự đoán
+    async function predict() {
+        try {
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const image = tf.browser.fromPixels(canvas);
+            const resizedImage = tf.image.resizeBilinear(image, [224, 224]);
+            const normalizedImage = resizedImage.div(255.0);
+            const predictions = await model.predict(normalizedImage).data();
+            let maxProbability = 0;
+            let predictedClass = "";
+            for (let i = 0; i < predictions.length; i++) {
+                if (predictions[i] > maxProbability) {
+                    maxProbability = predictions[i];
+                    predictedClass = model.getClassLabels()[i];
+                }
+            }
+            result.innerText = `Kết quả dự đoán: ${predictedClass} (${(maxProbability * 100).toFixed(2)}%)`;
+        } catch (error) {
+            console.error("Lỗi khi dự đoán:", error);
+            result.innerText = "Lỗi khi dự đoán. Vui lòng kiểm tra console.";
+        }
+    }
+  
+    // Hàm khởi tạo ứng dụng
+    async function init() {
+        await loadModel();
+        await setupCamera();
+    }
+  
+    document.addEventListener("DOMContentLoaded", async () => {
+        if (typeof tmImage === "undefined") {
+            console.error("tmImage is not defined. Please check the library script.");
+            result.innerText = "Đã có lỗi xảy ra. Vui lòng thử lại sau.";
+        } else {
+            await init();
+        }
+    });
+  </script>
 </body>
 </html>
