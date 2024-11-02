@@ -1,6 +1,7 @@
 let model;
-const result = document.getElementById('result');
-const captureButton = document.getElementById('captureButton');
+const URL = "model/";
+const result = document.getElementById("result");
+const captureButton = document.getElementById("captureButton");
 const video = document.getElementById('camera');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
@@ -9,13 +10,12 @@ const ctx = canvas.getContext('2d');
 // <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest"></script> 
 
 async function loadModel() {
-    const modelURL = "model/model.json"; 
+    const modelURL = `${URL}model.json`; // Đường dẫn tới model.json
     console.log("Đang tải mô hình từ:", modelURL);
     try {
-        // Sử dụng tmImage.load để tải mô hình Teachable Machine
-        model = await tmImage.load(modelURL); 
+        model = await tmImage.load(modelURL); // Kiểm tra xem mô hình có được tải thành công không
         console.log("Mô hình đã được tải thành công:", model);
-        result.innerText = "Mô hình đã sẵn sàng.";
+        result.innerText = "Mô hình đã sẵn sàng. Hãy đưa nông sản vào camera.";
     } catch (error) {
         console.error("Lỗi khi tải mô hình:", error);
         result.innerText = "Không thể tải mô hình!";
@@ -75,14 +75,12 @@ async function init() {
 }
 
 // Gọi hàm init khi trang web được tải
-window.addEventListener('load', () => {
-    init();
-
-    if (captureButton) {
-        captureButton.addEventListener('click', async () => {
-            await predict();
-        });
+// Đảm bảo rằng tmImage đã được định nghĩa
+document.addEventListener("DOMContentLoaded", async () => {
+    if (typeof tmImage === "undefined") {
+        console.error("tmImage is not defined. Please check the library script.");
+        result.innerText = "Đã có lỗi xảy ra. Vui lòng thử lại sau.";
     } else {
-        console.error("Không tìm thấy nút chụp ảnh.");
+        await init();
     }
 });
