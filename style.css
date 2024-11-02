@@ -1,69 +1,36 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4; /* Màu nền nhẹ nhàng */
-    color: #333; /* Màu chữ tối */
+    font-family: sans-serif;
     display: flex;
-    flex-direction: column;
-    align-items: center; /* Căn giữa các phần tử theo chiều ngang */
-    justify-content: center; /* Căn giữa các phần tử theo chiều dọc */
-    height: 100vh; /* Chiều cao toàn bộ màn hình */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
 }
 
-h1 {
-    font-size: 2.5em; /* Kích thước chữ lớn */
-    margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
-    text-align: center; /* Căn giữa tiêu đề */
+.container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#result {
-    font-size: 1.2em; /* Kích thước chữ cho thông báo */
-    margin-bottom: 20px; /* Khoảng cách dưới thông báo */
-    padding: 10px; /* Khoảng cách bên trong */
-    background-color: #fff; /* Màu nền trắng cho thông báo */
-    border-radius: 8px; /* Bo tròn góc cho thông báo */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Đổ bóng cho thông báo */
+video {
+    width: 640px;
+    height: 480px;
+    border: 1px solid #ccc;
+}
+
+#canvas {
+    display: none; /* Ẩn canvas */
 }
 
 button {
-    background-color: #4CAF50; /* Màu nền xanh lá cây cho nút */
-    border: none; /* Không có đường viền */
-    color: white; /* Màu chữ trắng */
-    padding: 15px 32px; /* Khoảng cách bên trong nút */
-    text-align: center; /* Căn giữa chữ trong nút */
-    text-decoration: none; /* Không có gạch chân */
-    display: inline-block; /* Để nút hiển thị như một khối */
-    font-size: 16px; /* Kích thước chữ cho nút */
-    margin: 4px 2px; /* Khoảng cách giữa các nút */
-    cursor: pointer; /* Hiển thị con trỏ tay khi di chuột qua nút */
-    border-radius: 5px; /* Bo tròn góc cho nút */
-    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu */
-}
-
-button:hover {
-    background-color: #45a049; /* Màu khi di chuột qua nút */
-}
-
-.hidden {
-    display: none; /* Ẩn phần tử */
-}
-
-@media (max-width: 600px) {
-    h1 {
-        font-size: 2em; /* Kích thước chữ cho tiêu đề trên màn hình nhỏ */
-    }
-
-    button {
-        padding: 10px 20px; /* Kích thước nút trên màn hình nhỏ */
-        font-size: 14px; /* Kích thước chữ cho nút trên màn hình nhỏ */
-    }
-
-    #result {
-        font-size: 1em; /* Kích thước chữ cho thông báo trên màn hình nhỏ */
-    }
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
