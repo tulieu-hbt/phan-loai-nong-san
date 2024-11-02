@@ -16,8 +16,10 @@ async function startCamera() {
 // Hàm tải mô hình
 async function loadModel() {
     const modelURL = "model/model.json"; // Đường dẫn tới model.json
+    console.log("Đang tải mô hình từ:", modelURL);
     try {
-        model = await tmImage.load(modelURL);
+        model = await tmImage.load(modelURL); // Kiểm tra xem mô hình có được tải thành công không
+        console.log("Mô hình đã được tải thành công:", model);
         result.innerText = "Mô hình đã sẵn sàng. Hãy đưa nông sản vào camera.";
     } catch (error) {
         console.error("Lỗi khi tải mô hình:", error);
@@ -44,7 +46,7 @@ async function classifyImage() {
 
 // Khởi động camera và tải mô hình khi nhấn nút
 document.getElementById('start-button').addEventListener('click', async () => {
-    await loadModel();
-    await startCamera(); // Khởi động camera sau khi mô hình được tải
+    await loadModel(); // Tải mô hình trước
+    await startCamera(); // Khởi động camera
     setInterval(classifyImage, 1000); // Phân loại hình ảnh mỗi giây
 });
