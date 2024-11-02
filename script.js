@@ -40,12 +40,17 @@ async function init() {
 }
 
 // Gọi hàm init khi trang được tải
-window.addEventListener('load', init);
+window.addEventListener('load', () => {
+    init();
 
-// Xử lý sự kiện chụp ảnh
-captureButton.addEventListener('click', async () => {
-    // Tạm thời chưa xử lý chụp ảnh
-    result.innerText = "Chức năng chụp ảnh chưa được triển khai.";
+    // Đảm bảo rằng phần tử đã sẵn sàng trước khi thêm sự kiện
+    if (captureButton) {
+        captureButton.addEventListener('click', async () => {
+            result.innerText = "Chức năng chụp ảnh chưa được triển khai.";
+        });
+    } else {
+        console.error("Không tìm thấy nút chụp ảnh.");
+    }
 });
 
 // Cần xử lý lỗi khi tải camera
