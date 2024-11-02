@@ -7,7 +7,8 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 // Hàm tải mô hình
-async function loadModel_XXX() {
+/*
+async function loadModel() {
     const modelURL = `${URL}model.json`;
     console.log("Đang tải mô hình từ:", modelURL);
     try {
@@ -19,6 +20,7 @@ async function loadModel_XXX() {
         result.innerText = "Không thể tải mô hình!";
     }
 }
+*/
 async function loadModel() {
     const modelURL = `${URL}model.json`;
     console.log("Đang tải mô hình từ:", modelURL);
