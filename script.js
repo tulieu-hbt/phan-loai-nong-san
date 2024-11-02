@@ -73,3 +73,4 @@ document.addEventListener("DOMContentLoaded", async () => {
         await init();
     }
 });
+captureButton.addEventListener("click", predict); // Thêm sự kiện cho nút
