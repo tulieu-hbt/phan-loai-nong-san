@@ -1,62 +1,61 @@
-/* Reset CSS */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-/* Toàn bộ trang */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    color: #343a40;
+    background-color: #f4f4f4; /* Màu nền nhẹ nhàng */
+    color: #333; /* Màu chữ tối */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
+    align-items: center; /* Căn giữa các phần tử theo chiều ngang */
+    justify-content: center; /* Căn giữa các phần tử theo chiều dọc */
+    height: 100vh; /* Chiều cao toàn bộ màn hình */
 }
 
-/* Tiêu đề */
 h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #007bff;
+    font-size: 2.5em; /* Kích thước chữ lớn */
+    margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
+    text-align: center; /* Căn giữa tiêu đề */
 }
 
-/* Khu vực kết quả */
 #result {
-    margin-top: 20px;
-    font-size: 1.2rem;
-    font-weight: bold;
+    font-size: 1.2em; /* Kích thước chữ cho thông báo */
+    margin-bottom: 20px; /* Khoảng cách dưới thông báo */
 }
 
-/* Nút chụp ảnh */
 button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    color: white;
-    background-color: #28a745;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    background-color: #4CAF50; /* Màu nền xanh lá cây cho nút */
+    border: none; /* Không có đường viền */
+    color: white; /* Màu chữ trắng */
+    padding: 15px 32px; /* Khoảng cách bên trong nút */
+    text-align: center; /* Căn giữa chữ trong nút */
+    text-decoration: none; /* Không có gạch chân */
+    display: inline-block; /* Để nút hiển thị như một khối */
+    font-size: 16px; /* Kích thước chữ cho nút */
+    margin: 4px 2px; /* Khoảng cách giữa các nút */
+    cursor: pointer; /* Hiển thị con trỏ tay khi di chuột qua nút */
+    border-radius: 5px; /* Bo tròn góc cho nút */
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu */
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #45a049; /* Màu khi di chuột qua nút */
 }
 
-/* Thông báo tải mô hình */
-#loading {
-    font-size: 1rem;
-    color: #6c757d;
-    margin-top: 10px;
-}
-
-/* Ẩn thông báo */
 .hidden {
-    display: none;
+    display: none; /* Ẩn phần tử */
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em; /* Kích thước chữ cho tiêu đề trên màn hình nhỏ */
+    }
+
+    button {
+        padding: 10px 20px; /* Kích thước nút trên màn hình nhỏ */
+        font-size: 14px; /* Kích thước chữ cho nút trên màn hình nhỏ */
+    }
 }
