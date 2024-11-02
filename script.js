@@ -7,7 +7,7 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 // Hàm tải mô hình
-async function loadModel() {
+async function loadModel_XXX() {
     const modelURL = `${URL}model.json`;
     console.log("Đang tải mô hình từ:", modelURL);
     try {
@@ -19,7 +19,19 @@ async function loadModel() {
         result.innerText = "Không thể tải mô hình!";
     }
 }
-
+async function loadModel() {
+    const modelURL = `${URL}model.json`;
+    console.log("Đang tải mô hình từ:", modelURL);
+    try {
+        // Sử dụng tf.loadLayersModel để tải mô hình
+        model = await tf.loadLayersModel(modelURL); 
+        console.log("Mô hình đã được tải thành công:", model);
+        result.innerText = "Mô hình đã sẵn sàng. Hãy đưa nông sản vào camera.";
+    } catch (error) {
+        console.error("Lỗi khi tải mô hình:", error);
+        result.innerText = "Không thể tải mô hình!";
+    }
+}
 // Hàm khởi tạo camera
 async function setupCamera() {
     try {
