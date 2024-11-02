@@ -48,12 +48,15 @@ async function predict() {
         const inputTensor = tf.expandDims(normalizedImage, 0); 
 
         const predictions = await model.predict(inputTensor).data();
+        // Định nghĩa mảng nhãn (thay thế bằng nhãn của mô hình của bạn)
+        const classLabels = ["dragon fruit","banana"; "tomato","grape","lemon"]; 
         let maxProbability = 0;
         let predictedClass = "";
         for (let i = 0; i < predictions.length; i++) {
             if (predictions[i] > maxProbability) {
                 maxProbability = predictions[i];
-                predictedClass = model.getClassLabels()[i]; // Giả sử mô hình của bạn có phương thức getClassLabels()
+                /*predictedClass = model.getClassLabels()[i]; // Giả sử mô hình của bạn có phương thức getClassLabels()*/
+                predictedClass = classLabels[i]; // Lấy nhãn từ mảng classLabels
             }
         }
         result.innerText = `Kết quả dự đoán: ${predictedClass} (${(maxProbability * 100).toFixed(2)}%)`;
