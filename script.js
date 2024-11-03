@@ -1,5 +1,5 @@
 let model;
-const URL = "model/";
+const URL = "model/"; // Đường dẫn đến thư mục chứa model.json
 const result = document.getElementById("result");
 const captureButton = document.getElementById("captureButton");
 const video = document.getElementById('camera');
@@ -11,12 +11,12 @@ async function loadModel() {
     const modelURL = `${URL}model.json`;
     console.log("Đang tải mô hình từ:", modelURL);
     try {
-        model = await tf.loadLayersModel(modelURL); 
+        model = await tf.loadLayersModel(modelURL);
         console.log("Mô hình đã được tải thành công:", model);
         result.innerText = "Mô hình đã sẵn sàng. Hãy đưa nông sản vào camera.";
     } catch (error) {
         console.error("Lỗi khi tải mô hình:", error);
-        result.innerText = "Không thể tải mô hình! " + error.message; 
+        result.innerText = "Không thể tải mô hình! " + error.message;
     }
 }
 
@@ -36,18 +36,18 @@ async function setupCamera() {
     }
 }
 
-// Hàm dự đoán (đã sửa lỗi)
+// Hàm dự đoán
 async function predict() {
     try {
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
         const image = tf.browser.fromPixels(canvas);
-        const resizedImage = tf.image.resizeBilinear(image, [224, 224]); 
+        const resizedImage = tf.image.resizeBilinear(image, [224, 224]);
         const normalizedImage = resizedImage.div(255.0);
-        const inputTensor = tf.expandDims(normalizedImage, 0); 
+        const inputTensor = tf.expandDims(normalizedImage, 0);
 
         const predictions = await model.predict(inputTensor).data();
 
-        // Sửa lỗi: Thay thế dấu chấm phẩy bằng dấu phẩy
+        // Thay thế bằng nhãn của mô hình của bạn
         const classLabels = ["dragon fruit", "banana", "tomato", "grape", "lemon"]; 
 
         let maxProbability = 0;
@@ -55,13 +55,37 @@ async function predict() {
         for (let i = 0; i < predictions.length; i++) {
             if (predictions[i] > maxProbability) {
                 maxProbability = predictions[i];
-                predictedClass = classLabels[i]; 
+                predictedClass = classLabels[i];
             }
         }
-        result.innerText = `Kết quả dự đoán: ${predictedClass} (${(maxProbability * 100).toFixed(2)}%)`;
+
+        // Kiểm tra độ chính xác (điều chỉnh ngưỡng nếu cần)
+        if (maxProbability < 0.7) { 
+            result.innerText = "Không đúng nông sản";
+            speak("Không đúng nông sản");
+            return; 
+        }
+
+        let predictedText = `Kết quả dự đoán: ${predictedClass} (${(maxProbability * 100).toFixed(2)}%)`;
+        let messageVi = await translateToVietnamese(predictedText); // Dịch sang tiếng Việt
+        result.innerText = messageVi;
+        speak(messageVi); 
+
     } catch (error) {
         console.error("Lỗi khi dự đoán:", error);
-        result.innerText = "Lỗi khi dự đoán: " + error.message; 
+        result.innerText = "Lỗi khi dự đoán: " + error.message;
+    }
+}
+
+// Hàm Text-to-Speech
+function speak(text) {
+    if ('speechSynthesis' in window) {
+        const synthesis = window.speechSynthesis;
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'vi-VN'; // Đặt ngôn ngữ là tiếng Việt
+        synthesis.speak(utterance);
+    } else {
+        console.error("Trình duyệt không hỗ trợ Speech Synthesis.");
     }
 }
 
@@ -71,7 +95,31 @@ async function init() {
     await setupCamera();
 }
 
+// Chạy khi trang web được tải
 document.addEventListener("DOMContentLoaded", async () => {
     await init();
-    captureButton.addEventListener("click", predict); 
+    captureButton.addEventListener("click", predict);
 });
+
+// Hàm dịch tiếng Anh sang tiếng Việt (sử dụng Google Translate API)
+async function translateToVietnamese(text) {
+    const apiKey = "YOUR_GOOGLE_TRANSLATE_API_KEY"; // Thay API key của bạn vào đây
+    const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                q: text,
+                target: "vi"
+            })
+        });
+        const data = await response.json();
+        return data.data.translations[0].translatedText;
+    } catch (error) {
+        console.error("Lỗi khi dịch:", error);
+        return text; // Trả về văn bản gốc nếu lỗi
+    }
+}
