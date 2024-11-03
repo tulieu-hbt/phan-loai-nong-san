@@ -133,12 +133,4 @@ async function translateToVietnamese(text) {
         })
     });
     const data = await response.json();
-    return data.data.translations[0].translatedText;
-}
-
-// Hàm lấy danh sách các thiết bị video (camera)
-async function getVideoDevices() {
-    const devices = await navigator.mediaDevices.enumerateDevices();
-    const videoDevices = devices.filter(device => device.kind === 'videoinput');
-    return videoDevices;
-}
+    return
