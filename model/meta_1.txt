@@ -1,1 +1,1 @@
-
+{"tfjsVersion":"1.3.1","tmVersion":"2.4.7","packageVersion":"0.8.4-alpha2","packageName":"@teachablemachine/image","timeStamp":"2024-11-02T17:00:49.231Z","userMetadata":{},"modelName":"tm-my-image-model","labels":["tomato","orange","lemon","banana","grapes","dragon fruit"],"imageSize":224}
