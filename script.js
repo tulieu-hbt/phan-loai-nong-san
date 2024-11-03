@@ -7,21 +7,21 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const fruitLabels = ["banana", "orange", "apple", "dragon fruit", "grape", "lemon"];
 
-// Hàm tải mô hình
+// Load model function
 async function loadModel() {
     const modelURL = `${URL}model.json`;
-    console.log("Đang tải mô hình từ:", modelURL);
+    console.log("Loading model from:", modelURL);
     try {
         model = await tmImage.load(modelURL);
-        console.log("Mô hình đã được tải thành công:", model);
-        result.innerText = "Mô hình đã sẵn sàng. Hãy đưa nông sản vào camera.";
+        console.log("Model successfully loaded:", model);
+        result.innerText = "Model is ready. Please place the produce in front of the camera.";
     } catch (error) {
-        console.error("Lỗi khi tải mô hình:", error);
-        result.innerText = "Không thể tải mô hình!";
+        console.error("Error loading model:", error);
+        result.innerText = "Cannot load the model!";
     }
 }
 
-// Hàm khởi tạo camera
+// Setup camera function
 async function setupCamera(deviceId = null) {
     try {
         const constraints = {
@@ -35,12 +35,12 @@ async function setupCamera(deviceId = null) {
             };
         });
     } catch (error) {
-        console.error("Lỗi khi khởi tạo camera:", error);
-        result.innerText = "Không thể sử dụng camera!";
+        console.error("Error setting up the camera:", error);
+        result.innerText = "Cannot access the camera!";
     }
 }
 
-// Hàm dự đoán
+// Prediction function
 async function predict() {
     try {
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -57,21 +57,21 @@ async function predict() {
             }
         }
         if (fruitLabels.includes(predictedClass.toLowerCase())) {
-            const message = `Đây là ${predictedClass} (${(maxProbability * 100).toFixed(2)}%)`;
+            const message = `This is a ${predictedClass} (${(maxProbability * 100).toFixed(2)}%)`;
             result.innerText = message;
-            speak(message);  // Phát âm giọng nói khi nhận diện đúng
+            speak(message);  // Speak out when identification is correct
         } else {
-            const message = "Đây không phải là trái cây!";
+            const message = "This is not a fruit!";
             result.innerText = message;
-            speak(message);  // Phát âm giọng nói khi nhận diện không đúng
+            speak(message);  // Speak out when identification is incorrect
         }
     } catch (error) {
-        console.error("Lỗi khi dự đoán:", error);
-        result.innerText = "Lỗi khi dự đoán. Vui lòng kiểm tra console.";
+        console.error("Prediction error:", error);
+        result.innerText = "Prediction error. Please check the console.";
     }
 }
 
-// Hàm phát âm giọng nói
+// Text-to-Speech function
 function speak(text) {
     if ('speechSynthesis' in window) {
         const synthesis = window.speechSynthesis;
@@ -83,13 +83,13 @@ function speak(text) {
     }
 }
 
-// Hàm khởi tạo ứng dụng
+// Initialize application
 async function init() {
     await loadModel();
     const videoDevices = await getVideoDevices();
     if (videoDevices.length === 0) {
-        console.log("Không tìm thấy thiết bị video nào.");
-        result.innerText = "Không tìm thấy thiết bị video!";
+        console.log("No video devices found.");
+        result.innerText = "No video devices found!";
     } else if (videoDevices.length === 1) {
         await setupCamera(videoDevices[0].deviceId);
     } else {
@@ -108,19 +108,19 @@ async function init() {
     }
 }
 
-// Gọi hàm init khi trang web được tải
+// Run initialization when page loads
 document.addEventListener("DOMContentLoaded", async () => {
     if (typeof tmImage === "undefined") {
         console.error("tmImage is not defined. Please check the library script.");
-        result.innerText = "Đã có lỗi xảy ra. Vui lòng thử lại sau.";
+        result.innerText = "An error occurred. Please try again later.";
     } else {
         await init();
     }
 });
 
-// Hàm dịch tiếng Anh sang tiếng Việt
+// Translate English to Vietnamese function
 async function translateToVietnamese(text) {
-    const apiKey = "YOUR_GOOGLE_TRANSLATE_API_KEY"; // Thay bằng API Key thực tế của bạn
+    const apiKey = "YOUR_GOOGLE_TRANSLATE_API_KEY"; // Replace with your actual API key
     const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
     const response = await fetch(url, {
         method: "POST",
@@ -133,4 +133,12 @@ async function translateToVietnamese(text) {
         })
     });
     const data = await response.json();
-    return
+    return data.data.translations[0].translatedText;
+}
+
+// Get list of video devices (cameras)
+async function getVideoDevices() {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const videoDevices = devices.filter(device => device.kind === 'videoinput');
+    return videoDevices;
+}
