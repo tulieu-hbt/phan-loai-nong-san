@@ -57,11 +57,11 @@ async function predict() {
             }
         }
         if (fruitLabels.includes(predictedClass.toLowerCase())) {
-            const message = `This is a ${predictedClass} (${(maxProbability * 100).toFixed(2)}%)`;
+            const message = `Đây là ${predictedClass} (${(maxProbability * 100).toFixed(2)}%)`;
             result.innerText = message;
             speak(message);  // Speak out when identification is correct
         } else {
-            const message = "This is not a fruit!";
+            const message = "Đây không phải là trái cây!";
             result.innerText = message;
             speak(message);  // Speak out when identification is incorrect
         }
@@ -107,7 +107,6 @@ async function init() {
         await setupCamera(videoDevices[0].deviceId);
     }
 }
-
 // Run initialization when page loads
 document.addEventListener("DOMContentLoaded", async () => {
     if (typeof tmImage === "undefined") {
