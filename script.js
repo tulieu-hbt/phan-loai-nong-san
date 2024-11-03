@@ -56,15 +56,21 @@ async function predict() {
                 predictedClass = model.getClassLabels()[i];
             }
         }
+
+        let messageVi = ""; 
+
         if (fruitLabels.includes(predictedClass.toLowerCase())) {
-            const message = `Đây là ${predictedClass} (${(maxProbability * 100).toFixed(2)}%)`;
-            result.innerText = message;
-            speak(message);  // Speak out when identification is correct
+            const messageEn = `This is ${predictedClass} (${(maxProbability * 100).toFixed(2)}%)`;
+            messageVi = await translateToVietnamese(messageEn); 
+            result.innerText = messageVi;
         } else {
-            const message = "Đây không phải là trái cây!";
-            result.innerText = message;
-            speak(message);  // Speak out when identification is incorrect
+            const messageEn = "This is not a fruit!";
+            messageVi = await translateToVietnamese(messageEn);
+            result.innerText = messageVi;
         }
+
+        speak(messageVi); 
+
     } catch (error) {
         console.error("Prediction error:", error);
         result.innerText = "Prediction error. Please check the console.";
@@ -86,27 +92,13 @@ function speak(text) {
 // Initialize application
 async function init() {
     await loadModel();
-    const videoDevices = await getVideoDevices();
-    if (videoDevices.length === 0) {
-        console.log("No video devices found.");
-        result.innerText = "No video devices found!";
-    } else if (videoDevices.length === 1) {
-        await setupCamera(videoDevices[0].deviceId);
-    } else {
-        const select = document.createElement('select');
-        videoDevices.forEach(device => {
-            const option = document.createElement('option');
-            option.value = device.deviceId;
-            option.text = device.label || `Camera ${videoDevices.indexOf(device) + 1}`;
-            select.appendChild(option);
-        });
-        select.addEventListener('change', async () => {
-            await setupCamera(select.value);
-        });
-        document.body.appendChild(select);
-        await setupCamera(videoDevices[0].deviceId);
-    }
+    await setupCamera(); // Giả sử chỉ có 1 camera
+
+    captureButton.addEventListener('click', async () => {
+        await predict();
+    });
 }
+
 // Run initialization when page loads
 document.addEventListener("DOMContentLoaded", async () => {
     if (typeof tmImage === "undefined") {
@@ -119,7 +111,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 // Translate English to Vietnamese function
 async function translateToVietnamese(text) {
-    const apiKey = "YOUR_GOOGLE_TRANSLATE_API_KEY"; // Replace with your actual API key
+    const apiKey = "YOUR_GOOGLE_TRANSLATE_API_KEY"; // Thay API key của bạn vào đây
     const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
     const response = await fetch(url, {
         method: "POST",
@@ -135,9 +127,9 @@ async function translateToVietnamese(text) {
     return data.data.translations[0].translatedText;
 }
 
-// Get list of video devices (cameras)
-async function getVideoDevices() {
-    const devices = await navigator.mediaDevices.enumerateDevices();
-    const videoDevices = devices.filter(device => device.kind === 'videoinput');
-    return videoDevices;
-}
+// Get list of video devices (cameras) - Không cần thiết nếu chỉ có 1 camera
+// async function getVideoDevices() {
+//     const devices = await navigator.mediaDevices.enumerateDevices();
+//     const videoDevices = devices.filter(device => device.kind === 'videoinput');
+//     return videoDevices;
+// }
