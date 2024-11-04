@@ -1,69 +1,67 @@
 let model;
-const URL = "model/"; // Replace with the path to your model
+const URL = "model/";
 const result = document.getElementById("result");
 const captureButton = document.getElementById("captureButton");
 const video = document.getElementById('camera');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-const imageContainer = document.getElementById('imageContainer');
+const imageContainer = document.getElementById('imageContainer'); // Lấy vùng chứa ảnh
 
-// Load model function
+// Hàm tải mô hình
 async function loadModel() {
+    const modelURL = `${URL}model.json`;
+    console.log("Đang tải mô hình từ:", modelURL);
     try {
-        model = await tmImage.load(`${URL}model.json`);
-        console.log("Model loaded successfully");
+        model = await tf.loadLayersModel(modelURL);
+        console.log("Mô hình đã được tải thành công:", model);
         result.innerText = "Mô hình đã sẵn sàng. Hãy đưa nông sản vào camera.";
     } catch (error) {
-        console.error("Error loading model:", error);
-        result.innerText = "Không thể tải mô hình!";
+        console.error("Lỗi khi tải mô hình:", error);
+        result.innerText = "Không thể tải mô hình! " + error.message;
     }
 }
 
-// Setup camera function
+// Hàm khởi tạo camera
 async function setupCamera() {
     try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const stream = await navigator.mediaDevices.getUserMedia({video: true});
         video.srcObject = stream;
-        await new Promise((resolve) => {
+        return new Promise((resolve) => {
             video.onloadedmetadata = () => {
                 resolve(video);
             };
         });
     } catch (error) {
         console.error("Lỗi khi khởi tạo camera:", error);
-        result.innerText = "Không thể truy cập camera!";
+        result.innerText = "Không thể sử dụng camera!";
     }
 }
 
-// Capture and predict function
+// Hàm dự đoán
 async function predict() {
     try {
-        // Capture the image
+        // Chụp ảnh từ video
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const imageDataURL = canvas.toDataURL();
 
-        // Display the captured image
+        // Hiển thị ảnh chụp trên canvas
+        const imageDataURL = canvas.toDataURL();
         const capturedImage = document.createElement('img');
         capturedImage.src = imageDataURL;
         capturedImage.style.maxWidth = "100%";
-        capturedImage.style.maxHeight = "100%";
-        imageContainer.innerHTML = '';
-        imageContainer.appendChild(capturedImage);
+        imageContainer.innerHTML = ''; // Xóa nội dung cũ trong imageContainer
+        imageContainer.appendChild(capturedImage); // Hiển thị ảnh
 
-        // Process and predict
+        // Tiếp tục xử lý phân loại
         const image = tf.browser.fromPixels(canvas);
-        const resized = tf.image.resizeBilinear(image, [224, 224]);
-        const normalized = resized.div(255);
-        const batched = normalized.expandDims(0);
+        const resizedImage = tf.image.resizeBilinear(image, [224, 224]);
+        const normalizedImage = resizedImage.div(255.0);
+        const inputTensor = tf.expandDims(normalizedImage, 0);
 
-        console.log("Image processed for prediction:");
-        console.log(batched);
+        const predictions = await model.predict(inputTensor).data();
 
-        const predictions = await model.predict(batched).data();
-        console.log("Predictions:", predictions);
-
-        // Get prediction label (replace with your labels)
+        // Thay thế bằng nhãn của mô hình của bạn
         const classLabels = ["dragon fruit", "banana", "tomato", "grape", "lemon"];
+
         let maxProbability = 0;
         let predictedClass = "";
         for (let i = 0; i < predictions.length; i++) {
@@ -73,41 +71,32 @@ async function predict() {
             }
         }
 
-        // Display the result and read out in Vietnamese
-        if (maxProbability > 0.6) { // Adjust threshold if needed
-            const message = `Dự đoán: ${predictedClass} - ${(maxProbability * 100).toFixed(2)}%`;
-            result.innerText = message;
-            speak(message);  // Speak out when identification is correct
-        } else {
-            const message = "Không nhận ra nông sản này.";
-            result.innerText = message;
-            speak(message);  // Speak out when identification is incorrect
+        // Kiểm tra độ chính xác (điều chỉnh ngưỡng nếu cần)
+        if (maxProbability < 0.7) {
+            result.innerText = "Không đúng nông sản";
+            speak("Không đúng nông sản");
+            return;
         }
 
+        let predictedText = `Kết quả dự đoán: ${predictedClass} (${(maxProbability * 100).toFixed(2)}%)`;
+        let messageVi = await translateToVietnamese(predictedText); // Dịch sang tiếng Việt
+        result.innerText = messageVi;
+        speak(messageVi);
+
     } catch (error) {
-        console.error("Prediction error:", error);
-        result.innerText = "Lỗi khi dự đoán!";
+        console.error("Lỗi khi dự đoán:", error);
+        result.innerText = "Lỗi khi dự đoán: " + error.message;
     }
 }
 
-// Text-to-Speech function
+// Hàm Text-to-Speech
 function speak(text) {
     if ('speechSynthesis' in window) {
         const synthesis = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'vi-VN'; // Set language to Vietnamese
+        utterance.lang = 'vi-VN';
         synthesis.speak(utterance);
     } else {
-        console.error("Speech Synthesis not supported in this browser.");
+        console.error("Trình duyệt không hỗ trợ Speech Synthesis.");
     }
 }
-
-// Initialize the application
-async function init() {
-    await loadModel();
-    await setupCamera();
-    captureButton.addEventListener("click", predict);
-}
-
-// Run the application when the web page is loaded
-document.addEventListener('DOMContentLoaded', init);
