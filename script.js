@@ -32,6 +32,8 @@ async function setupCamera() {
             }
         });
         video.srcObject = stream;
+        video.style.display = "block"; // Hiển thị video
+        video.style.width = "100%"; // Đảm bảo video được hiển thị toàn bộ trong khung hình
         return new Promise((resolve) => {
             video.onloadedmetadata = () => {
                 resolve(video);
@@ -70,10 +72,18 @@ async function predict() {
 
         let maxProbability = 0;
         let predictedClass = "";
+        let secondMaxProbability = 0;
+        let secondPredictedClass = "";
+
         for (let i = 0; i < predictions.length; i++) {
             if (predictions[i] > maxProbability) {
+                secondMaxProbability = maxProbability;
+                secondPredictedClass = predictedClass;
                 maxProbability = predictions[i];
                 predictedClass = classLabels[i];
+            } else if (predictions[i] > secondMaxProbability) {
+                secondMaxProbability = predictions[i];
+                secondPredictedClass = classLabels[i];
             }
         }
 
@@ -81,6 +91,13 @@ async function predict() {
         if (maxProbability < 0.6) {
             result.innerText = "Không đúng nông sản";
             speak("Không đúng nông sản");
+            return;
+        }
+
+        // Cảnh báo khi kết quả không chắc chắn
+        if (maxProbability - secondMaxProbability < 0.2) {
+            result.innerText = `Kết quả không chắc chắn. Có thể là: ${predictedClass} hoặc ${secondPredictedClass}`;
+            speak(`Kết quả không chắc chắn. Có thể là: ${predictedClass} hoặc ${secondPredictedClass}`);
             return;
         }
 
