@@ -6,6 +6,7 @@ const video = document.getElementById('camera');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const imageContainer = document.getElementById('imageContainer');
+const preservationInfo = document.getElementById('preservationInfo');
 
 // Hàm tải mô hình
 async function loadModel() {
@@ -68,6 +69,13 @@ async function predict() {
 
         // Thay thế bằng nhãn của mô hình của bạn
         const classLabels = ["thanh long", "chuối", "cà chua", "nho", "chanh"];
+        const preservationTexts = {
+            "thanh long": "Bảo quản thanh long ở nơi thoáng mát, tránh ánh nắng trực tiếp, tốt nhất ở nhiệt độ 10-12 độ C.",
+            "chuối": "Chuối nên được bảo quản ở nhiệt độ phòng, tránh nơi có ánh nắng mặt trời và độ ẩm cao.",
+            "cà chua": "Cà chua nên được bảo quản ở nhiệt độ phòng, tránh lạnh để giữ hương vị tốt nhất.",
+            "nho": "Nho nên được bảo quản trong tủ lạnh và giữ trong hộp kín để tránh mất nước.",
+            "chanh": "Chanh nên được bảo quản ở nhiệt độ phòng hoặc trong ngăn mát tủ lạnh để giữ độ tươi lâu hơn."
+        };
 
         let maxProbability = 0;
         let predictedClass = "";
@@ -103,6 +111,11 @@ async function predict() {
         let predictedText = `Kết quả dự đoán: ${predictedClass} (${(maxProbability * 100).toFixed(2)}%)`;
         result.innerText = predictedText;
         speak(predictedText);
+
+        // Hiển thị thông tin bảo quản
+        const preservationText = preservationTexts[predictedClass];
+        preservationInfo.innerText = `Cách bảo quản: ${preservationText}`;
+        speak(preservationText);
 
     } catch (error) {
         console.error("Lỗi khi dự đoán:", error);
