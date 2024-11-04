@@ -6,19 +6,26 @@
     <title>Ứng Dụng Phân Loại Nông Sản</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest"></script>
 </head>
 <body>
     <div class="container">
-    <h1>Ứng Dụng Phân Loại Nông Sản</h1>
-    <div class="camera-container">  
-      <video id="camera" autoplay playsinline></video>
-      <div id="imageContainer"></div> 
+        <h1>Ứng Dụng Phân Loại Nông Sản</h1>
+
+        <div class="main-content">
+            <div class="camera-container">
+                <video id="camera" autoplay playsinline></video>
+                <div id="imageContainer"></div>
+            </div>
+
+            <div class="controls">
+                <button id="captureButton">Chụp Ảnh và Phân Loại</button>
+                <div id="result"></div>
+            </div>
+        </div>
+
+        <canvas id="canvas" width="640" height="480"></canvas>
     </div>
-    <canvas id="canvas" width="640" height="480"></canvas>
-    <div id="result"></div>  
-    <button id="captureButton">Chụp Ảnh và Phân Loại</button>
-  </div>
     <script src="script.js"></script>
 </body>
 </html>
