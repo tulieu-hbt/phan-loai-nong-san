@@ -102,7 +102,7 @@ async function predict() {
         const plantingPlans = {
             "cà chua": `
                 <h3>Kế hoạch trồng và chăm sóc cây cà chua</h3>
-                <table border="1">
+                <table class="planting-plan-table">
                     <thead>
                         <tr>
                             <th>STT</th>
@@ -120,10 +120,38 @@ async function predict() {
                         <tr><td>5</td><td>Thu hoạch</td><td>60-70 ngày sau khi trồng</td><td>Kéo cắt</td><td>Thu hoạch khi quả chín đỏ</td></tr>
                     </tbody>
                 </table>
+                <h3>Bảng tính chi phí trồng và chăm sóc cây cà chua</h3>
+                <table class="cost-table">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Các loại chi phí</th>
+                            <th>Đơn vị tính</th>
+                            <th>Đơn giá (đồng)</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền (đồng)</th>
+                            <th>Ghi chú</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>Vật liệu, dụng cụ để trồng và chăm sóc</td><td>Bộ</td><td>50,000</td><td>1</td><td>50,000</td><td>Dụng cụ cần thiết</td></tr>
+                        <tr><td>2</td><td>Cây giống</td><td>Cây</td><td>10,000</td><td>5</td><td>50,000</td><td></td></tr>
+                        <tr><td>3</td><td>Phân bón</td><td>Kg</td><td>15,000</td><td>2</td><td>30,000</td><td></td></tr>
+                        <tr><td>4</td><td>Thuốc bảo vệ thực vật</td><td>Chai</td><td>25,000</td><td>1</td><td>25,000</td><td></td></tr>
+                        <tr><td>5</td><td>Chi phí gieo trồng, chăm sóc cây</td><td>Lần</td><td>20,000</td><td>1</td><td>20,000</td><td></td></tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">Tổng cộng</td>
+                            <td>175,000</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
             `,
             "chuối": `
                 <h3>Kế hoạch trồng và chăm sóc cây chuối</h3>
-                <table border="1">
+                <table class="planting-plan-table">
                     <thead>
                         <tr>
                             <th>STT</th>
@@ -140,6 +168,34 @@ async function predict() {
                         <tr><td>4</td><td>Bón phân</td><td>Hàng tháng</td><td>Phân hữu cơ</td><td>Bón đúng liều lượng</td></tr>
                         <tr><td>5</td><td>Thu hoạch</td><td>10-12 tháng sau khi trồng</td><td>Kéo cắt</td><td>Thu hoạch khi quả chín</td></tr>
                     </tbody>
+                </table>
+                <h3>Bảng tính chi phí trồng và chăm sóc cây chuối</h3>
+                <table class="cost-table">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Các loại chi phí</th>
+                            <th>Đơn vị tính</th>
+                            <th>Đơn giá (đồng)</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền (đồng)</th>
+                            <th>Ghi chú</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>Vật liệu, dụng cụ để trồng và chăm sóc</td><td>Bộ</td><td>60,000</td><td>1</td><td>60,000</td><td>Dụng cụ cần thiết</td></tr>
+                        <tr><td>2</td><td>Cây giống</td><td>Cây</td><td>15,000</td><td>3</td><td>45,000</td><td></td></tr>
+                        <tr><td>3</td><td>Phân bón</td><td>Kg</td><td>10,000</td><td>4</td><td>40,000</td><td></td></tr>
+                        <tr><td>4</td><td>Thuốc bảo vệ thực vật</td><td>Chai</td><td>30,000</td><td>1</td><td>30,000</td><td></td></tr>
+                        <tr><td>5</td><td>Chi phí gieo trồng, chăm sóc cây</td><td>Lần</td><td>25,000</td><td>1</td><td>25,000</td><td></td></tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">Tổng cộng</td>
+                            <td>200,000</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
                 </table>
             `
             // Thêm kế hoạch trồng cây cho các loại cây khác tương tự
