@@ -11,12 +11,15 @@
 <body>
     <div class="container">
         <h1>Ứng Dụng Phân Loại Nông Sản</h1>
-        <video id="camera" autoplay playsinline></video>
-        <canvas id="canvas" width="640" height="480"></canvas>
-
-        <div id="imageContainer"></div> <div id="result"></div> 
-
-        <button id="captureButton">Chụp Ảnh và Phân Loại</button>
+        <div class="video-container">
+            <video id="camera" autoplay playsinline></video>
+        </div>
+        <div class="result-container">
+            <canvas id="canvas" width="640" height="480"></canvas>
+            <div id="imageContainer"></div>
+            <div id="result" class="result-text"></div>
+            <button id="captureButton" class="capture-button">Chụp Ảnh và Phân Loại</button>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
