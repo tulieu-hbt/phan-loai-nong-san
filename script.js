@@ -100,3 +100,38 @@ function speak(text) {
         console.error("Trình duyệt không hỗ trợ Speech Synthesis.");
     }
 }
+
+// Hàm khởi tạo ứng dụng
+async function init() {
+    await loadModel();
+    await setupCamera();
+}
+
+// Chạy khi trang web được tải
+document.addEventListener("DOMContentLoaded", async () => {
+    await init();
+    captureButton.addEventListener("click", predict);
+});
+
+// Hàm dịch tiếng Anh sang tiếng Việt (sử dụng Google Translate API)
+async function translateToVietnamese(text) {
+    const apiKey = "YOUR_GOOGLE_TRANSLATE_API_KEY"; // Thay API key của bạn vào đây
+    const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                q: text,
+                target: "vi"
+            })
+        });
+        const data = await response.json();
+        return data.data.translations[0].translatedText;
+    } catch (error) {
+        console.error("Lỗi khi dịch:", error);
+        return text;
+    }
+}
