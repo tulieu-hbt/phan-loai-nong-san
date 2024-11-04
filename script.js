@@ -10,6 +10,9 @@ const imageContainer = document.getElementById('imageContainer');
 // Load model function
 async function loadModel() {
     try {
+        if (typeof tmImage === "undefined") {
+            throw new Error("tmImage is not defined. Please check the library script.");
+        }
         model = await tmImage.load(`${URL}model.json`); // Correctly load the model
         console.log("Model loaded successfully");
         result.innerText = "Mô hình đã sẵn sàng. Hãy đưa nông sản vào camera.";
@@ -38,6 +41,9 @@ async function setupCamera() {
 // Capture and predict function
 async function predict() {
     try {
+        if (!model) {
+            throw new Error("Model is not loaded. Please ensure the model is correctly loaded before predicting.");
+        }
         // Capture the image
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
         const imageDataURL = canvas.toDataURL();
@@ -55,7 +61,13 @@ async function predict() {
         const resized = tf.image.resizeBilinear(image, [224, 224]);
         const normalized = resized.div(255);
         const batched = normalized.expandDims(0);
+
+        // Debugging steps
+        console.log("Image processed for prediction:");
+        console.log(batched);
+        
         const predictions = await model.predict(batched).data();
+        console.log("Predictions:", predictions);
 
         // Get prediction label (replace with your labels)
         const classLabels = ["dragon fruit", "banana", "tomato", "grape", "lemon"];
@@ -80,7 +92,7 @@ async function predict() {
         }
 
     } catch (error) {
-        console.error("Lỗi khi dự đoán:", error);
+        console.error("Prediction error:", error);
         result.innerText = "Lỗi khi dự đoán!";
     }
 }
@@ -122,12 +134,4 @@ async function translateToVietnamese(text) {
         })
     });
     const data = await response.json();
-    return data.data.translations[0].translatedText;
-}
-
-// Get list of video devices (cameras)
-async function getVideoDevices() {
-    const devices = await navigator.mediaDevices.enumerateDevices();
-    const videoDevices = devices.filter(device => device.kind === 'videoinput');
-    return videoDevices;
-}
+    return data.data.translations[0].translated
