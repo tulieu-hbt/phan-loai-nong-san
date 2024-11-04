@@ -1,3 +1,4 @@
+let model
 const URL = "model/"; // Thay thế bằng đường dẫn đến mô hình của bạn
 const result = document.getElementById("result");
 const captureButton = document.getElementById("captureButton");
@@ -5,8 +6,6 @@ const video = document.getElementById('camera');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const imageContainer = document.getElementById('imageContainer');
-
-let model;
 
 // Hàm tải mô hình
 async function loadModel() {
