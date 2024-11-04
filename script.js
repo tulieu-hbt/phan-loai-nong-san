@@ -46,7 +46,7 @@ async function setupCamera() {
     }
 }
 
-// Hàm dự đoán
+// Hàm phát hiện vùng sản phẩm và dự đoán
 async function predict() {
     try {
         // Chụp ảnh từ video
@@ -66,8 +66,21 @@ async function predict() {
         imageContainer.innerHTML = ''; // Xóa nội dung cũ trong imageContainer
         imageContainer.appendChild(capturedImage); // Hiển thị ảnh
 
-        // Tiền xử lý ảnh để dự đoán
+        // Phát hiện vùng sản phẩm nổi bật nhất (ví dụ sử dụng kỹ thuật tính toán trọng số của các vùng ảnh)
         const image = tf.browser.fromPixels(canvas);
+        const grayscaleImage = image.mean(2).toFloat();
+        const [height, width] = grayscaleImage.shape;
+
+        // Áp dụng threshold để phát hiện vùng sản phẩm
+        const binaryMask = grayscaleImage.greater(127);
+        const totalNonZero = binaryMask.sum().arraySync();
+
+        if (totalNonZero < 1000) {
+            result.innerText = "Không tìm thấy sản phẩm rõ ràng. Vui lòng thử lại.";
+            return;
+        }
+
+        // Tiền xử lý ảnh để dự đoán
         const resizedImage = tf.image.resizeBilinear(image, [224, 224]);
         const normalizedImage = resizedImage.div(255.0);
         const inputTensor = tf.expandDims(normalizedImage, 0);
@@ -109,9 +122,8 @@ async function predict() {
         }
 
         let predictedText = `Kết quả dự đoán: ${predictedClass} (${(maxProbability * 100).toFixed(2)}%)`;
-        let messageVi = await translateToVietnamese(predictedText); // Dịch sang tiếng Việt
-        result.innerText = messageVi;
-        speak(messageVi);
+        result.innerText = predictedText;
+        speak(predictedText);
 
     } catch (error) {
         console.error("Lỗi khi dự đoán:", error);
@@ -142,26 +154,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     await init();
     captureButton.addEventListener("click", predict);
 });
-
-// Hàm dịch tiếng Anh sang tiếng Việt (sử dụng Google Translate API)
-async function translateToVietnamese(text) {
-    const apiKey = "YOUR_GOOGLE_TRANSLATE_API_KEY"; // Thay API key của bạn vào đây
-    const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
-    try {
-        const response = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                q: text,
-                target: "vi"
-            })
-        });
-        const data = await response.json();
-        return data.data.translations[0].translatedText;
-    } catch (error) {
-        console.error("Lỗi khi dịch:", error);
-        return text;
-    }
-}
