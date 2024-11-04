@@ -5,7 +5,7 @@ const captureButton = document.getElementById("captureButton");
 const video = document.getElementById('camera');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-const imageContainer = document.getElementById('imageContainer'); // Lấy vùng chứa ảnh
+const imageContainer = document.getElementById('imageContainer');
 
 // Hàm tải mô hình
 async function loadModel() {
@@ -21,10 +21,16 @@ async function loadModel() {
     }
 }
 
-// Hàm khởi tạo camera
+// Hàm khởi tạo camera với cấu hình phù hợp
 async function setupCamera() {
     try {
-        const stream = await navigator.mediaDevices.getUserMedia({video: true});
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+                facingMode: "environment", // Sử dụng camera sau trên điện thoại
+                width: { ideal: 1280 },
+                height: { ideal: 720 }
+            }
+        });
         video.srcObject = stream;
         return new Promise((resolve) => {
             video.onloadedmetadata = () => {
@@ -51,7 +57,7 @@ async function predict() {
         imageContainer.innerHTML = ''; // Xóa nội dung cũ trong imageContainer
         imageContainer.appendChild(capturedImage); // Hiển thị ảnh
 
-        // Tiếp tục xử lý phân loại
+        // Tiền xử lý ảnh để dự đoán
         const image = tf.browser.fromPixels(canvas);
         const resizedImage = tf.image.resizeBilinear(image, [224, 224]);
         const normalizedImage = resizedImage.div(255.0);
@@ -71,7 +77,7 @@ async function predict() {
             }
         }
 
-        // Kiểm tra độ chính xác (điều chỉnh ngưỡng nếu cần)
+        // Điều chỉnh ngưỡng dự đoán
         if (maxProbability < 0.6) {
             result.innerText = "Không đúng nông sản";
             speak("Không đúng nông sản");
