@@ -46,7 +46,7 @@ async function setupCamera() {
     }
 }
 
-// Hàm phát hiện vùng sản phẩm và dự đoán
+// Hàm dự đoán
 async function predict() {
     try {
         // Chụp ảnh từ video
@@ -58,29 +58,8 @@ async function predict() {
             return;
         }
 
-        // Hiển thị ảnh chụp trên canvas
-        const imageDataURL = canvas.toDataURL();
-        const capturedImage = document.createElement('img');
-        capturedImage.src = imageDataURL;
-        capturedImage.style.maxWidth = "100%";
-        imageContainer.innerHTML = ''; // Xóa nội dung cũ trong imageContainer
-        imageContainer.appendChild(capturedImage); // Hiển thị ảnh
-
-        // Phát hiện vùng sản phẩm nổi bật nhất (ví dụ sử dụng kỹ thuật tính toán trọng số của các vùng ảnh)
-        const image = tf.browser.fromPixels(canvas);
-        const grayscaleImage = image.mean(2).toFloat();
-        const [height, width] = grayscaleImage.shape;
-
-        // Áp dụng threshold để phát hiện vùng sản phẩm
-        const binaryMask = grayscaleImage.greater(127);
-        const totalNonZero = binaryMask.sum().arraySync();
-
-        if (totalNonZero < 1000) {
-            result.innerText = "Không tìm thấy sản phẩm rõ ràng. Vui lòng thử lại.";
-            return;
-        }
-
         // Tiền xử lý ảnh để dự đoán
+        const image = tf.browser.fromPixels(canvas);
         const resizedImage = tf.image.resizeBilinear(image, [224, 224]);
         const normalizedImage = resizedImage.div(255.0);
         const inputTensor = tf.expandDims(normalizedImage, 0);
