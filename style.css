@@ -1,98 +1,48 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f4f4f9;
-    margin: 0;
+    background-color: #f0f0f0;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-h1 {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.main-content {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    max-width: 1000px;
-    margin-bottom: 20px;
-}
-
-.camera-container {
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-#camera {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
+video {
+    width: 640px;
+    height: 480px;
     background-color: #eee;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+canvas {
+    display: none; /* Ẩn canvas */
 }
 
 #imageContainer {
-    width: 100%;
-    height: auto;
-    margin-top: 10px;
-    text-align: center;
+    margin-top: 20px;
+    border: 1px solid #ccc;
 }
 
 #imageContainer img {
     max-width: 100%;
-    max-height: 100%;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.controls {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 30%;
-    margin-left: 20px;
-}
-
-#captureButton {
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#captureButton:hover {
-    background-color: #0056b3;
+    height: auto;
 }
 
 #result {
-    margin-top: 10px;
-    font-size: 1.2rem;
-    color: #007BFF;
-    text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
 }
 
-#canvas {
-    display: none;
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
