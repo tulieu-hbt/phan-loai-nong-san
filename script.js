@@ -56,10 +56,6 @@ async function predict() {
         const normalized = resized.div(255);
         const batched = normalized.expandDims(0);
 
-        // Debugging steps
-        console.log("Image processed for prediction:");
-        console.log(batched);
-        
         const predictions = await model.predict(batched).data();
         console.log("Predictions:", predictions);
 
@@ -95,45 +91,4 @@ async function predict() {
 function speak(text) {
     if ('speechSynthesis' in window) {
         const synthesis = window.speechSynthesis;
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'vi-VN'; // Set language to Vietnamese
-        synthesis.speak(utterance);
-    } else {
-        console.error("Speech Synthesis not supported in this browser.");
-    }
-}
-
-// Initialize the application
-async function init() {
-    await loadModel();
-    await setupCamera();
-    captureButton.addEventListener("click", predict);
-}
-
-// Run the application when the web page is loaded
-document.addEventListener('DOMContentLoaded', init);
-
-// Translate English to Vietnamese function
-async function translateToVietnamese(text) {
-    const apiKey = "YOUR_GOOGLE_TRANSLATE_API_KEY"; // Replace with your actual API key
-    const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
-    const response = await fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            q: text,
-            target: "vi"
-        })
-    });
-    const data = await response.json();
-    return data.data.translations[0].translatedText;
-}
-
-// Get list of video devices (cameras)
-async function getVideoDevices() {
-    const devices = await navigator.mediaDevices.enumerateDevices();
-    const videoDevices = devices.filter(device => device.kind === 'videoinput');
-    return videoDevices;
-}
+        const utterance = new SpeechSynthesisUtterance
