@@ -34,28 +34,12 @@ video {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.result-container {
+.result-text, .preservation-text {
     margin-top: 20px;
-}
-
-#imageContainer {
-    margin-top: 20px;
-    border: 2px dashed #ccc;
-    padding: 10px;
-    background-color: #f9f9f9;
-}
-
-#imageContainer img {
-    max-width: 100%;
-    height: auto;
-}
-
-.result-text {
-    margin-top: 20px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
-    color: #ff5722;
-    background-color: #ffebee;
+    color: #2c3e50;
+    background-color: #e8f5e9;
     padding: 10px;
     border-radius: 5px;
 }
@@ -75,12 +59,4 @@ video {
 
 .capture-button:hover {
     background-color: #45a049;
-}
-.preservation-text {
-    margin-top: 20px;
-    font-size: 18px;
-    color: #2c3e50;
-    background-color: #e8f5e9;
-    padding: 10px;
-    border-radius: 5px;
 }
