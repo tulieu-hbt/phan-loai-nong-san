@@ -12,10 +12,10 @@ async function loadModel() {
     try {
         model = await tmImage.load(`${URL}model.json`); // Correctly load the model
         console.log("Model loaded successfully");
-        result.innerText = "The model is ready. Please position the produce in front of the camera.";
+        result.innerText = "Mô hình đã sẵn sàng. Hãy đưa nông sản vào camera.";
     } catch (error) {
         console.error("Error loading model:", error);
-        result.innerText = "Unable to load the model!";
+        result.innerText = "Không thể tải mô hình!";
     }
 }
 
@@ -30,8 +30,8 @@ async function setupCamera() {
             };
         });
     } catch (error) {
-        console.error("Error setting up the camera:", error);
-        result.innerText = "Unable to access the camera!";
+        console.error("Lỗi khi khởi tạo camera:", error);
+        result.innerText = "Không thể truy cập camera!";
     }
 }
 
@@ -68,16 +68,32 @@ async function predict() {
             }
         }
 
-        // Display the result (add translation function if needed)
+        // Display the result and read out in Vietnamese
         if (maxProbability > 0.6) { // Adjust threshold if needed
-            result.innerText = `Prediction: ${predictedClass} - ${(maxProbability * 100).toFixed(2)}%`;
+            const message = `Dự đoán: ${predictedClass} - ${(maxProbability * 100).toFixed(2)}%`;
+            result.innerText = message;
+            speak(message);  // Speak out when identification is correct
         } else {
-            result.innerText = "Cannot recognize this produce.";
+            const message = "Không nhận ra nông sản này.";
+            result.innerText = message;
+            speak(message);  // Speak out when identification is incorrect
         }
 
     } catch (error) {
-        console.error("Prediction error:", error);
-        result.innerText = "Error making prediction!";
+        console.error("Lỗi khi dự đoán:", error);
+        result.innerText = "Lỗi khi dự đoán!";
+    }
+}
+
+// Text-to-Speech function
+function speak(text) {
+    if ('speechSynthesis' in window) {
+        const synthesis = window.speechSynthesis;
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'vi-VN'; // Set language to Vietnamese
+        synthesis.speak(utterance);
+    } else {
+        console.error("Speech Synthesis not supported in this browser.");
     }
 }
 
@@ -90,3 +106,28 @@ async function init() {
 
 // Run the application when the web page is loaded
 document.addEventListener('DOMContentLoaded', init);
+
+// Translate English to Vietnamese function
+async function translateToVietnamese(text) {
+    const apiKey = "YOUR_GOOGLE_TRANSLATE_API_KEY"; // Replace with your actual API key
+    const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
+    const response = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            q: text,
+            target: "vi"
+        })
+    });
+    const data = await response.json();
+    return data.data.translations[0].translatedText;
+}
+
+// Get list of video devices (cameras)
+async function getVideoDevices() {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const videoDevices = devices.filter(device => device.kind === 'videoinput');
+    return videoDevices;
+}
