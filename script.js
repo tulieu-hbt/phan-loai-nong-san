@@ -10,7 +10,7 @@ const imageContainer = document.getElementById('imageContainer');
 // Hàm tải mô hình
 async function loadModel() {
     try {
-        model = await tmImage.load(`${URL}model.json`, `${URL}metadata.json`);
+        model = await tmImage.load(`${URL}model.json`);
         console.log("Model loaded successfully");
         result.innerText = "Mô hình đã sẵn sàng. Hãy đưa nông sản vào camera.";
     } catch (error) {
