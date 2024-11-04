@@ -60,7 +60,7 @@ async function predict() {
         const predictions = await model.predict(inputTensor).data();
 
         // Thay thế bằng nhãn của mô hình của bạn
-        const classLabels = ["dragon fruit", "banana", "tomato", "grape", "lemon"];
+        const classLabels = ["thanh long", "Chuối", "cà chua", "nho", "chanh"];
 
         let maxProbability = 0;
         let predictedClass = "";
