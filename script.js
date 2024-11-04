@@ -4,7 +4,15 @@ const result = document.getElementById("result");
 const captureButton = document.getElementById("captureButton");
 const video = document.getElementById('camera');
 const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
+
+// Kiểm tra nếu canvas tồn tại trước khi lấy context
+let ctx;
+if (canvas) {
+    ctx = canvas.getContext('2d');
+} else {
+    console.error("Canvas không tồn tại. Vui lòng kiểm tra lại phần tử canvas trong HTML.");
+}
+
 const imageContainer = document.getElementById('imageContainer');
 const preservationInfo = document.getElementById('preservationInfo');
 
@@ -50,6 +58,11 @@ async function setupCamera() {
 // Hàm dự đoán
 async function predict() {
     try {
+        if (!ctx) {
+            console.error("Không thể lấy context của canvas. Vui lòng kiểm tra lại phần tử canvas.");
+            return;
+        }
+
         // Chụp ảnh từ video
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
