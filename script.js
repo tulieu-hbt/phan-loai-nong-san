@@ -89,8 +89,8 @@ async function predict() {
 
         // Điều chỉnh ngưỡng dự đoán
         if (maxProbability < 0.6) {
-            result.innerText = "Không đúng nông sản";
-            speak("Không đúng nông sản");
+            result.innerText = "Không nhận diện được nông sản. Vui lòng thử lại.";
+            speak("Không nhận diện được nông sản. Vui lòng thử lại.");
             return;
         }
 
