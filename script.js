@@ -1,5 +1,5 @@
-let model
-const URL = "model/"; // Thay thế bằng đường dẫn đến mô hình của bạn
+let model;
+const URL = "model/"; // Replace with the path to your model
 const result = document.getElementById("result");
 const captureButton = document.getElementById("captureButton");
 const video = document.getElementById('camera');
@@ -7,86 +7,86 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const imageContainer = document.getElementById('imageContainer');
 
-// Hàm tải mô hình
+// Load model function
 async function loadModel() {
-  try {
-    model = await tf.loadLayersModel(URL + 'model.json');
-    console.log("Mô hình đã tải thành công");
-    result.innerText = "Mô hình đã sẵn sàng. Hãy đưa nông sản vào camera.";
-  } catch (error) {
-    console.error("Lỗi khi tải mô hình:", error);
-    result.innerText = "Không thể tải mô hình!";
-  }
+    try {
+        model = await tmImage.load(`${URL}model.json`); // Correctly load the model
+        console.log("Model loaded successfully");
+        result.innerText = "The model is ready. Please position the produce in front of the camera.";
+    } catch (error) {
+        console.error("Error loading model:", error);
+        result.innerText = "Unable to load the model!";
+    }
 }
 
-// Hàm khởi tạo camera
+// Setup camera function
 async function setupCamera() {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-    video.srcObject = stream;
-    await new Promise((resolve) => {
-      video.onloadedmetadata = () => {
-        resolve(video);
-      };
-    });
-  } catch (error) {
-    console.error("Lỗi khi khởi tạo camera:", error);
-    result.innerText = "Không thể truy cập camera!";
-  }
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
+        await new Promise((resolve) => {
+            video.onloadedmetadata = () => {
+                resolve(video);
+            };
+        });
+    } catch (error) {
+        console.error("Error setting up the camera:", error);
+        result.innerText = "Unable to access the camera!";
+    }
 }
 
-// Hàm chụp ảnh và dự đoán
+// Capture and predict function
 async function predict() {
-  try {
-    // Chụp ảnh
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    const imageDataURL = canvas.toDataURL();
+    try {
+        // Capture the image
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const imageDataURL = canvas.toDataURL();
 
-    // Hiển thị ảnh đã chụp
-    const capturedImage = document.createElement('img');
-    capturedImage.src = imageDataURL;
-    capturedImage.style.maxWidth = "100%";
-    capturedImage.style.maxHeight = "100%";
-    imageContainer.innerHTML = '';
-    imageContainer.appendChild(capturedImage);
+        // Display the captured image
+        const capturedImage = document.createElement('img');
+        capturedImage.src = imageDataURL;
+        capturedImage.style.maxWidth = "100%";
+        capturedImage.style.maxHeight = "100%";
+        imageContainer.innerHTML = '';
+        imageContainer.appendChild(capturedImage);
 
-    // Xử lý và dự đoán
-    const image = tf.browser.fromPixels(canvas); // hoặc tmImage.fromPixels(canvas) nếu có
-    const resized = tf.image.resizeBilinear(image, [224, 224]);
-    const normalized = resized.div(255);
-    const batched = normalized.expandDims(0);
-    const predictions = await model.predict(batched).data();
+        // Process and predict
+        const image = tf.browser.fromPixels(canvas);
+        const resized = tf.image.resizeBilinear(image, [224, 224]);
+        const normalized = resized.div(255);
+        const batched = normalized.expandDims(0);
+        const predictions = await model.predict(batched).data();
 
-    // Lấy nhãn dự đoán (thay thế bằng nhãn của bạn)
-    const classLabels = ["dragon fruit", "banana", "tomato", "grape", "lemon"];
-    let maxProbability = 0;
-    let predictedClass = "";
-    for (let i = 0; i < predictions.length; i++) {
-      if (predictions[i] > maxProbability) {
-        maxProbability = predictions[i];
-        predictedClass = classLabels[i];
-      }
+        // Get prediction label (replace with your labels)
+        const classLabels = ["dragon fruit", "banana", "tomato", "grape", "lemon"];
+        let maxProbability = 0;
+        let predictedClass = "";
+        for (let i = 0; i < predictions.length; i++) {
+            if (predictions[i] > maxProbability) {
+                maxProbability = predictions[i];
+                predictedClass = classLabels[i];
+            }
+        }
+
+        // Display the result (add translation function if needed)
+        if (maxProbability > 0.6) { // Adjust threshold if needed
+            result.innerText = `Prediction: ${predictedClass} - ${(maxProbability * 100).toFixed(2)}%`;
+        } else {
+            result.innerText = "Cannot recognize this produce.";
+        }
+
+    } catch (error) {
+        console.error("Prediction error:", error);
+        result.innerText = "Error making prediction!";
     }
-
-    // Hiển thị kết quả (có thể thêm hàm dịch ở đây)
-    if (maxProbability > 0.6) { // Điều chỉnh ngưỡng nếu cần
-      result.innerText = `Dự đoán: ${predictedClass} - ${(maxProbability * 100).toFixed(2)}%`;
-    } else {
-      result.innerText = "Không nhận ra nông sản này.";
-    }
-
-  } catch (error) {
-    console.error("Lỗi khi dự đoán:", error);
-    result.innerText = "Lỗi khi dự đoán!";
-  }
 }
 
-// Khởi tạo ứng dụng
+// Initialize the application
 async function init() {
-  await loadModel();
-  await setupCamera();
-  captureButton.addEventListener("click", predict);
+    await loadModel();
+    await setupCamera();
+    captureButton.addEventListener("click", predict);
 }
 
-// Chạy ứng dụng khi trang web được tải
+// Run the application when the web page is loaded
 document.addEventListener('DOMContentLoaded', init);
