@@ -1,11 +1,12 @@
-let model;
+et model;
 const URL = "model/";
 const result = document.getElementById("result");
 const captureButton = document.getElementById("captureButton");
 const video = document.getElementById('camera');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-const imageContainer = document.getElementById('imageContainer'); // Lấy vùng chứa ảnh
+const   
+ imageContainer = document.getElementById('imageContainer');
 
 // Hàm tải mô hình
 async function loadModel() {
@@ -24,32 +25,34 @@ async function loadModel() {
 // Hàm khởi tạo camera
 async function setupCamera() {
     try {
-        const stream = await navigator.mediaDevices.getUserMedia({video: true});
-        video.srcObject = stream;
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;   
+
         return new Promise((resolve) => {
             video.onloadedmetadata = () => {
                 resolve(video);
             };
         });
     } catch (error) {
-        console.error("Lỗi khi khởi tạo camera:", error);
-        result.innerText = "Không thể sử dụng camera!";
+        console.error("Lỗi   
+ khi khởi tạo camera:", error);
+        result.innerText = "Không thể sử dụng camera! " + error.message; // Hiển thị thông báo lỗi chi tiết
     }
 }
-
 // Hàm dự đoán
 async function predict() {
     try {
         // Chụp ảnh từ video
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-        // Hiển thị ảnh chụp trên canvas
         const imageDataURL = canvas.toDataURL();
         const capturedImage = document.createElement('img');
         capturedImage.src = imageDataURL;
+
+        // Điều chỉnh kích thước khung hình chụp
         capturedImage.style.maxWidth = "100%";
-        imageContainer.innerHTML = ''; // Xóa nội dung cũ trong imageContainer
-        imageContainer.appendChild(capturedImage); // Hiển thị ảnh
+        capturedImage.style.maxHeight = "100%";
+
+        imageContainer.innerHTML = '';
+        imageContainer.appendChild(capturedImage)
 
         // Tiếp tục xử lý phân loại
         const image = tf.browser.fromPixels(canvas);
@@ -72,7 +75,7 @@ async function predict() {
         }
 
         // Kiểm tra độ chính xác (điều chỉnh ngưỡng nếu cần)
-        if (maxProbability < 0.7) {
+        if (maxProbability < 0.6) {
             result.innerText = "Không đúng nông sản";
             speak("Không đúng nông sản");
             return;
