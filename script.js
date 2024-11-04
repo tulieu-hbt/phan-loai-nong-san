@@ -7,11 +7,13 @@ const canvas = document.getElementById('canvas');
 
 // Kiểm tra nếu canvas tồn tại trước khi lấy context
 let ctx;
-if (canvas) {
-    ctx = canvas.getContext('2d');
-} else {
-    console.error("Canvas không tồn tại. Vui lòng kiểm tra lại phần tử canvas trong HTML.");
-}
+window.addEventListener("DOMContentLoaded", () => {
+    if (canvas) {
+        ctx = canvas.getContext('2d');
+    } else {
+        console.error("Canvas không tồn tại. Vui lòng kiểm tra lại phần tử canvas trong HTML.");
+    }
+});
 
 const imageContainer = document.getElementById('imageContainer');
 const preservationInfo = document.getElementById('preservationInfo');
