@@ -8,7 +8,8 @@ body {
 }
 
 .container {
-    text-align: center;
+     display: flex;
+     flex-direction: row;
 }
 
 video {
@@ -20,15 +21,17 @@ video {
 canvas {
     display: none; /* Ẩn canvas */
 }
-
+#camera {
+  width: 70%; /* Camera chính chiếm 70% chiều rộng */
+}
 #imageContainer {
-    margin-top: 20px;
-    border: 1px solid #ccc;
+   width: 30%; /* Khung hình chụp chiếm 30% chiều rộng */
+  height: auto; /* Tự động điều chỉnh chiều cao */
 }
 
 #imageContainer img {
     max-width: 100%;
-    height: auto;
+  max-height: 100%;
 }
 
 #result {
