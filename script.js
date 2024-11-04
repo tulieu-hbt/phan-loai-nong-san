@@ -1,5 +1,5 @@
 let model;
-const URL = "model/"; // Replace with the path to your model
+const URL = "model/"; // Thay thế bằng đường dẫn đến mô hình của bạn
 const result = document.getElementById("result");
 const captureButton = document.getElementById("captureButton");
 const video = document.getElementById('camera');
@@ -7,10 +7,10 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const imageContainer = document.getElementById('imageContainer');
 
-// Load model function
+// Hàm tải mô hình
 async function loadModel() {
     try {
-        model = await tmImage.load(`${URL}model.json`); // Correctly load the model
+        model = await tmImage.load(`${URL}model.json`, `${URL}metadata.json`);
         console.log("Model loaded successfully");
         result.innerText = "Mô hình đã sẵn sàng. Hãy đưa nông sản vào camera.";
     } catch (error) {
@@ -19,11 +19,12 @@ async function loadModel() {
     }
 }
 
-// Setup camera function
+// Hàm thiết lập camera
 async function setupCamera() {
     try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
         video.srcObject = stream;
+
         await new Promise((resolve) => {
             video.onloadedmetadata = () => {
                 resolve(video);
@@ -31,18 +32,24 @@ async function setupCamera() {
         });
     } catch (error) {
         console.error("Lỗi khi khởi tạo camera:", error);
-        result.innerText = "Không thể truy cập camera!";
+        if (error.name === "NotAllowedError") {
+            result.innerText = "Bạn đã từ chối truy cập camera hoặc camera đang được sử dụng bởi ứng dụng khác.";
+        } else if (error.name === "NotFoundError") {
+            result.innerText = "Không tìm thấy camera trên thiết bị.";
+        } else {
+            result.innerText = "Không thể truy cập camera!";
+        }
     }
 }
 
-// Capture and predict function
+// Hàm chụp ảnh và dự đoán
 async function predict() {
     try {
-        // Capture the image
+        // Chụp ảnh
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
         const imageDataURL = canvas.toDataURL();
 
-        // Display the captured image
+        // Hiển thị ảnh đã chụp
         const capturedImage = document.createElement('img');
         capturedImage.src = imageDataURL;
         capturedImage.style.maxWidth = "100%";
@@ -50,21 +57,20 @@ async function predict() {
         imageContainer.innerHTML = '';
         imageContainer.appendChild(capturedImage);
 
-        // Process and predict
+        // Xử lý và dự đoán
         const image = tf.browser.fromPixels(canvas);
         const resized = tf.image.resizeBilinear(image, [224, 224]);
         const normalized = resized.div(255);
         const batched = normalized.expandDims(0);
 
-        // Debugging steps
         console.log("Image processed for prediction:");
         console.log(batched);
-        
+
         const predictions = await model.predict(batched).data();
         console.log("Predictions:", predictions);
 
-        // Get prediction label (replace with your labels)
-        const classLabels = ["dragon fruit", "banana", "tomato", "grape", "lemon"];
+        // Lấy nhãn dự đoán (thay thế bằng nhãn của bạn)
+        const classLabels = ["dragon fruit", "banana", "tomato", "grape", "lemon"]; 
         let maxProbability = 0;
         let predictedClass = "";
         for (let i = 0; i < predictions.length; i++) {
@@ -74,15 +80,15 @@ async function predict() {
             }
         }
 
-        // Display the result and read out in Vietnamese
-        if (maxProbability > 0.6) { // Adjust threshold if needed
+        // Hiển thị kết quả và đọc bằng tiếng Việt
+        if (maxProbability > 0.6) { // Điều chỉnh ngưỡng nếu cần
             const message = `Dự đoán: ${predictedClass} - ${(maxProbability * 100).toFixed(2)}%`;
             result.innerText = message;
-            speak(message);  // Speak out when identification is correct
+            speak(message);
         } else {
             const message = "Không nhận ra nông sản này.";
             result.innerText = message;
-            speak(message);  // Speak out when identification is incorrect
+            speak(message);
         }
 
     } catch (error) {
@@ -91,24 +97,24 @@ async function predict() {
     }
 }
 
-// Text-to-Speech function
+// Hàm chuyển văn bản thành giọng nói
 function speak(text) {
     if ('speechSynthesis' in window) {
         const synthesis = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'vi-VN'; // Set language to Vietnamese
+        utterance.lang = 'vi-VN';
         synthesis.speak(utterance);
     } else {
         console.error("Speech Synthesis not supported in this browser.");
     }
 }
 
-// Initialize the application
+// Khởi tạo ứng dụng
 async function init() {
     await loadModel();
     await setupCamera();
     captureButton.addEventListener("click", predict);
 }
 
-// Run the application when the web page is loaded
+// Chạy ứng dụng khi trang web được tải
 document.addEventListener('DOMContentLoaded', init);
