@@ -29,7 +29,8 @@ async function setupCamera() {
                 facingMode: "environment", // Sử dụng camera sau trên điện thoại
                 width: { ideal: 1280 },
                 height: { ideal: 720 }
-            }
+            },
+            audio: false
         });
         video.srcObject = stream;
         video.style.display = "block"; // Hiển thị video
@@ -50,6 +51,12 @@ async function predict() {
     try {
         // Chụp ảnh từ video
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // Kiểm tra xem canvas có hình ảnh hay không
+        if (ctx.getImageData(0, 0, canvas.width, canvas.height).data.every(value => value === 0)) {
+            result.innerText = "Không thể chụp được hình ảnh từ camera. Vui lòng kiểm tra lại.";
+            return;
+        }
 
         // Hiển thị ảnh chụp trên canvas
         const imageDataURL = canvas.toDataURL();
@@ -88,7 +95,7 @@ async function predict() {
         }
 
         // Điều chỉnh ngưỡng dự đoán
-        if (maxProbability < 0.6) {
+        if (maxProbability < 0.7) {
             result.innerText = "Không nhận diện được nông sản. Vui lòng thử lại.";
             speak("Không nhận diện được nông sản. Vui lòng thử lại.");
             return;
