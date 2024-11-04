@@ -60,7 +60,7 @@ async function predict() {
         const predictions = await model.predict(inputTensor).data();
 
         // Thay thế bằng nhãn của mô hình của bạn
-        const classLabels = ["thanh long", "Chuối", "cà chua", "nho", "chanh"];
+        const classLabels = ["thanh long", "chuối", "cà chua", "nho", "chanh"];
 
         let maxProbability = 0;
         let predictedClass = "";
@@ -72,7 +72,7 @@ async function predict() {
         }
 
         // Kiểm tra độ chính xác (điều chỉnh ngưỡng nếu cần)
-        if (maxProbability < 0.7) {
+        if (maxProbability < 0.6) {
             result.innerText = "Không đúng nông sản";
             speak("Không đúng nông sản");
             return;
