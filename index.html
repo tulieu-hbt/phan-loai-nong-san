@@ -3,21 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ứng Dụng Phân Loại Nông Sản - Giao Diện Hai Cột</title>
+    <title>Ứng Dụng Phân Loại Nông Sản</title>
     <link rel="stylesheet" href="style.css">
-    <script src="kehoach.js"></script> <!-- Import dữ liệu nông sản -->
-    <script src="script.js" defer></script> <!-- Mã xử lý chính -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="ketqua.js"></script>
+    <script defer src="script.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>Ứng Dụng Phân Loại Nông Sản</h1>
-        <div class="main-content">
-            <!-- Khu vực hiển thị mã code và kết quả -->
-            <div class="code-container">
-                <h2>Kết Quả Phân Loại Nông Sản</h2>
+        
+        <div class="content">
+            <!-- Vùng camera -->
+            <div class="video-container">
+                <video id="camera" autoplay playsinline></video>
+                <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+                <button id="captureButton" class="capture-button">Chụp Ảnh và Phân Loại</button>
+            </div>
+            
+            <!-- Vùng kết quả -->
+            <div class="result-section">
+                <h2>Kết quả nhận diện</h2>
                 <div id="result" class="result-text"></div>
                 <div id="preservationInfo" class="preservation-text"></div>
-                <div id="plantingPlanContainer" class="planting-plan-container"></div>
+                
+                <h2>Kế hoạch trồng và chăm sóc</h2>
+                <div id="plantingPlanContainer" class="planting-plan-container">
+                    <!-- Bảng kế hoạch sẽ được thêm tự động -->
+                </div>
             </div>
         </div>
     </div>
