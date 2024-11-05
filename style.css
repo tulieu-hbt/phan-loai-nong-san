@@ -39,7 +39,7 @@ h1 {
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px; /* Tạo không gian để đặt nút */
     position: relative;
 }
 
@@ -64,12 +64,12 @@ video#camera, .image-container img {
     border: 2px solid #3498db;
 }
 
-/* Căn giữa nút Chụp Ảnh và Phân Loại */
+/* Căn nút Chụp Ảnh và Phân Loại vào giữa hai khung hình */
 .capture-button {
     position: absolute;
-    bottom: -30px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     padding: 10px 20px;
     font-size: 16px;
     color: #ffffff;
@@ -78,6 +78,7 @@ video#camera, .image-container img {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    z-index: 1; /* Đảm bảo nút hiển thị trên hai khung hình */
 }
 
 .capture-button:hover {
@@ -101,7 +102,7 @@ video#camera, .image-container img {
 
 /* Vùng giá thị trường và kế hoạch trồng */
 .market-info-container, .planting-plan-container {
-    margin-top: 40px;
+    margin-top: 20px;
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -129,8 +130,7 @@ video#camera, .image-container img {
     }
     .capture-button {
         position: relative;
-        transform: translateX(0);
-        bottom: 0;
+        transform: translate(0, 0);
         margin-top: 10px;
     }
 }
