@@ -3,34 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ứng Dụng Phân Loại Nông Sản</title>
+    <title>Ứng Dụng Phân Loại Nông Sản - Giao Diện Hai Cột</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script defer src="script.js"></script>
+    <script src="kehoach.js"></script> <!-- Import dữ liệu nông sản -->
+    <script src="script.js" defer></script> <!-- Mã xử lý chính -->
 </head>
 <body>
     <div class="container">
         <h1>Ứng Dụng Phân Loại Nông Sản</h1>
-        <div class="content">
-            <!-- Video camera section -->
-            <div class="video-container">
-                <video id="camera" autoplay playsinline></video>
-                <button id="captureButton" class="capture-button">Chụp Ảnh và Phân Loại</button>
-            </div>
-
-            <!-- Captured image storage area -->
-            <div class="image-storage">
-                <h2>Kết quả ảnh chụp từ camera</h2>
-                <div id="imageContainer"></div>
+        <div class="main-content">
+            <!-- Khu vực hiển thị mã code và kết quả -->
+            <div class="code-container">
+                <h2>Kết Quả Phân Loại Nông Sản</h2>
+                <div id="result" class="result-text"></div>
+                <div id="preservationInfo" class="preservation-text"></div>
+                <div id="plantingPlanContainer" class="planting-plan-container"></div>
             </div>
         </div>
-
-        <!-- Results and additional information -->
-        <div id="result" class="result-text"></div>
-        <div id="preservationInfo" class="preservation-text"></div>
-        <div id="plantingPlanContainer" class="planting-plan-container"></div>
-
-        <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
     </div>
 </body>
 </html>
