@@ -70,6 +70,7 @@ function saveCapturedImage() {
 }
 
 // Hàm dự đoán
+// Hàm dự đoán
 async function predict() {
     try {
         if (!ctx) {
@@ -122,8 +123,8 @@ async function predict() {
         preservationInfo.innerText = `Cách bảo quản: ${preservationText}`;
         speak(preservationText);
 
-        // Lấy kế hoạch trồng cây từ kehoach.js
-        loadPlantingPlan(predictedClass);
+        // Gọi hàm displayPlantingPlan từ kehoach.js để hiển thị kế hoạch trồng cây
+        displayPlantingPlan(predictedClass);
 
     } catch (error) {
         console.error("Lỗi khi dự đoán:", error);
