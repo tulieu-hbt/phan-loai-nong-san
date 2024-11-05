@@ -68,7 +68,7 @@ function saveCapturedImage() {
     imageContainer.innerHTML = ''; // Xóa ảnh cũ trước khi thêm ảnh mới
     imageContainer.appendChild(img);
 }
-
+displayMarketData(nongsan, container);
 // Hàm dự đoán
 // Hàm dự đoán
 async function predict() {
