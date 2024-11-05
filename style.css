@@ -1,37 +1,155 @@
-/* Định dạng tổng quan */
-.container {
-    text-align: center;
-    margin: 0 auto;
-    max-width: 900px;
+/* Tổng quan */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
 }
 
-/* Định dạng phần nội dung chính */
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Container chính */
+.container {
+    width: 80%;
+    max-width: 1200px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Tiêu đề chính */
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+/* Bố cục nội dung */
 .content {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    gap: 20px;
 }
 
-/* Khu vực video camera */
-.video-container {
+/* Phần video và nút */
+.video-section {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    background-color: #eaf6f6;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* Khu vực lưu ảnh */
-.image-storage {
-    flex: 1;
-    padding: 20px;
+#camera {
+    width: 100%;
+    border-radius: 8px;
+    border: 2px solid #3498db;
 }
 
-/* Định dạng cho ảnh chụp */
-#imageContainer img {
-    max-width: 100%;
-    margin-top: 10px;
+.button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-/* Định dạng cho kết quả và thông báo */
-.result-text, .preservation-text, .planting-plan-container {
-    margin-top: 20px;
-    text-align: center;
+.button:hover {
+    background-color: #2980b9;
+}
+
+/* Phần kết quả */
+.result-section {
+    flex: 1.5;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+}
+
+.result-section h2 {
+    color: #3498db;
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+/* Kết quả nhận diện */
+.result-container {
+    padding: 10px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+    margin-bottom: 20px;
+}
+
+#result {
+    font-weight: bold;
+    color: #2c3e50;
     font-size: 18px;
+    margin-bottom: 10px;
+}
+
+#preservationInfo {
+    color: #555;
+    font-size: 16px;
+}
+
+/* Kế hoạch trồng */
+.planting-plan-container {
+    overflow-x: auto;
+    padding: 10px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+.planting-plan-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.planting-plan-container th,
+.planting-plan-container td {
+    padding: 8px 12px;
+    border: 1px solid #dddddd;
+    text-align: center;
+}
+
+.planting-plan-container th {
+    background-color: #3498db;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.planting-plan-container td {
+    background-color: #f9f9f9;
+}
+
+.planting-plan-container tfoot td {
+    font-weight: bold;
+    background-color: #e1e5ea;
+}
+
+/* Phần phản hồi trên thiết bị nhỏ */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+    }
 }
