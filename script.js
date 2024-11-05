@@ -1,3 +1,5 @@
+// script.js
+
 let model;
 const URL = "model/";
 const result = document.getElementById("result");
@@ -6,10 +8,9 @@ const video = document.getElementById('camera');
 const canvas = document.getElementById('canvas');
 const imageContainer = document.getElementById('imageContainer');
 const preservationInfo = document.getElementById('preservationInfo');
-const plantingPlanContainer = document.getElementById('plantingPlanContainer');
-let ctx;
 
-// Khởi tạo context cho canvas khi DOM được tải
+// Kiểm tra nếu canvas tồn tại trước khi lấy context
+let ctx;
 window.addEventListener("DOMContentLoaded", () => {
     if (canvas) {
         ctx = canvas.getContext('2d');
@@ -32,21 +33,101 @@ async function loadModel() {
     }
 }
 
-// Hàm thiết lập camera
+// Hàm khởi tạo camera với cấu hình phù hợp
 async function setupCamera() {
     try {
         const stream = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } },
+            video: {
+                facingMode: "environment",
+                width: { ideal: 1280 },
+                height: { ideal: 720 }
+            },
             audio: false
         });
         video.srcObject = stream;
         video.style.display = "block";
+        video.style.width = "100%";
         return new Promise((resolve) => {
-            video.onloadedmetadata = () => resolve(video);
+            video.onloadedmetadata = () => {
+                resolve(video);
+            };
         });
     } catch (error) {
         console.error("Lỗi khi khởi tạo camera:", error);
         result.innerText = "Không thể sử dụng camera!";
+    }
+}
+
+// Hàm lưu ảnh chụp vào vùng imageContainer
+function saveCapturedImage() {
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const img = document.createElement('img');
+    img.src = canvas.toDataURL('image/png');
+    img.alt = "Hình chụp từ camera";
+    img.classList.add('captured-image');
+    imageContainer.innerHTML = ''; // Xóa ảnh cũ trước khi thêm ảnh mới
+    imageContainer.appendChild(img);
+}
+
+// Hàm dự đoán
+async function predict() {
+    try {
+        if (!ctx) {
+            console.error("Không thể lấy context của canvas. Vui lòng kiểm tra lại phần tử canvas.");
+            return;
+        }
+
+        // Chụp ảnh từ video và lưu ảnh
+        saveCapturedImage();
+
+        // Tiền xử lý ảnh để dự đoán
+        const image = tf.browser.fromPixels(canvas);
+        const resizedImage = tf.image.resizeBilinear(image, [224, 224]);
+        const normalizedImage = resizedImage.div(255.0);
+        const inputTensor = tf.expandDims(normalizedImage, 0);
+
+        const predictions = await model.predict(inputTensor).data();
+
+        // Thay thế bằng nhãn của mô hình của bạn
+        const classLabels = ["thanh long", "chuối", "cà chua", "nho", "chanh"];
+        const preservationTexts = {
+            "thanh long": "Bảo quản thanh long ở nơi thoáng mát, tránh ánh nắng trực tiếp, tốt nhất ở nhiệt độ 10-12 độ C.",
+            "chuối": "Chuối nên được bảo quản ở nhiệt độ phòng, tránh nơi có ánh nắng mặt trời và độ ẩm cao.",
+            "cà chua": "Cà chua nên được bảo quản ở nhiệt độ phòng, tránh lạnh để giữ hương vị tốt nhất.",
+            "nho": "Nho nên được bảo quản trong tủ lạnh và giữ trong hộp kín để tránh mất nước.",
+            "chanh": "Chanh nên được bảo quản ở nhiệt độ phòng hoặc trong ngăn mát tủ lạnh để giữ độ tươi lâu hơn."
+        };
+
+        let maxProbability = 0;
+        let predictedClass = "";
+
+        for (let i = 0; i < predictions.length; i++) {
+            if (predictions[i] > maxProbability) {
+                maxProbability = predictions[i];
+                predictedClass = classLabels[i];
+            }
+        }
+
+        if (maxProbability < 0.7) {
+            result.innerText = "Không nhận diện được nông sản. Vui lòng thử lại.";
+            speak("Không nhận diện được nông sản. Vui lòng thử lại.");
+            return;
+        }
+
+        const predictedText = `Kết quả dự đoán: ${predictedClass} (${(maxProbability * 100).toFixed(2)}%)`;
+        result.innerText = predictedText;
+        speak(predictedText);
+
+        const preservationText = preservationTexts[predictedClass];
+        preservationInfo.innerText = `Cách bảo quản: ${preservationText}`;
+        speak(preservationText);
+
+        // Lấy kế hoạch trồng cây từ kehoach.js
+        loadPlantingPlan(predictedClass);
+
+    } catch (error) {
+        console.error("Lỗi khi dự đoán:", error);
+        result.innerText = "Lỗi khi dự đoán: " + error.message;
     }
 }
 
@@ -62,69 +143,7 @@ function speak(text) {
     }
 }
 
-// Hàm dự đoán loại nông sản
-async function predict() {
-    try {
-        if (!ctx) {
-            console.error("Không thể lấy context của canvas.");
-            return;
-        }
-
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const image = tf.browser.fromPixels(canvas);
-        const resizedImage = tf.image.resizeBilinear(image, [224, 224]);
-        const normalizedImage = resizedImage.div(255.0);
-        const inputTensor = tf.expandDims(normalizedImage, 0);
-
-        const predictions = await model.predict(inputTensor).data();
-        const classLabels = ["thanh long", "chuối", "cà chua", "nho", "chanh", "cải xanh", "bầu", "mướp", "đu đủ", "ổi", "ớt"];
-
-        const preservationTexts = { /* chứa thông tin bảo quản */ };
-        const plantingPlans = { /* chứa kế hoạch trồng cây */ };
-
-        let maxProbability = 0, predictedClass = "";
-        let secondMaxProbability = 0, secondPredictedClass = "";
-
-        for (let i = 0; i < predictions.length; i++) {
-            if (predictions[i] > maxProbability) {
-                secondMaxProbability = maxProbability;
-                secondPredictedClass = predictedClass;
-                maxProbability = predictions[i];
-                predictedClass = classLabels[i];
-            } else if (predictions[i] > secondMaxProbability) {
-                secondMaxProbability = predictions[i];
-                secondPredictedClass = classLabels[i];
-            }
-        }
-
-        if (maxProbability < 0.7) {
-            result.innerText = "Không nhận diện được nông sản. Vui lòng thử lại.";
-            speak("Không nhận diện được nông sản. Vui lòng thử lại.");
-            return;
-        }
-
-        if (maxProbability - secondMaxProbability < 0.2) {
-            result.innerText = `Kết quả không chắc chắn. Có thể là: ${predictedClass} hoặc ${secondPredictedClass}`;
-            speak(`Kết quả không chắc chắn. Có thể là: ${predictedClass} hoặc ${secondPredictedClass}`);
-            return;
-        }
-
-        result.innerText = `Kết quả dự đoán: ${predictedClass} (${(maxProbability * 100).toFixed(2)}%)`;
-        speak(`Kết quả dự đoán: ${predictedClass}`);
-        
-        const preservationText = preservationTexts[predictedClass];
-        preservationInfo.innerText = `Cách bảo quản: ${preservationText}`;
-        speak(preservationText);
-
-        plantingPlanContainer.innerHTML = plantingPlans[predictedClass] || `<p>Chưa có kế hoạch trồng cho loại cây này.</p>`;
-        
-    } catch (error) {
-        console.error("Lỗi khi dự đoán:", error);
-        result.innerText = "Lỗi khi dự đoán: " + error.message;
-    }
-}
-
-// Khởi tạo ứng dụng
+// Hàm khởi tạo ứng dụng
 async function init() {
     await loadModel();
     await setupCamera();
