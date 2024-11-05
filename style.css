@@ -1,71 +1,37 @@
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-}
-
+/* Định dạng tổng quan */
 .container {
-    width: 80%;
-    max-width: 960px;
     text-align: center;
-    background: #fff;
-    padding: 20px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    margin: 0 auto;
+    max-width: 900px;
 }
 
-h1 {
-    color: #4CAF50;
-    font-weight: bold;
+/* Định dạng phần nội dung chính */
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
+/* Khu vực video camera */
 .video-container {
-    margin-bottom: 20px;
+    flex: 1;
 }
 
-video {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+/* Khu vực lưu ảnh */
+.image-storage {
+    flex: 1;
+    padding: 20px;
 }
 
-.result-text, .preservation-text {
+/* Định dạng cho ảnh chụp */
+#imageContainer img {
+    max-width: 100%;
+    margin-top: 10px;
+}
+
+/* Định dạng cho kết quả và thông báo */
+.result-text, .preservation-text, .planting-plan-container {
     margin-top: 20px;
+    text-align: center;
     font-size: 18px;
-    font-weight: bold;
-    color: #2c3e50;
-    background-color: #e8f5e9;
-    padding: 10px;
-    border-radius: 5px;
-}
-.planting-plan-container {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
-    color: #333;
-}
-
-.capture-button {
-    margin-top: 20px;
-    padding: 15px 30px;
-    font-size: 18px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    border-radius: 5px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.capture-button:hover {
-    background-color: #45a049;
 }
