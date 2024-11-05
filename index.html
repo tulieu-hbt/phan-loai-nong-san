@@ -6,7 +6,7 @@
     <title>Ứng Dụng Phân Loại Nông Sản</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="ketqua.js"></script>
+    <script src="kehoach.js"></script>
     <script defer src="script.js"></script>
 </head>
 <body>
@@ -14,23 +14,37 @@
         <h1>Ứng Dụng Phân Loại Nông Sản</h1>
         
         <div class="content">
-            <!-- Vùng camera -->
-            <div class="video-container">
-                <video id="camera" autoplay playsinline></video>
-                <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
-                <button id="captureButton" class="capture-button">Chụp Ảnh và Phân Loại</button>
+            <!-- Vùng camera và hình chụp -->
+            <div class="left-section">
+                <div class="video-container">
+                    <video id="camera" autoplay playsinline></video>
+                    <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+                    <button id="captureButton" class="capture-button">Chụp Ảnh và Phân Loại</button>
+                </div>
+                
+                <div id="imageContainer" class="image-container">
+                    <!-- Hình chụp sẽ được thêm vào đây -->
+                </div>
             </div>
             
             <!-- Vùng kết quả -->
-            <div class="result-section">
+            <div class="right-section">
                 <h2>Kết quả nhận diện</h2>
-                <div id="result" class="result-text"></div>
-                <div id="preservationInfo" class="preservation-text"></div>
-                
-                <h2>Kế hoạch trồng và chăm sóc</h2>
-                <div id="plantingPlanContainer" class="planting-plan-container">
-                    <!-- Bảng kế hoạch sẽ được thêm tự động -->
-                </div>
+                <div id="result" class="result-text">Kết quả dự đoán sẽ hiển thị ở đây</div>
+                <div id="preservationInfo" class="preservation-text">Thông tin bảo quản sẽ hiển thị ở đây</div>
+            </div>
+        </div>
+        
+        <!-- Vùng bảng kế hoạch trồng cây -->
+        <div class="plan-section">
+            <div id="plantingPlanContainer1" class="planting-plan-container">
+                <h2>Kế hoạch trồng và chăm sóc 1</h2>
+                <!-- Nội dung bảng kế hoạch 1 sẽ được thêm vào đây -->
+            </div>
+            
+            <div id="plantingPlanContainer2" class="planting-plan-container">
+                <h2>Kế hoạch trồng và chăm sóc 2</h2>
+                <!-- Nội dung bảng kế hoạch 2 sẽ được thêm vào đây -->
             </div>
         </div>
     </div>
