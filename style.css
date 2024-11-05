@@ -15,7 +15,6 @@ body {
     min-height: 100vh;
 }
 
-/* Container chính */
 .container {
     width: 90%;
     max-width: 1200px;
@@ -25,7 +24,6 @@ body {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Tiêu đề chính */
 h1 {
     text-align: center;
     color: #2c3e50;
@@ -33,16 +31,14 @@ h1 {
     font-size: 28px;
 }
 
-/* Bố cục nội dung chính */
 .content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
-/* Phần camera và hình chụp */
 .camera-section, .image-container {
     flex: 1;
     display: flex;
@@ -53,7 +49,6 @@ h1 {
     border: 1px solid #ddd;
     border-radius: 8px;
     max-width: 100%;
-    position: relative; /* Để có thể định vị nút bên trong */
 }
 
 video#camera, .image-container img {
@@ -64,11 +59,13 @@ video#camera, .image-container img {
     border: 2px solid #3498db;
 }
 
-/* Đặt nút Chụp Ảnh và Phân Loại ở góc dưới bên trái của khung camera */
+/* Button container để nút nằm dưới camera */
+.button-container {
+    text-align: center;
+    margin-top: 15px; /* Tạo khoảng cách giữa nút và khung camera */
+}
+
 .capture-button {
-    position: absolute;
-    bottom: 10px; /* Cách cạnh dưới của khung camera 10px */
-    left: 10px;   /* Cách cạnh trái của khung camera 10px */
     padding: 10px 20px;
     font-size: 16px;
     color: #ffffff;
@@ -77,14 +74,13 @@ video#camera, .image-container img {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    z-index: 1; /* Đảm bảo nút hiển thị trên video */
 }
 
 .capture-button:hover {
     background-color: #2980b9;
 }
 
-/* Phần kết quả */
+/* Các phần khác */
 .result-text {
     font-weight: bold;
     color: #2c3e50;
@@ -99,7 +95,6 @@ video#camera, .image-container img {
     text-align: center;
 }
 
-/* Vùng giá thị trường và kế hoạch trồng */
 .market-info-container, .planting-plan-container {
     margin-top: 20px;
     padding: 15px;
@@ -126,10 +121,5 @@ video#camera, .image-container img {
     }
     .camera-section, .image-container {
         width: 100%;
-    }
-    .capture-button {
-        position: relative;
-        transform: translate(0, 0);
-        margin-top: 10px;
     }
 }
