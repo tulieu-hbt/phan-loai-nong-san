@@ -37,7 +37,7 @@ h1 {
 .content {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     gap: 20px;
     margin-bottom: 40px;
 }
@@ -64,12 +64,11 @@ video#camera, .image-container img {
     border: 2px solid #3498db;
 }
 
-/* Đặt nút Chụp Ảnh và Phân Loại ở giữa phía dưới của khung camera */
+/* Đặt nút Chụp Ảnh và Phân Loại ở góc dưới bên trái của khung camera */
 .capture-button {
     position: absolute;
-    bottom: 15px; /* Cách cạnh dưới của khung camera */
-    left: 50%; /* Căn giữa theo chiều ngang */
-    transform: translateX(-50%); /* Điều chỉnh để nút nằm giữa khung */
+    bottom: 10px; /* Cách cạnh dưới của khung camera 10px */
+    left: 10px;   /* Cách cạnh trái của khung camera 10px */
     padding: 10px 20px;
     font-size: 16px;
     color: #ffffff;
