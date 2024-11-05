@@ -5,6 +5,10 @@ const captureButton = document.getElementById("captureButton");
 const video = document.getElementById('camera');
 const canvas = document.getElementById('canvas');
 
+const camera = document.getElementById('camera');
+const canvas = document.getElementById('canvas');
+const captureButton = document.getElementById('captureButton');
+const imageContainer = document.getElementById('imageContainer');
 // Kiểm tra nếu canvas tồn tại trước khi lấy context
 let ctx;
 window.addEventListener("DOMContentLoaded", () => {
@@ -57,6 +61,19 @@ async function setupCamera() {
         result.innerText = "Không thể sử dụng camera!";
     }
 }
+// Thêm kết quả:
+captureButton.addEventListener('click', () => {
+    // Chụp ảnh từ camera
+    const context = canvas.getContext('2d');
+    context.drawImage(camera, 0, 0, canvas.width, canvas.height);
+
+    // Lấy ảnh từ canvas và hiển thị
+    const img = document.createElement('img');
+    img.src = canvas.toDataURL('image/png');
+    imageContainer.appendChild(img);
+
+    // Gọi hàm phân loại hoặc xử lý ở đây (chỉnh theo logic của bạn)
+});
 
 // Hàm dự đoán
 async function predict() {
