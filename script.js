@@ -4,16 +4,16 @@ let model;
 const URL = "model/";
 const result = document.getElementById("result");
 const captureButton = document.getElementById("captureButton");
-const video = document.getElementById('camera');
-const canvas = document.getElementById('canvas');
-const imageContainer = document.getElementById('imageContainer');
-const preservationInfo = document.getElementById('preservationInfo');
+const video = document.getElementById("camera");
+const canvas = document.getElementById("canvas");
+const imageContainer = document.getElementById("imageContainer");
+const preservationInfo = document.getElementById("preservationInfo");
 
 // Kiểm tra nếu canvas tồn tại trước khi lấy context
 let ctx;
 window.addEventListener("DOMContentLoaded", () => {
     if (canvas) {
-        ctx = canvas.getContext('2d');
+        ctx = canvas.getContext("2d");
     } else {
         console.error("Canvas không tồn tại. Vui lòng kiểm tra lại phần tử canvas trong HTML.");
     }
@@ -37,11 +37,7 @@ async function loadModel() {
 async function setupCamera() {
     try {
         const stream = await navigator.mediaDevices.getUserMedia({
-            video: {
-                facingMode: "environment",
-                width: { ideal: 1280 },
-                height: { ideal: 720 }
-            },
+            video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } },
             audio: false
         });
         video.srcObject = stream;
@@ -61,15 +57,14 @@ async function setupCamera() {
 // Hàm lưu ảnh chụp vào vùng imageContainer
 function saveCapturedImage() {
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    const img = document.createElement('img');
-    img.src = canvas.toDataURL('image/png');
+    const img = document.createElement("img");
+    img.src = canvas.toDataURL("image/png");
     img.alt = "Hình chụp từ camera";
-    img.classList.add('captured-image');
-    imageContainer.innerHTML = ''; // Xóa ảnh cũ trước khi thêm ảnh mới
+    img.classList.add("captured-image");
+    imageContainer.innerHTML = ""; // Xóa ảnh cũ trước khi thêm ảnh mới
     imageContainer.appendChild(img);
 }
-displayMarketData(nongsan, container);
-// Hàm dự đoán
+
 // Hàm dự đoán
 async function predict() {
     try {
@@ -123,8 +118,11 @@ async function predict() {
         preservationInfo.innerText = `Cách bảo quản: ${preservationText}`;
         speak(preservationText);
 
-        // Gọi hàm displayPlantingPlan từ kehoach.js để hiển thị kế hoạch trồng cây
-        displayPlantingPlan(predictedClass);
+        // Hiển thị kế hoạch trồng cây và giá thị trường
+        const planContainer = document.getElementById("plantingPlanContainer");
+        const marketInfoContainer = document.getElementById("marketInfoContainer");
+        displayPlantingPlan(predictedClass, planContainer);
+        displayMarketData(predictedClass, marketInfoContainer);
 
     } catch (error) {
         console.error("Lỗi khi dự đoán:", error);
@@ -134,10 +132,10 @@ async function predict() {
 
 // Hàm Text-to-Speech
 function speak(text) {
-    if ('speechSynthesis' in window) {
+    if ("speechSynthesis" in window) {
         const synthesis = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'vi-VN';
+        utterance.lang = "vi-VN";
         synthesis.speak(utterance);
     } else {
         console.error("Trình duyệt không hỗ trợ Speech Synthesis.");
