@@ -8,6 +8,8 @@ const video = document.getElementById("camera");
 const canvas = document.createElement("canvas");
 const imageContainer = document.getElementById("imageContainer");
 const preservationInfo = document.getElementById("preservationInfo");
+const planContainer = document.getElementById("plantingPlanContainer");
+
 
 // Thiết lập kích thước canvas giống với video
 video.addEventListener('loadedmetadata', () => {
@@ -89,10 +91,11 @@ async function predict() {
         speak("Không nhận diện được nông sản.");
         return;
     }
-
+   
     result.innerText = `Kết quả: ${predictedClass}`;
     preservationInfo.innerText = preservationTexts[predictedClass];
-    displayPlantingPlan(predictedClass, document.getElementById("plantingPlanContainer"));
+    //displayPlantingPlan(predictedClass, document.getElementById("plantingPlanContainer"));
+     displayPlantingPlan(predictedClass, planContainer);
     displayMarketData(predictedClass, document.getElementById("marketInfoContainer"));
 }
 
