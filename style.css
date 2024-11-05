@@ -67,7 +67,7 @@ video#camera, .image-container img {
 /* Căn nút Chụp Ảnh và Phân Loại vào giữa hai khung hình */
 .capture-button {
     position: absolute;
-    top: 50%;
+    top: 50%; /* Căn nút ở giữa chiều cao của hai khung */
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 10px 20px;
