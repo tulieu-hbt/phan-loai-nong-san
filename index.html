@@ -11,17 +11,26 @@
 <body>
     <div class="container">
         <h1>Ứng Dụng Phân Loại Nông Sản</h1>
-        <div class="video-container">
-            <video id="camera" autoplay playsinline></video>
+        <div class="content">
+            <!-- Video camera section -->
+            <div class="video-container">
+                <video id="camera" autoplay playsinline></video>
+                <button id="captureButton" class="capture-button">Chụp Ảnh và Phân Loại</button>
+            </div>
+
+            <!-- Captured image storage area -->
+            <div class="image-storage">
+                <h2>Kết quả ảnh chụp từ camera</h2>
+                <div id="imageContainer"></div>
+            </div>
         </div>
-        <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
-        
-        <div id="imageContainer"></div>
+
+        <!-- Results and additional information -->
         <div id="result" class="result-text"></div>
         <div id="preservationInfo" class="preservation-text"></div>
         <div id="plantingPlanContainer" class="planting-plan-container"></div>
 
-        <button id="captureButton" class="capture-button">Chụp Ảnh và Phân Loại</button>
+        <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
     </div>
 </body>
 </html>
