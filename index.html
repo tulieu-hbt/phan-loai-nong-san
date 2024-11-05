@@ -13,26 +13,30 @@
     <div class="container">
         <h1>Ứng Dụng Phân Loại Nông Sản</h1>
         
-        <!-- Khu vực chụp và hiển thị ảnh -->
         <div class="content">
+            <!-- Khu vực camera -->
             <div class="camera-section">
                 <video id="camera" autoplay playsinline></video>
-                <button id="captureButton" class="capture-button">Chụp Ảnh và Phân Loại</button>
             </div>
-
-            <div class="image-container" id="imageContainer">
-                <p>Kết quả ảnh chụp</p>
-                <!-- Ảnh chụp sẽ hiển thị ở đây -->
+            
+            <!-- Khu vực hiển thị hình ảnh chụp -->
+            <div class="image-container">
+                <img id="capturedImage" src="" alt="Captured Image">
             </div>
         </div>
+        
+        <!-- Nút chụp ảnh và phân loại, đặt bên dưới camera -->
+        <div class="button-container">
+            <button id="captureButton" class="capture-button">Chụp Ảnh và Phân Loại</button>
+        </div>
 
-        <!-- Kết quả dự đoán và thông tin kế hoạch trồng cây -->
-        <div id="result" class="result-text">Kết quả dự đoán sẽ hiển thị ở đây</div>
-        <div id="preservationInfo" class="preservation-text">Thông tin bảo quản sẽ hiển thị ở đây</div>
+        <!-- Kết quả dự đoán và thông tin bảo quản -->
+        <div id="result" class="result-text"></div>
+        <div id="preservationInfo" class="preservation-text"></div>
 
-        <!-- Thông tin giá thị trường và kế hoạch trồng cây -->
-        <div id="marketInfoContainer" class="market-info-container"></div>
+        <!-- Khu vực hiển thị kế hoạch trồng cây và thông tin thị trường -->
         <div id="plantingPlanContainer" class="planting-plan-container"></div>
+        <div id="marketInfoContainer" class="market-info-container"></div>
     </div>
 </body>
 </html>
