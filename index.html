@@ -13,40 +13,26 @@
     <div class="container">
         <h1>Ứng Dụng Phân Loại Nông Sản</h1>
         
+        <!-- Khu vực chụp và hiển thị ảnh -->
         <div class="content">
-            <!-- Vùng camera và hình chụp -->
-            <div class="left-section">
-                <div class="video-container">
-                    <video id="camera" autoplay playsinline></video>
-                    <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
-                    <button id="captureButton" class="capture-button">Chụp Ảnh và Phân Loại</button>
-                </div>
-                
-                <div id="imageContainer" class="image-container">
-                    <!-- Hình chụp sẽ được thêm vào đây -->
-                </div>
+            <div class="camera-section">
+                <video id="camera" autoplay playsinline></video>
+                <button id="captureButton" class="capture-button">Chụp Ảnh và Phân Loại</button>
             </div>
-            
-            <!-- Vùng kết quả -->
-            <div class="right-section">
-                <h2>Kết quả nhận diện</h2>
-                <div id="result" class="result-text">Kết quả dự đoán sẽ hiển thị ở đây</div>
-                <div id="preservationInfo" class="preservation-text">Thông tin bảo quản sẽ hiển thị ở đây</div>
+
+            <div class="image-container" id="imageContainer">
+                <p>Kết quả ảnh chụp</p>
+                <!-- Ảnh chụp sẽ hiển thị ở đây -->
             </div>
         </div>
-        
-        <!-- Vùng bảng kế hoạch trồng cây -->
-        <div class="plan-section">
-            <div id="marketInfoContainer"></div><div id="plantingPlanContainer1" class="planting-plan-container">
-                <h2>Kế hoạch trồng và chăm sóc 1</h2>
-                <!-- Nội dung bảng kế hoạch 1 sẽ được thêm vào đây -->
-            </div>
-            
-            <div id="marketInfoContainer"></div><div id="plantingPlanContainer2" class="planting-plan-container">
-                <h2>Kế hoạch trồng và chăm sóc 2</h2>
-                <!-- Nội dung bảng kế hoạch 2 sẽ được thêm vào đây -->
-            </div>
-        </div>
+
+        <!-- Kết quả dự đoán và thông tin kế hoạch trồng cây -->
+        <div id="result" class="result-text">Kết quả dự đoán sẽ hiển thị ở đây</div>
+        <div id="preservationInfo" class="preservation-text">Thông tin bảo quản sẽ hiển thị ở đây</div>
+
+        <!-- Thông tin giá thị trường và kế hoạch trồng cây -->
+        <div id="marketInfoContainer" class="market-info-container"></div>
+        <div id="plantingPlanContainer" class="planting-plan-container"></div>
     </div>
 </body>
 </html>
