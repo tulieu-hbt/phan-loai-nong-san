@@ -1,5 +1,3 @@
-// script.js
-
 let model;
 const URL = "model/";
 
@@ -98,7 +96,11 @@ async function predict() {
     if (result) result.innerText = `Kết quả: ${predictedClass}`;
     if (preservationInfo) preservationInfo.innerText = preservationTexts[predictedClass];
     speak(preservationTexts[predictedClass]);
-    displayPlantingPlan(predictedClass, plantingPlanContainer);
+
+    // Gọi hàm hiển thị kế hoạch và chi phí
+    displayPlantingInfo(predictedClass);
+
+    // Gọi hàm hiển thị thông tin thị trường
     displayMarketData(predictedClass, marketInfoContainer);
 }
 
