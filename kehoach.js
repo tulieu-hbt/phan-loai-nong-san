@@ -106,24 +106,3 @@ async function displayPlantingPlan(nongsan, container) {
         // Kế hoạch trồng và chăm sóc cây trồng
         let tasksHTML = "<h3>Kế hoạch trồng và chăm sóc cây trồng</h3><table><tr><th>STT</th><th>Công việc cần làm</th><th>Thời gian thực hiện</th><th>Vật liệu, dụng cụ cần thiết</th><th>Ghi chú</th></tr>";
         planData.tasks.forEach(task => {
-            tasksHTML += `<tr><td>${task.stt}</td><td>${task.task}</td><td>${task.time}</td><td>${task.materials}</td><td>${task.note}</td></tr>`;
-        });
-        tasksHTML += "</table>";
-
-        // Bảng tính chi phí trồng và chăm sóc cây trồng
-        let costHTML = "<h3>Bảng tính chi phí trồng và chăm sóc cây trồng</h3><table><tr><th>STT</th><th>Các loại chi phí</th><th>Đơn vị tính</th><th>Đơn giá (đồng)</th><th>Số lượng</th><th>Thành tiền (đồng)</th><th>Ghi chú</th></tr>";
-        let totalCost = 0;
-        planData.cost.forEach(item => {
-            const itemTotal = item.price * item.quantity;
-            totalCost += itemTotal;
-            costHTML += `<tr><td>${item.stt}</td><td>${item.item}</td><td>${item.unit}</td><td>${item.price}</td><td>${item.quantity}</td><td>${itemTotal}</td><td>${item.note}</td></tr>`;
-        });
-        costHTML += `<tr><td colspan="5">Tổng cộng</td><td>${totalCost}</td><td></td></tr>`;
-        costHTML += "</table>";
-
-        // Gán nội dung vào container
-        container.innerHTML = overviewHTML + tasksHTML + costHTML;
-    } else {
-        container.innerHTML = "<p>Không có dữ liệu cho nông sản này.</p>";
-    }
-}
