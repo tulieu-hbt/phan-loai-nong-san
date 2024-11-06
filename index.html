@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ứng Dụng Phân Loại Nông Sản</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Thêm thư viện TensorFlow và SheetJS -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <!-- Thêm các tệp JS -->
     <script src="kehoach.js"></script>
     <script defer src="script.js"></script>
 </head>
@@ -19,7 +22,7 @@
                 <video id="camera" autoplay playsinline></video>
             </div>
             <div class="image-container">
-                <img id="capturedImage" src="" alt="Captured Image"> <!-- Sử dụng id="capturedImage" -->
+                <img id="capturedImage" src="" alt="Captured Image">
             </div>
         </div>
 
@@ -33,8 +36,15 @@
         <div id="preservationInfo" class="preservation-text"></div>
 
         <!-- Khu vực hiển thị kế hoạch trồng cây và thông tin thị trường -->
-        <div id="plantingPlanContainer" class="planting-plan-container"></div>
-        <div id="marketInfoContainer" class="market-info-container"></div>
+        <div id="plantingPlanContainer" class="planting-plan-container">
+            <h2>Kế hoạch trồng cây và chăm sóc</h2>
+            <!-- Kế hoạch trồng cây và chăm sóc sẽ được hiển thị ở đây -->
+        </div>
+        
+        <div id="marketInfoContainer" class="market-info-container">
+            <h2>Thông tin thị trường</h2>
+            <!-- Thông tin giá thị trường sẽ được hiển thị ở đây -->
+        </div>
     </div>
 </body>
 </html>
