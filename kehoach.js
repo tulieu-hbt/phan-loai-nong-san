@@ -1,3 +1,5 @@
+// kehoach.js
+
 // Hàm tải dữ liệu từ file Excel
 async function loadExcelData() {
     const url = 'https://github.com/tulieu-hbt/phan-loai-nong-san/raw/main/assets/baocao.xlsx';
@@ -16,6 +18,10 @@ async function loadExcelData() {
         const plantingPlan = XLSX.utils.sheet_to_json(plantingSheet);
         const costEstimate = XLSX.utils.sheet_to_json(costSheet);
 
+        // Kiểm tra dữ liệu
+        console.log("Planting Plan:", plantingPlan);
+        console.log("Cost Estimate:", costEstimate);
+
         return { plantingPlan, costEstimate };
     } catch (error) {
         console.error("Lỗi khi tải dữ liệu từ file Excel:", error);
@@ -25,24 +31,62 @@ async function loadExcelData() {
 
 // Hàm hiển thị kế hoạch trồng cây
 function displayPlantingPlan(plantingPlan, container) {
-    let tasksHTML = "<h3>Kế hoạch trồng và chăm sóc cây trồng</h3><table><tr><th>STT</th><th>Công việc cần làm</th><th>Thời gian thực hiện</th><th>Vật liệu, dụng cụ cần thiết</th><th>Ghi chú</th></tr>";
+    // Kiểm tra nếu plantingPlan là mảng
+    if (!Array.isArray(plantingPlan)) {
+        console.error("Dữ liệu plantingPlan không phải là một mảng:", plantingPlan);
+        container.innerHTML = "<p>Không có dữ liệu kế hoạch trồng cây hợp lệ.</p>";
+        return;
+    }
+
+    let tasksHTML = "<h3>Kế hoạch trồng và chăm sóc cây trồng</h3>";
+    tasksHTML += "<table><tr><th>STT</th><th>Công việc cần làm</th><th>Thời gian thực hiện</th><th>Vật liệu, dụng cụ cần thiết</th><th>Ghi chú</th></tr>";
+
     plantingPlan.forEach(task => {
-        tasksHTML += `<tr><td>${task.STT}</td><td>${task['Cong Viec Can Lam']}</td><td>${task['Thoi gian thuc hien']}</td><td>${task['Vat lieu, dung cu can thiet']}</td><td>${task['Ghi chu']}</td></tr>`;
+        tasksHTML += `<tr>
+            <td>${task.STT || ""}</td>
+            <td>${task['Cong Viec Can Lam'] || ""}</td>
+            <td>${task['Thoi gian thuc hien'] || ""}</td>
+            <td>${task['Vat lieu, dung cu can thiet'] || ""}</td>
+            <td>${task['Ghi chu'] || ""}</td>
+        </tr>`;
     });
+
     tasksHTML += "</table>";
     container.innerHTML += tasksHTML;
 }
 
 // Hàm hiển thị chi phí trồng cây
 function displayCostEstimate(costEstimate, container) {
-    let costHTML = "<h3>Bảng tính chi phí trồng và chăm sóc cây trồng</h3><table><tr><th>STT</th><th>Các loại chi phí</th><th>Đơn vị tính</th><th>Đơn giá (đồng)</th><th>Số lượng</th><th>Thành tiền (đồng)</th><th>Ghi chú</th></tr>";
+    // Kiểm tra nếu costEstimate là mảng
+    if (!Array.isArray(costEstimate)) {
+        console.error("Dữ liệu costEstimate không phải là một mảng:", costEstimate);
+        container.innerHTML = "<p>Không có dữ liệu chi phí trồng cây hợp lệ.</p>";
+        return;
+    }
+
+    let costHTML = "<h3>Bảng tính chi phí trồng và chăm sóc cây trồng</h3>";
+    costHTML += "<table><tr><th>STT</th><th>Các loại chi phí</th><th>Đơn vị tính</th><th>Đơn giá (đồng)</th><th>Số lượng</th><th>Thành tiền (đồng)</th><th>Ghi chú</th></tr>";
+
     let totalCost = 0;
     costEstimate.forEach(item => {
-        const itemTotal = item['Don gia (dong)'] * item['So luong'];
+        const itemTotal = (item['Don gia (dong)'] || 0) * (item['So luong'] || 0);
         totalCost += itemTotal;
-        costHTML += `<tr><td>${item.STT}</td><td>${item['Cac loai chi phi']}</td><td>${item['Don vi tinh']}</td><td>${item['Don gia (dong)']}</td><td>${item['So luong']}</td><td>${itemTotal}</td><td>${item['Ghi chu']}</td></tr>`;
+        costHTML += `<tr>
+            <td>${item.STT || ""}</td>
+            <td>${item['Cac loai chi phi'] || ""}</td>
+            <td>${item['Don vi tinh'] || ""}</td>
+            <td>${item['Don gia (dong)'] || ""}</td>
+            <td>${item['So luong'] || ""}</td>
+            <td>${itemTotal}</td>
+            <td>${item['Ghi chu'] || ""}</td>
+        </tr>`;
     });
-    costHTML += `<tr class="total-row"><td colspan="5">Tổng cộng</td><td>${totalCost}</td><td></td></tr>`;
+
+    costHTML += `<tr class="total-row">
+        <td colspan="5">Tổng cộng</td>
+        <td>${totalCost}</td>
+        <td></td>
+    </tr>`;
     costHTML += "</table>";
     container.innerHTML += costHTML;
 }
@@ -51,39 +95,13 @@ function displayCostEstimate(costEstimate, container) {
 async function displayPlantingInfo(nongsan) {
     const { plantingPlan, costEstimate } = await loadExcelData();
     const plantingPlanContainer = document.getElementById('plantingPlanContainer');
-    
-    if (plantingPlan && costEstimate) {
+
+    // Kiểm tra nếu dữ liệu có dạng mảng
+    if (Array.isArray(plantingPlan) && Array.isArray(costEstimate)) {
         displayPlantingPlan(plantingPlan, plantingPlanContainer);
         displayCostEstimate(costEstimate, plantingPlanContainer);
     } else {
         plantingPlanContainer.innerHTML = "<p>Không có dữ liệu cho nông sản này.</p>";
-    }
-}
-
-// Hàm lấy thông tin giá thị trường từ API hoặc dữ liệu giả lập
-async function fetchMarketData(nongsan) {
-    const symbol = productSymbols[nongsan.toLowerCase()];
-    if (!symbol) {
-        console.warn(`Nông sản "${nongsan}" không có mã trên Finnhub.`);
-        return generateMockMarketData(nongsan);
-    }
-
-    const url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`;
-
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            console.error(`Lỗi API: ${response.status} - ${response.statusText}`);
-            return generateMockMarketData(nongsan);
-        }
-
-        const data = await response.json();
-        return data.c
-            ? { price: data.c, date: new Date().toLocaleDateString() }
-            : generateMockMarketData(nongsan);
-    } catch (error) {
-        console.error("Lỗi khi lấy dữ liệu từ API:", error);
-        return generateMockMarketData(nongsan);
     }
 }
 
@@ -99,11 +117,12 @@ function generateMockMarketData(nongsan) {
 
 // Hàm hiển thị thông tin giá thị trường lên giao diện
 async function displayMarketData(nongsan, container) {
-    const marketData = await fetchMarketData(nongsan);
-    container.innerHTML = `<p>Giá thị trường hiện tại của ${nongsan}: ${marketData.price} USD/kg</p><p>Cập nhật lần cuối: ${marketData.date}</p>`;
+    const marketData = generateMockMarketData(nongsan);
+    container.innerHTML = `<p>Giá thị trường hiện tại của ${nongsan}: ${marketData.price} VND/kg</p>
+    <p>Cập nhật lần cuối: ${marketData.date}</p>`;
 }
 
 // Khởi tạo
-document.addEventListener("DOMContentLoaded", async () => {
-    // Thêm phần khởi tạo hiển thị hoặc các hàm bổ sung khác nếu cần
+document.addEventListener("DOMContentLoaded", () => {
+    // Khởi tạo thêm nếu cần
 });
