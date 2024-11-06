@@ -11,16 +11,16 @@ async function loadExcelData() {
         const workbook = XLSX.read(arrayBuffer, { type: 'array' });
 
         // Lấy dữ liệu từ các sheet
-        const plantingSheet = workbook.Sheets[workbook.SheetNames[0]];
-        const costSheet = workbook.Sheets[workbook.SheetNames[1]];
+        const plantingSheet = workbook.Sheets["Ke hoach Cham soc"];
+        const costSheet = workbook.Sheets["Chi Phi"];
 
         // Chuyển đổi dữ liệu sheet thành JSON
         const plantingPlan = XLSX.utils.sheet_to_json(plantingSheet);
         const costEstimate = XLSX.utils.sheet_to_json(costSheet);
 
         // Kiểm tra dữ liệu
-        console.log("Planting Plan:", plantingPlan);
-        console.log("Cost Estimate:", costEstimate);
+        console.log("Planting Plan (dữ liệu kế hoạch chăm sóc):", plantingPlan);
+        console.log("Cost Estimate (dữ liệu chi phí):", costEstimate);
 
         return { plantingPlan, costEstimate };
     } catch (error) {
@@ -45,9 +45,9 @@ function displayPlantingPlan(plantingPlan, container) {
         tasksHTML += `<tr>
             <td>${task.STT || ""}</td>
             <td>${task['Cong Viec Can Lam'] || ""}</td>
-            <td>${task['Thoi gian thuc hien'] || ""}</td>
-            <td>${task['Vat lieu, dung cu can thiet'] || ""}</td>
-            <td>${task['Ghi chu'] || ""}</td>
+            <td>${task['Thoi Gian Thuc Hien'] || ""}</td>
+            <td>${task['Vat Lieu, Dung Cu Can Thiet'] || ""}</td>
+            <td>${task['Ghi Chu'] || ""}</td>
         </tr>`;
     });
 
@@ -69,16 +69,16 @@ function displayCostEstimate(costEstimate, container) {
 
     let totalCost = 0;
     costEstimate.forEach(item => {
-        const itemTotal = (item['Don gia (dong)'] || 0) * (item['So luong'] || 0);
+        const itemTotal = (item['Don Gia (dong)'] || 0) * (item['So Luong'] || 0);
         totalCost += itemTotal;
         costHTML += `<tr>
             <td>${item.STT || ""}</td>
-            <td>${item['Cac loai chi phi'] || ""}</td>
-            <td>${item['Don vi tinh'] || ""}</td>
-            <td>${item['Don gia (dong)'] || ""}</td>
-            <td>${item['So luong'] || ""}</td>
+            <td>${item['Cac Loai Chi Phi'] || ""}</td>
+            <td>${item['Don Vi Tinh'] || ""}</td>
+            <td>${item['Don Gia (dong)'] || ""}</td>
+            <td>${item['So Luong'] || ""}</td>
             <td>${itemTotal}</td>
-            <td>${item['Ghi chu'] || ""}</td>
+            <td>${item['Ghi Chu'] || ""}</td>
         </tr>`;
     });
 
