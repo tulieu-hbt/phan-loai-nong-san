@@ -139,6 +139,10 @@ async function fetchData() {
 
 // Hàm hiển thị dữ liệu kế hoạch trồng cây
 function displayPlantingInfo(data, container) {
+    if (!container) {
+        console.error("Container is undefined");
+        return;
+    }
     const { plantingPlan, costEstimate } = data;
 
     if (Array.isArray(plantingPlan) && Array.isArray(costEstimate)) {
@@ -151,6 +155,10 @@ function displayPlantingInfo(data, container) {
 
 // Hàm hiển thị kế hoạch trồng cây
 function displayPlantingPlan(plantingPlan, container) {
+    if (!container) {
+        console.error("Container is undefined");
+        return;
+    }
     let tasksHTML = "<h3>Kế hoạch trồng và chăm sóc cây trồng</h3>";
     tasksHTML += "<table><tr><th>STT</th><th>Công việc cần làm</th><th>Thời gian thực hiện</th><th>Vật liệu, dụng cụ cần thiết</th><th>Ghi chú</th></tr>";
 
@@ -170,6 +178,10 @@ function displayPlantingPlan(plantingPlan, container) {
 
 // Hàm hiển thị chi phí trồng cây
 function displayCostEstimate(costEstimate, container) {
+    if (!container) {
+        console.error("Container is undefined");
+        return;
+    }
     let costHTML = "<h3>Bảng tính chi phí trồng và chăm sóc cây trồng</h3>";
     costHTML += "<table><tr><th>STT</th><th>Các loại chi phí</th><th>Đơn vị tính</th><th>Đơn giá (đồng)</th><th>Số lượng</th><th>Thành tiền (đồng)</th><th>Ghi chú</th></tr>";
 
@@ -198,19 +210,57 @@ function displayCostEstimate(costEstimate, container) {
 }
 
 // Hàm tạo dữ liệu giả lập cho giá thị trường
-// Hàm tạo dữ liệu giả lập cho giá thị trường
 function generateMockMarketData(nongsan) {
     const mockPrices = {
         "chuối": { price: (5000 + Math.random() * 2000).toFixed(0), date: new Date().toLocaleDateString() },
         "cà chua": { price: (15000 + Math.random() * 3000).toFixed(0), date: new Date().toLocaleDateString() },
         "thanh long": { price: (20000 + Math.random() * 5000).toFixed(0), date: new Date().toLocaleDateString() },
-        "cam": { price: (12000 + Math.random() * 3000).toFixed(0), date: new Date().toLocaleDateString() },
-        "quýt": { price: (10000 + Math.random() * 2000).toFixed(0), date: new Date().toLocaleDateString() }
+        "nho": { price: (10000 + Math.random() * 4000).toFixed(0), date: new Date().toLocaleDateString() },
+        "chanh": { price: (8000 + Math.random() * 2000).toFixed(0), date: new Date().toLocaleDateString() }
     };
-
-    return mockPrices[nongsan] || { price: "N/A", date: new Date().toLocaleDateString() };
+    return mockPrices[nongsan] || { price: "Không có sẵn", date: new Date().toLocaleDateString() };
 }
 
-// Ví dụ sử dụng
-console.log(generateMockMarketData("chuối")); // Kết quả: { price: "5800", date: "07/11/2024" }
+// Hàm hiển thị thông tin giá thị trường lên giao diện
+async function displayMarketData(nongsan, container) {
+    const marketData = generateMockMarketData(nongsan);
+    container.innerHTML = `<p>Giá thị trường hiện tại của ${nongsan}: ${marketData.price} VND/kg</p>
+    <p>Cập nhật lần cuối: ${marketData.date}</p>`;
+}
+
+// Đảm bảo hàm displayPlantingInfo được định nghĩa
+async function fetchData() {
+    try {
+        const response = await fetch('https://tulieu-hbt.github.io/phan-loai-nong-san/assets/baocao.json');
+        const data = await response.json();
+        displayPlantingInfo(data, plantingPlanContainer);
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        plantingPlanContainer.innerHTML = "<p>Không thể tải dữ liệu kế hoạch trồng cây.</p>";
+    }
+}
+
+// Hàm hiển thị dữ liệu kế hoạch trồng cây
+function displayPlantingInfo(data, container) {
+    const { plantingPlan, costEstimate } = data;
+
+    if (Array.isArray(plantingPlan) && Array.isArray(costEstimate)) {
+        displayPlantingPlan(plantingPlan, container);
+        displayCostEstimate(costEstimate, container);
+    } else {
+        container.innerHTML = "<p>Không có dữ liệu cho nông sản này.</p>";
+    }
+}
+
+// Khởi tạo
+async function init() {
+    await loadModel();
+    await setupCamera();
+    await fetchData();
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+    await init();
+    if (captureButton) captureButton.addEventListener("click", predict);
+});
 
