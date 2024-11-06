@@ -2,7 +2,7 @@
 
 // Hàm tải dữ liệu từ file Excel
 async function loadExcelData() {
-    const url = 'https://github.com/tulieu-hbt/phan-loai-nong-san/raw/main/assets/baocao.xlsx';
+    const url ='https://tulieu-hbt.github.io/phan-loai-nong-san/assets/baocao.xlsx';
 
     try {
         // Tải file Excel
