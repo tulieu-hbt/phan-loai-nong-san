@@ -139,10 +139,6 @@ async function fetchData() {
 
 // Hàm hiển thị dữ liệu kế hoạch trồng cây
 function displayPlantingInfo(data, container) {
-    if (!container) {
-        console.error("Container is undefined");
-        return;
-    }
     const { plantingPlan, costEstimate } = data;
 
     if (Array.isArray(plantingPlan) && Array.isArray(costEstimate)) {
@@ -209,6 +205,8 @@ function displayCostEstimate(costEstimate, container) {
     container.innerHTML += costHTML;
 }
 
+// Hàm tạo dữ liệu giả lập cho giá thị trường
+function generateMockMarketData(n
 // Hàm tạo dữ liệu giả lập cho giá thị trường
 function generateMockMarketData(nongsan) {
     const mockPrices = {
