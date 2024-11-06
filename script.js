@@ -2,12 +2,16 @@
 
 let model;
 const URL = "model/";
+
+// Lấy các phần tử từ DOM
 const result = document.getElementById("result");
 const captureButton = document.getElementById("captureButton");
 const video = document.getElementById("camera");
 const canvas = document.createElement("canvas");
-const imageContainer = document.getElementById("imageContainer");
+const capturedImage = document.getElementById("capturedImage");
 const preservationInfo = document.getElementById("preservationInfo");
+const plantingPlanContainer = document.getElementById("plantingPlanContainer");
+const marketInfoContainer = document.getElementById("marketInfoContainer");
 
 // Thiết lập kích thước canvas giống với video
 video.addEventListener('loadedmetadata', () => {
@@ -20,10 +24,10 @@ async function loadModel() {
     const modelURL = `${URL}model.json`;
     try {
         model = await tf.loadLayersModel(modelURL);
-        result.innerText = "Mô hình đã sẵn sàng. Hãy đưa nông sản vào camera.";
+        if (result) result.innerText = "Mô hình đã sẵn sàng. Hãy đưa nông sản vào camera.";
     } catch (error) {
         console.error("Lỗi khi tải mô hình:", error);
-        result.innerText = "Không thể tải mô hình! " + error.message;
+        if (result) result.innerText = "Không thể tải mô hình! " + error.message;
     }
 }
 
@@ -42,18 +46,19 @@ async function setupCamera() {
         });
     } catch (error) {
         console.error("Lỗi khi khởi tạo camera:", error);
-        result.innerText = "Không thể sử dụng camera!";
+        if (result) result.innerText = "Không thể sử dụng camera!";
     }
 }
 
-// Hàm lưu ảnh chụp vào vùng imageContainer
+// Hàm lưu ảnh chụp vào thẻ img có id="capturedImage"
 function saveCapturedImage() {
     const ctx = canvas.getContext("2d");
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    const img = document.createElement("img");
-    img.src = canvas.toDataURL("image/png");
-    imageContainer.innerHTML = ""; 
-    imageContainer.appendChild(img);
+    if (capturedImage) {
+        capturedImage.src = canvas.toDataURL("image/png");
+    } else {
+        console.error("Element with ID 'capturedImage' not found.");
+    }
 }
 
 // Hàm dự đoán
@@ -85,16 +90,16 @@ async function predict() {
     }
 
     if (maxProbability < 0.7) {
-        result.innerText = "Không nhận diện được nông sản.";
+        if (result) result.innerText = "Không nhận diện được nông sản.";
         speak("Không nhận diện được nông sản.");
         return;
     }
 
-    result.innerText = `Kết quả: ${predictedClass}`;
-    preservationInfo.innerText = preservationTexts[predictedClass];
+    if (result) result.innerText = `Kết quả: ${predictedClass}`;
+    if (preservationInfo) preservationInfo.innerText = preservationTexts[predictedClass];
     speak(preservationTexts[predictedClass]);
-    displayPlantingPlan(predictedClass, document.getElementById("plantingPlanContainer"));
-    displayMarketData(predictedClass, document.getElementById("marketInfoContainer"));
+    displayPlantingPlan(predictedClass, plantingPlanContainer);
+    displayMarketData(predictedClass, marketInfoContainer);
 }
 
 // Hàm Text-to-Speech
@@ -115,5 +120,5 @@ async function init() {
 
 document.addEventListener("DOMContentLoaded", async () => {
     await init();
-    captureButton.addEventListener("click", predict);
+    if (captureButton) captureButton.addEventListener("click", predict);
 });
