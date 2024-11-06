@@ -139,3 +139,58 @@ video#camera, .image-container img {
         flex-direction: column;
     }
 }
+/*Thông tin được lấy từ excel*/
+/* Định dạng cho bảng dữ liệu kế hoạch và chi phí */
+.planting-plan-container, .market-info-container {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+.planting-plan-container h3, .market-info-container h3 {
+    color: #3498db;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.planting-plan-container table, .market-info-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.planting-plan-container th, .market-info-container th,
+.planting-plan-container td, .market-info-container td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+/* Màu nền và định dạng cho các tiêu đề cột */
+.planting-plan-container th, .market-info-container th {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Màu nền cho các ô dữ liệu */
+.planting-plan-container td, .market-info-container td {
+    background-color: #ffffff;
+}
+
+/* Màu nền xen kẽ cho các hàng để dễ đọc */
+.planting-plan-container tr:nth-child(even) td,
+.market-info-container tr:nth-child(even) td {
+    background-color: #f2f2f2;
+}
+
+/* Kiểu dáng cho tổng cộng */
+.planting-plan-container .total-row td,
+.market-info-container .total-row td {
+    font-weight: bold;
+    background-color: #e9f5ff;
+    color: #2c3e50;
+}
