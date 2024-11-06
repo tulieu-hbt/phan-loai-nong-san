@@ -2,24 +2,17 @@
 
 // Hàm lấy thông tin giá thị trường từ API hoặc dữ liệu giả lập
 async function fetchMarketData(nongsan) {
-    const apiKey = "YOUR_RAPIDAPI_KEY"; // Thay thế bằng API Key của bạn
-    const url = `https://agridata.p.rapidapi.com/prices?product=${nongsan}`;
+    // Sử dụng API miễn phí từ JSON Placeholder để tạo dữ liệu giả lập
+    const url = `https://jsonplaceholder.typicode.com/posts?title=${nongsan}`;
 
     try {
-        const response = await fetch(url, {
-            method: "GET",
-            headers: {
-                "X-RapidAPI-Key": apiKey,
-                "X-RapidAPI-Host": "agridata.p.rapidapi.com"
-            }
-        });
-
+        const response = await fetch(url);
         if (!response.ok) return generateMockMarketData(nongsan);
 
         const data = await response.json();
-        return data.prices ? { price: data.prices[0].price, date: data.prices[0].date } : generateMockMarketData(nongsan);
+        return data.length ? { price: (10000 + Math.random() * 5000).toFixed(0), date: new Date().toLocaleDateString() } : generateMockMarketData(nongsan);
     } catch (error) {
-        console.error("Lỗi khi lấy dữ liệu từ AgriData API:", error);
+        console.error("Lỗi khi lấy dữ liệu từ API:", error);
         return generateMockMarketData(nongsan);
     }
 }
