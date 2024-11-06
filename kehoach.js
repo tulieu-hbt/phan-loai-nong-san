@@ -1,7 +1,7 @@
 // kehoach.js
 
 // Finnhub API Key
-const apiKey = 'csle9nhr01qq49fgr9jgcsle9nhr01qq49fgr9k0'; // Thay bằng API Key của bạn từ Finnhub
+const apiKey = 'csle9nhr01qq49fgr9jgcsle9nhr01qq49fgr9k0'; // Đảm bảo bảo mật khi triển khai thực tế
 
 // Mapping sản phẩm nông sản sang mã hiệu trên Finnhub
 const productSymbols = {
@@ -27,16 +27,24 @@ const productSymbols = {
 // Hàm lấy thông tin giá thị trường từ API hoặc dữ liệu giả lập
 async function fetchMarketData(nongsan) {
     const symbol = productSymbols[nongsan.toLowerCase()];
-    if (!symbol) return generateMockMarketData(nongsan);
+    if (!symbol) {
+        console.warn(`Nông sản "${nongsan}" không có mã trên Finnhub.`);
+        return generateMockMarketData(nongsan);
+    }
 
     const url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`;
 
     try {
         const response = await fetch(url);
-        if (!response.ok) return generateMockMarketData(nongsan);
+        if (!response.ok) {
+            console.error(`Lỗi API: ${response.status} - ${response.statusText}`);
+            return generateMockMarketData(nongsan);
+        }
 
         const data = await response.json();
-        return data.c ? { price: data.c, date: new Date().toLocaleDateString() } : generateMockMarketData(nongsan);
+        return data.c
+            ? { price: data.c, date: new Date().toLocaleDateString() }
+            : generateMockMarketData(nongsan);
     } catch (error) {
         console.error("Lỗi khi lấy dữ liệu từ API:", error);
         return generateMockMarketData(nongsan);
