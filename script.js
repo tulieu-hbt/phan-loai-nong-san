@@ -1,3 +1,5 @@
+// script.js
+
 let model;
 const URL = "model/";
 
