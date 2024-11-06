@@ -1,0 +1,166 @@
+{
+"Thong tin Cay Trong":[
+ {
+  "ID": "id_chuoi",
+  "Giong Cay": "Chuối",
+  "Phuong Thuc Trong": "Trồng chậu",
+  "Dien Tich": "1 m2",
+  "So Luong Cay": 1,
+  "Dieu Kien Sinh Truong": "Nhiệt độ 25-30°C"
+ },
+ {
+  "ID": "id_ca_chua",
+  "Giong Cay": "Cà chua",
+  "Phuong Thuc Trong": "Trồng chậu",
+  "Dien Tich": "1 m2",
+  "So Luong Cay": 2,
+  "Dieu Kien Sinh Truong": "Nhiệt độ 20-25°C"
+ },
+ {
+  "ID": "id_dau_bap",
+  "Giong Cay": "Đậu bắp",
+  "Phuong Thuc Trong": "Trồng thùng xốp",
+  "Dien Tich": "1 m2",
+  "So Luong Cay": 3,
+  "Dieu Kien Sinh Truong": "Nhiệt độ 25-30°C"
+ },
+ {
+  "ID": "id_ot",
+  "Giong Cay": "Ớt",
+  "Phuong Thuc Trong": "Trồng chậu",
+  "Dien Tich": "1 m2",
+  "So Luong Cay": 4,
+  "Dieu Kien Sinh Truong": "Nhiệt độ 25-30°C"
+ },
+ {
+  "ID": "id_xa_lach",
+  "Giong Cay": "Xà lách",
+  "Phuong Thuc Trong": "Trồng chậu",
+  "Dien Tich": "1 m2",
+  "So Luong Cay": 5,
+  "Dieu Kien Sinh Truong": "Nhiệt độ 20-25°C"
+ },
+ {
+  "ID": "id_ca_tim",
+  "Giong Cay": "Cà tím",
+  "Phuong Thuc Trong": "Trồng chậu",
+  "Dien Tich": "1 m2",
+  "So Luong Cay": 2,
+  "Dieu Kien Sinh Truong": "Nhiệt độ 20-25°C"
+ },
+ {
+  "ID": "id_ca_rot",
+  "Giong Cay": "Cà rốt",
+  "Phuong Thuc Trong": "Trồng thùng xốp",
+  "Dien Tich": "1 m2",
+  "So Luong Cay": 1,
+  "Dieu Kien Sinh Truong": "Nhiệt độ 15-20°C"
+ },
+ {
+  "ID": "id_dua_leo",
+  "Giong Cay": "Dưa leo",
+  "Phuong Thuc Trong": "Trồng chậu",
+  "Dien Tich": "1 m2",
+  "So Luong Cay": 2,
+  "Dieu Kien Sinh Truong": "Nhiệt độ 20-25°C"
+ },
+ {
+  "ID": "id_cai_xoong",
+  "Giong Cay": "Cải xoong",
+  "Phuong Thuc Trong": "Trồng chậu",
+  "Dien Tich": "1 m2",
+  "So Luong Cay": 3,
+  "Dieu Kien Sinh Truong": "Nhiệt độ 20-25°C"
+ },
+ {
+  "ID": "id_dau_cove",
+  "Giong Cay": "Đậu cô ve",
+  "Phuong Thuc Trong": "Trồng chậu",
+  "Dien Tich": "1 m2",
+  "So Luong Cay": 4,
+  "Dieu Kien Sinh Truong": "Nhiệt độ 20-25°C"
+ }
+],
+"Ke hoach Cham soc":[
+ {
+  "STT": 1,
+  "Cong Viec Can Lam": "Chuẩn bị đất và chậu",
+  "Thoi Gian Thuc Hien": "1 ngày",
+  "Vat Lieu, Dung Cu Can Thiet": "Đất, chậu"
+ },
+ {
+  "STT": 2,
+  "Cong Viec Can Lam": "Gieo hạt hoặc trồng cây con",
+  "Thoi Gian Thuc Hien": "1 tuần",
+  "Vat Lieu, Dung Cu Can Thiet": "Hạt giống hoặc cây con"
+ },
+ {
+  "STT": 3,
+  "Cong Viec Can Lam": "Tưới nước hàng ngày",
+  "Thoi Gian Thuc Hien": "Hàng ngày",
+  "Vat Lieu, Dung Cu Can Thiet": "Bình tưới"
+ },
+ {
+  "STT": 4,
+  "Cong Viec Can Lam": "Bón phân hàng tuần",
+  "Thoi Gian Thuc Hien": "Hàng tuần",
+  "Vat Lieu, Dung Cu Can Thiet": "Phân bón"
+ },
+ {
+  "STT": 5,
+  "Cong Viec Can Lam": "Kiểm tra sâu bệnh và bảo vệ cây",
+  "Thoi Gian Thuc Hien": "Hàng tháng",
+  "Vat Lieu, Dung Cu Can Thiet": "Thuốc trừ sâu, dụng cụ kiểm tra"
+ }
+],
+"Chi Phi":[
+ {
+  "STT": 1,
+  "Cac Loai Chi Phi": "Vật liệu, dụng cụ để trồng và chăm sóc cây",
+  "Don Vi Tinh": "Bộ",
+  "Don Gia (dong)": 50000,
+  "So Luong": 1,
+  "Thanh Tien (dong)": 50000
+ },
+ {
+  "STT": 2,
+  "Cac Loai Chi Phi": "Cây giống",
+  "Don Vi Tinh": "Cây",
+  "Don Gia (dong)": 20000,
+  "So Luong": 2,
+  "Thanh Tien (dong)": 40000
+ },
+ {
+  "STT": 3,
+  "Cac Loai Chi Phi": "Phân bón",
+  "Don Vi Tinh": "Kg",
+  "Don Gia (dong)": 10000,
+  "So Luong": 1,
+  "Thanh Tien (dong)": 10000
+ },
+ {
+  "STT": 4,
+  "Cac Loai Chi Phi": "Thuốc bảo vệ thực vật",
+  "Don Vi Tinh": "Lọ",
+  "Don Gia (dong)": 15000,
+  "So Luong": 1,
+  "Thanh Tien (dong)": 15000
+ },
+ {
+  "STT": 5,
+  "Cac Loai Chi Phi": "Chi phí gieo trồng, chăm sóc cây",
+  "Don Vi Tinh": "Lần",
+  "Don Gia (dong)": 5000,
+  "So Luong": 5,
+  "Thanh Tien (dong)": 25000
+ },
+ {
+  "STT": 6,
+  "Cac Loai Chi Phi": "Chi phí khác",
+  "Don Vi Tinh": "Lần",
+  "Don Gia (dong)": 10000,
+  "So Luong": 2,
+  "Thanh Tien (dong)": 20000
+ }
+]
+}
