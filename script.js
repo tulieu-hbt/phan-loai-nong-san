@@ -8,7 +8,7 @@ const result = document.getElementById("result");
 const captureButton = document.getElementById("captureButton");
 const video = document.getElementById("camera");
 const canvas = document.createElement("canvas");
-const capturedImage = document.getElementById("capturedImage");
+const capturedImage = document.getElementById("capturedImage"); // Sử dụng cùng id="capturedImage"
 const preservationInfo = document.getElementById("preservationInfo");
 const plantingPlanContainer = document.getElementById("plantingPlanContainer");
 const marketInfoContainer = document.getElementById("marketInfoContainer");
@@ -52,13 +52,13 @@ async function setupCamera() {
 
 // Hàm lưu ảnh chụp vào thẻ img có id="capturedImage"
 function saveCapturedImage() {
+    if (!capturedImage) {
+        console.error("Element with ID 'capturedImage' not found.");
+        return;
+    }
     const ctx = canvas.getContext("2d");
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    if (capturedImage) {
-        capturedImage.src = canvas.toDataURL("image/png");
-    } else {
-        console.error("Element with ID 'capturedImage' not found.");
-    }
+    capturedImage.src = canvas.toDataURL("image/png");
 }
 
 // Hàm dự đoán
