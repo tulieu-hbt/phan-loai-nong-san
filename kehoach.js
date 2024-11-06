@@ -1,16 +1,37 @@
 // kehoach.js
 
+// Mapping nông sản tới mã hiệu của chúng trên Finnhub
+const productSymbols = {
+    "cà chua": "CCH",
+    "nho": "GR",
+    "chuối": "BAN",
+    "ớt": "CHL",
+    "cải xanh": "BLC",
+    "bắp": "CORN",
+    "thanh long": "PNL",
+    "xoài": "MPS",
+    "cam": "ORNG",
+    "quýt": "TNG"
+};
+
 // Hàm lấy thông tin giá thị trường từ API hoặc dữ liệu giả lập
 async function fetchMarketData(nongsan) {
-    // Sử dụng API miễn phí từ CoinGecko để lấy dữ liệu giá tiền mã hóa
-    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${nongsan}&vs_currencies=usd`;
+    const apiKey = 'csle9nhr01qq49fgr9jgcsle9nhr01qq49fgr9k0'; // Thay thế bằng API Key của bạn từ Finnhub
+    const symbol = productSymbols[nongsan.toLowerCase()];
+
+    if (!symbol) {
+        console.error(`Không tìm thấy mã nông sản cho ${nongsan}`);
+        return generateMockMarketData(nongsan);
+    }
+
+    const url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`;
 
     try {
         const response = await fetch(url);
         if (!response.ok) return generateMockMarketData(nongsan);
 
         const data = await response.json();
-        return data[nongsan] ? { price: data[nongsan].usd, date: new Date().toLocaleDateString() } : generateMockMarketData(nongsan);
+        return data ? { price: data.c, date: new Date().toLocaleDateString() } : generateMockMarketData(nongsan);
     } catch (error) {
         console.error("Lỗi khi lấy dữ liệu từ API:", error);
         return generateMockMarketData(nongsan);
@@ -22,15 +43,16 @@ function generateMockMarketData(nongsan) {
     const mockPrices = {
         "chuối": { price: (5000 + Math.random() * 2000).toFixed(0), date: new Date().toLocaleDateString() },
         "cà chua": { price: (15000 + Math.random() * 3000).toFixed(0), date: new Date().toLocaleDateString() },
-        "thanh long": { price: (20000 + Math.random() * 5000).toFixed(0), date: new Date().toLocaleDateString() }
+        "nho": { price: (20000 + Math.random() * 5000).toFixed(0), date: new Date().toLocaleDateString() }
+        // Thêm các nông sản khác nếu cần
     };
-    return mockPrices[nongsan] || { price: "Không có sẵn", date: new Date().toLocaleDateString() };
+    return mockPrices[nongsan.toLowerCase()] || { price: "Không có sẵn", date: new Date().toLocaleDateString() };
 }
 
 // Hàm hiển thị thông tin giá thị trường lên giao diện
 async function displayMarketData(nongsan, container) {
     const marketData = await fetchMarketData(nongsan);
-    container.innerHTML = `<p>Giá thị trường hiện tại của ${nongsan}: ${marketData.price} USD</p><p>Cập nhật lần cuối: ${marketData.date}</p>`;
+    container.innerHTML = `<p>Giá thị trường hiện tại của ${nongsan}: ${marketData.price} USD/kg</p><p>Cập nhật lần cuối: ${marketData.date}</p>`;
 }
 
 // Hàm lấy và hiển thị kế hoạch trồng cây
@@ -62,7 +84,7 @@ async function fetchPlantingPlan(nongsan) {
         // Thêm các nông sản khác nếu cần
     };
 
-    return plantingPlans[nongsan] || null;
+    return plantingPlans[nongsan.toLowerCase()] || null;
 }
 
 // Hàm hiển thị kế hoạch trồng cây lên giao diện
@@ -96,8 +118,3 @@ async function displayPlantingPlan(nongsan, container) {
         costHTML += "</table>";
 
         // Gán nội dung vào container
-        container.innerHTML = overviewHTML + tasksHTML + costHTML;
-    } else {
-        container.innerHTML = "<p>Không có dữ liệu cho nông sản này.</p>";
-    }
-}
