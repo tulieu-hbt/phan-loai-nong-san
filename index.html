@@ -46,5 +46,82 @@
             <!-- Thông tin giá thị trường sẽ được hiển thị ở đây -->
         </div>
     </div>
+
+    <!-- Thêm đoạn script để xử lý khi nội dung được tải xong -->
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            // Load và hiển thị dữ liệu kế hoạch trồng và chăm sóc cây trồng
+            const plantingPlanContainer = document.getElementById('plantingPlanContainer');
+
+            try {
+                const response = await fetch('https://tulieu-hbt.github.io/phan-loai-nong-san/assets/baocao.json');
+                const data = await response.json();
+                displayPlantingInfo(data, plantingPlanContainer);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                plantingPlanContainer.innerHTML = "<p>Không thể tải dữ liệu kế hoạch trồng cây.</p>";
+            }
+        });
+
+        // Hàm hiển thị dữ liệu kế hoạch trồng cây
+        function displayPlantingInfo(data, container) {
+            const { plantingPlan, costEstimate } = data;
+
+            if (Array.isArray(plantingPlan) && Array.isArray(costEstimate)) {
+                displayPlantingPlan(plantingPlan, container);
+                displayCostEstimate(costEstimate, container);
+            } else {
+                container.innerHTML = "<p>Không có dữ liệu cho nông sản này.</p>";
+            }
+        }
+
+        // Hàm hiển thị kế hoạch trồng cây
+        function displayPlantingPlan(plantingPlan, container) {
+            let tasksHTML = "<h3>Kế hoạch trồng và chăm sóc cây trồng</h3>";
+            tasksHTML += "<table><tr><th>STT</th><th>Công việc cần làm</th><th>Thời gian thực hiện</th><th>Vật liệu, dụng cụ cần thiết</th><th>Ghi chú</th></tr>";
+
+            plantingPlan.forEach(task => {
+                tasksHTML += `<tr>
+                    <td>${task.STT || ""}</td>
+                    <td>${task['Cong Viec Can Lam'] || ""}</td>
+                    <td>${task['Thoi Gian Thuc Hien'] || ""}</td>
+                    <td>${task['Vat Lieu, Dung Cu Can Thiet'] || ""}</td>
+                    <td>${task['Ghi Chu'] || ""}</td>
+                </tr>`;
+            });
+
+            tasksHTML += "</table>";
+            container.innerHTML += tasksHTML;
+        }
+
+        // Hàm hiển thị chi phí trồng cây
+        function displayCostEstimate(costEstimate, container) {
+            let costHTML = "<h3>Bảng tính chi phí trồng và chăm sóc cây trồng</h3>";
+            costHTML += "<table><tr><th>STT</th><th>Các loại chi phí</th><th>Đơn vị tính</th><th>Đơn giá (đồng)</th><th>Số lượng</th><th>Thành tiền (đồng)</th><th>Ghi chú</th></tr>";
+
+            let totalCost = 0;
+            costEstimate.forEach(item => {
+                const itemTotal = (item['Don Gia (dong)'] || 0) * (item['So Luong'] || 0);
+                totalCost += itemTotal;
+                costHTML += `<tr>
+                    <td>${item.STT || ""}</td>
+                    <td>${item['Cac Loai Chi Phi'] || ""}</td>
+                    <td>${item['Don Vi Tinh'] || ""}</td>
+                    <td>${item['Don Gia (dong)'] || ""}</td>
+                    <td>${item['So Luong'] || ""}</td>
+                    <td>${itemTotal}</td>
+                    <td>${item['Ghi Chu'] || ""}</td>
+                </tr>`;
+            });
+
+            costHTML += `<tr class="total-row">
+                <td colspan="5">Tổng cộng</td>
+                <td>${totalCost}</td>
+                <td></td>
+            </tr>`;
+            costHTML += "</table>";
+            container.innerHTML += costHTML;
+        }
+    </script>
 </body>
 </html>
