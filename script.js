@@ -1,5 +1,3 @@
-// script.js
-
 let model;
 const URL = "model/";
 
@@ -8,7 +6,7 @@ const result = document.getElementById("result");
 const captureButton = document.getElementById("captureButton");
 const video = document.getElementById("camera");
 const canvas = document.createElement("canvas");
-const capturedImage = document.getElementById("capturedImage"); // Sử dụng cùng id="capturedImage"
+const capturedImage = document.getElementById("capturedImage");
 const preservationInfo = document.getElementById("preservationInfo");
 const plantingPlanContainer = document.getElementById("plantingPlanContainer");
 const marketInfoContainer = document.getElementById("marketInfoContainer");
