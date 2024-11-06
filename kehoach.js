@@ -1,43 +1,34 @@
-// kehoach.js
+// URL của file JSON chứa dữ liệu
+const dataUrl = 'https://tulieu-hbt.github.io/phan-loai-nong-san/assets/baocao.json';  // Đảm bảo URL đúng
 
-// Hàm tải dữ liệu từ file Excel
-async function loadExcelData() {
-    const url ='https://tulieu-hbt.github.io/phan-loai-nong-san/assets/baocao.xlsx';
-
+// Hàm tải và xử lý dữ liệu từ file JSON
+async function fetchData() {
     try {
-        // Tải file Excel
-        const response = await fetch(url);
-        const arrayBuffer = await response.arrayBuffer();
-        const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+        const response = await fetch(dataUrl);
+        const data = await response.json();
 
-        // Lấy dữ liệu từ các sheet
-        const plantingSheet = workbook.Sheets["Ke hoach Cham soc"];
-        const costSheet = workbook.Sheets["Chi Phi"];
-
-        // Chuyển đổi dữ liệu sheet thành JSON
-        const plantingPlan = XLSX.utils.sheet_to_json(plantingSheet);
-        const costEstimate = XLSX.utils.sheet_to_json(costSheet);
-
-        // Kiểm tra dữ liệu
-        console.log("Planting Plan (dữ liệu kế hoạch chăm sóc):", plantingPlan);
-        console.log("Cost Estimate (dữ liệu chi phí):", costEstimate);
-
-        return { plantingPlan, costEstimate };
+        // Gọi hàm hiển thị dữ liệu
+        displayPlanData(data);
     } catch (error) {
-        console.error("Lỗi khi tải dữ liệu từ file Excel:", error);
-        return { plantingPlan: null, costEstimate: null };
+        console.error(`Error fetching data: ${error}`);
+    }
+}
+
+// Hàm hiển thị dữ liệu trên giao diện
+function displayPlanData(data) {
+    const { plantingPlan, costEstimate } = data;
+    const plantingPlanContainer = document.getElementById('plantingPlanContainer');
+
+    if (Array.isArray(plantingPlan) && Array.isArray(costEstimate)) {
+        displayPlantingPlan(plantingPlan, plantingPlanContainer);
+        displayCostEstimate(costEstimate, plantingPlanContainer);
+    } else {
+        plantingPlanContainer.innerHTML = "<p>Không có dữ liệu cho nông sản này.</p>";
     }
 }
 
 // Hàm hiển thị kế hoạch trồng cây
 function displayPlantingPlan(plantingPlan, container) {
-    // Kiểm tra nếu plantingPlan là mảng
-    if (!Array.isArray(plantingPlan)) {
-        console.error("Dữ liệu plantingPlan không phải là một mảng:", plantingPlan);
-        container.innerHTML = "<p>Không có dữ liệu kế hoạch trồng cây hợp lệ.</p>";
-        return;
-    }
-
     let tasksHTML = "<h3>Kế hoạch trồng và chăm sóc cây trồng</h3>";
     tasksHTML += "<table><tr><th>STT</th><th>Công việc cần làm</th><th>Thời gian thực hiện</th><th>Vật liệu, dụng cụ cần thiết</th><th>Ghi chú</th></tr>";
 
@@ -57,13 +48,6 @@ function displayPlantingPlan(plantingPlan, container) {
 
 // Hàm hiển thị chi phí trồng cây
 function displayCostEstimate(costEstimate, container) {
-    // Kiểm tra nếu costEstimate là mảng
-    if (!Array.isArray(costEstimate)) {
-        console.error("Dữ liệu costEstimate không phải là một mảng:", costEstimate);
-        container.innerHTML = "<p>Không có dữ liệu chi phí trồng cây hợp lệ.</p>";
-        return;
-    }
-
     let costHTML = "<h3>Bảng tính chi phí trồng và chăm sóc cây trồng</h3>";
     costHTML += "<table><tr><th>STT</th><th>Các loại chi phí</th><th>Đơn vị tính</th><th>Đơn giá (đồng)</th><th>Số lượng</th><th>Thành tiền (đồng)</th><th>Ghi chú</th></tr>";
 
@@ -91,38 +75,5 @@ function displayCostEstimate(costEstimate, container) {
     container.innerHTML += costHTML;
 }
 
-// Hàm hiển thị toàn bộ dữ liệu kế hoạch và chi phí lên giao diện
-async function displayPlantingInfo(nongsan) {
-    const { plantingPlan, costEstimate } = await loadExcelData();
-    const plantingPlanContainer = document.getElementById('plantingPlanContainer');
-
-    // Kiểm tra nếu dữ liệu có dạng mảng
-    if (Array.isArray(plantingPlan) && Array.isArray(costEstimate)) {
-        displayPlantingPlan(plantingPlan, plantingPlanContainer);
-        displayCostEstimate(costEstimate, plantingPlanContainer);
-    } else {
-        plantingPlanContainer.innerHTML = "<p>Không có dữ liệu cho nông sản này.</p>";
-    }
-}
-
-// Hàm tạo dữ liệu giả lập cho giá thị trường
-function generateMockMarketData(nongsan) {
-    const mockPrices = {
-        "chuối": { price: (5000 + Math.random() * 2000).toFixed(0), date: new Date().toLocaleDateString() },
-        "cà chua": { price: (15000 + Math.random() * 3000).toFixed(0), date: new Date().toLocaleDateString() },
-        "thanh long": { price: (20000 + Math.random() * 5000).toFixed(0), date: new Date().toLocaleDateString() }
-    };
-    return mockPrices[nongsan] || { price: "Không có sẵn", date: new Date().toLocaleDateString() };
-}
-
-// Hàm hiển thị thông tin giá thị trường lên giao diện
-async function displayMarketData(nongsan, container) {
-    const marketData = generateMockMarketData(nongsan);
-    container.innerHTML = `<p>Giá thị trường hiện tại của ${nongsan}: ${marketData.price} VND/kg</p>
-    <p>Cập nhật lần cuối: ${marketData.date}</p>`;
-}
-
 // Khởi tạo
-document.addEventListener("DOMContentLoaded", () => {
-    // Khởi tạo thêm nếu cần
-});
+document.addEventListener("DOMContentLoaded", fetchData);
