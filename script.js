@@ -48,6 +48,8 @@ async function setupCamera() {
     }
 }
 
+// Hàm lưu ảnh chụp vào th
+
 // Hàm lưu ảnh chụp vào thẻ img có id="capturedImage"
 function saveCapturedImage() {
     if (!capturedImage) {
