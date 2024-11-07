@@ -121,31 +121,4 @@
         "Ghi Chu": ""
       }
     ],
-    "costEstimate": [
-      {
-        "STT": 1,
-        "Cac Loai Chi Phi": "Hạt giống",
-        "Don Vi Tinh": "Gói",
-        "Don Gia (dong)": 10000,
-        "So Luong": 1,
-        "Thanh Tien (dong)": 10000,
-        "Ghi Chu": ""
-      },
-      {
-        "STT": 2,
-        "Cac Loai Chi Phi": "Phân bón",
-        "Don Vi Tinh": "Kg",
-        "Don Gia (dong)": 15000,
-        "So Luong": 3,
-        "Thanh Tien (dong)": 45000,
-        "Ghi Chu": ""
-      },
-      {
-        "STT": 3,
-        "Cac Loai Chi Phi": "Thuốc trừ sâu",
-        "Don Vi Tinh": "Lọ",
-        "Don Gia (dong)": 20000,
-        "So Luong": 1,
-        "Thanh Tien (dong)": 20000,
-        "Ghi Chu": ""
-      }
+    "costEstimate
