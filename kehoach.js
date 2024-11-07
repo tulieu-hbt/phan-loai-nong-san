@@ -17,13 +17,12 @@ async function loadExcelData() {
 }
 
 // Hàm hiển thị kế hoạch trồng cây
+// Hàm hiển thị kế hoạch trồng cây
 function displayPlantingPlan(plantingPlan, container) {
-    if (!Array.isArray(plantingPlan)) {
-        console.error("Dữ liệu plantingPlan không phải là một mảng:", plantingPlan);
-        container.innerHTML = "<p>Không có dữ liệu kế hoạch trồng cây hợp lệ.</p>";
+    if (!container) {
+        console.error("Container is undefined");
         return;
     }
-
     let tasksHTML = "<h3>Kế hoạch trồng và chăm sóc cây trồng</h3>";
     tasksHTML += "<table><tr><th>STT</th><th>Công việc cần làm</th><th>Thời gian thực hiện</th><th>Vật liệu, dụng cụ cần thiết</th><th>Ghi chú</th></tr>";
 
@@ -38,8 +37,9 @@ function displayPlantingPlan(plantingPlan, container) {
     });
 
     tasksHTML += "</table>";
-    container.innerHTML = tasksHTML; // Ghi đè nội dung của container
+    container.innerHTML += tasksHTML;
 }
+
 
 // Hàm hiển thị chi phí trồng cây
 function displayCostEstimate(costEstimate, container) {
