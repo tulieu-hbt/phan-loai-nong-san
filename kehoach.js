@@ -76,22 +76,6 @@ function displayCostEstimate(costEstimate, container) {
     container.innerHTML = costHTML; // Ghi đè nội dung của container
 }
 
-// Hàm hiển thị toàn bộ dữ liệu kế hoạch và chi phí lên giao diện
-async function displayPlantingInfo(nongsan) {
-    const data = await loadExcelData();
-    const plantingPlanContainer = document.getElementById('plantingPlanContainer');
-    
-    // Tìm dữ liệu cho loại nông sản cụ thể
-    const nongsanData = data.find(item => item.nongsan === nongsan);
-
-    if (nongsanData) {
-        displayPlantingPlan(nongsanData.plantingPlan, plantingPlanContainer);
-        displayCostEstimate(nongsanData.costEstimate, plantingPlanContainer);
-    } else {
-        plantingPlanContainer.innerHTML = "<p>Không có dữ liệu cho nông sản này.</p>";
-    }
-}
-
 // Hàm tạo dữ liệu giả lập cho giá thị trường (bổ sung dữ liệu)
 function generateMockMarketData(nongsan) {
     const mockPrices = {
@@ -110,8 +94,3 @@ async function displayMarketData(nongsan, container) {
     container.innerHTML = `<p>Giá thị trường hiện tại của ${nongsan}: ${marketData.price} VND/kg</p>
     <p>Cập nhật lần cuối: ${marketData.date}</p>`;
 }
-
-// Khởi tạo (nếu cần)
-document.addEventListener("DOMContentLoaded", () => {
-    // ...
-});
