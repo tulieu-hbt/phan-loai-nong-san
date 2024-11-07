@@ -98,7 +98,7 @@ async function predict() {
     speak(preservationTexts[predictedClass]);
 
     // Gọi hàm hiển thị kế hoạch và chi phí
-    displayPlantingInfo(predictedClass);
+    fetchAndDisplayPlantingInfo(predictedClass); 
 
     // Gọi hàm hiển thị thông tin thị trường
     displayMarketData(predictedClass, marketInfoContainer);
@@ -108,44 +108,30 @@ async function predict() {
 function speak(text) {
     if ('speechSynthesis' in window) {
         const synthesis = window.speechSynthesis;
-        const utterance = new SpeechSynthesisUtterance(text);
+        const utterance = new SpeechSynthesisUtterance(text);   
+
         utterance.lang = 'vi-VN';
         synthesis.speak(utterance);
     }
 }
 
-// Khởi tạo
-async function init() {
-    await loadModel();
-    await setupCamera();
-}
 
-document.addEventListener("DOMContentLoaded", async () => {
-    await init();
-    if (captureButton) captureButton.addEventListener("click", predict);
-});
+// Hàm lấy dữ liệu từ file JSON dựa trên loại nông sản
+async function fetchPlantingInfo(nongsan) {
+    const url = `https://tulieu-hbt.github.io/phan-loai-nong-san/assets/baocao.json`; 
 
-// Đảm bảo hàm displayPlantingInfo được định nghĩa
-async function fetchData() {
     try {
-        const response = await fetch('https://tulieu-hbt.github.io/phan-loai-nong-san/assets/baocao.json');
+        const response = await fetch(url);
         const data = await response.json();
-        displayPlantingInfo(data, plantingPlanContainer);
+        // Lọc dữ liệu dựa trên nông sản
+        const filteredData = data.filter(item => item.nongsan === nongsan); 
+        return { 
+            plantingPlan: filteredData[0]?.plantingPlan || [], 
+            costEstimate: filteredData[0]?.costEstimate || [] 
+        };
     } catch (error) {
-        console.error("Error fetching data:", error);
-        plantingPlanContainer.innerHTML = "<p>Không thể tải dữ liệu kế hoạch trồng cây.</p>";
-    }
-}
-
-// Hàm hiển thị dữ liệu kế hoạch trồng cây
-function displayPlantingInfo(data, container) {
-    const { plantingPlan, costEstimate } = data;
-
-    if (Array.isArray(plantingPlan) && Array.isArray(costEstimate)) {
-        displayPlantingPlan(plantingPlan, container);
-        displayCostEstimate(costEstimate, container);
-    } else {
-        container.innerHTML = "<p>Không có dữ liệu cho nông sản này.</p>";
+        console.error("Lỗi khi tải dữ liệu từ file JSON:", error);
+        return { plantingPlan: [], costEstimate: [] };
     }
 }
 
@@ -204,10 +190,25 @@ function displayCostEstimate(costEstimate, container) {
     costHTML += "</table>";
     container.innerHTML += costHTML;
 }
+// Hàm hiển thị dữ liệu kế hoạch trồng cây
+function displayPlantingInfo(data, container) {
+    const { plantingPlan, costEstimate } = data;
 
-// Hàm tạo dữ liệu giả lập cho giá thị trường
-function generateMockMarketData(n
-// Hàm tạo dữ liệu giả lập cho giá thị trường
+    if (Array.isArray(plantingPlan) && Array.isArray(costEstimate)) {
+        displayPlantingPlan(plantingPlan, container);
+        displayCostEstimate(costEstimate, container);
+    } else {
+        container.innerHTML = "<p>Không có dữ liệu cho nông sản này.</p>";
+    }
+}
+
+// Hàm fetch dữ liệu và hiển thị kế hoạch trồng cây
+async function fetchAndDisplayPlantingInfo(nongsan) {
+    const data = await fetchPlantingInfo(nongsan);
+    displayPlantingInfo(data, plantingPlanContainer);
+}
+
+// Hàm tạo dữ liệu giả lập cho giá thị trường (bổ sung dữ liệu)
 function generateMockMarketData(nongsan) {
     const mockPrices = {
         "chuối": { price: (5000 + Math.random() * 2000).toFixed(0), date: new Date().toLocaleDateString() },
@@ -226,35 +227,10 @@ async function displayMarketData(nongsan, container) {
     <p>Cập nhật lần cuối: ${marketData.date}</p>`;
 }
 
-// Đảm bảo hàm displayPlantingInfo được định nghĩa
-async function fetchData() {
-    try {
-        const response = await fetch('https://tulieu-hbt.github.io/phan-loai-nong-san/assets/baocao.json');
-        const data = await response.json();
-        displayPlantingInfo(data, plantingPlanContainer);
-    } catch (error) {
-        console.error("Error fetching data:", error);
-        plantingPlanContainer.innerHTML = "<p>Không thể tải dữ liệu kế hoạch trồng cây.</p>";
-    }
-}
-
-// Hàm hiển thị dữ liệu kế hoạch trồng cây
-function displayPlantingInfo(data, container) {
-    const { plantingPlan, costEstimate } = data;
-
-    if (Array.isArray(plantingPlan) && Array.isArray(costEstimate)) {
-        displayPlantingPlan(plantingPlan, container);
-        displayCostEstimate(costEstimate, container);
-    } else {
-        container.innerHTML = "<p>Không có dữ liệu cho nông sản này.</p>";
-    }
-}
-
 // Khởi tạo
 async function init() {
     await loadModel();
     await setupCamera();
-    await fetchData();
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
