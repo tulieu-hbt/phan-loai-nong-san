@@ -123,12 +123,16 @@ async function fetchPlantingInfo(nongsan) {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        // Lọc dữ liệu dựa trên nông sản
-        const filteredData = data.filter(item => item.nongsan === nongsan); 
-        return { 
-            plantingPlan: filteredData[0]?.plantingPlan || [], 
-            costEstimate: filteredData[0]?.costEstimate || [] 
-        };
+
+        // Tìm đối tượng có nongsan trùng với nongsan cần tìm
+        const nongsanData = data.find(item => item.nongsan === nongsan);
+
+        // Trả về plantingPlan và costEstimate từ đối tượng tìm được
+        return nongsanData ? { 
+            plantingPlan: nongsanData.plantingPlan, 
+            costEstimate: nongsanData.costEstimate 
+        } : { plantingPlan: [], costEstimate: [] }; // Trả về mảng rỗng nếu không tìm thấy
+
     } catch (error) {
         console.error("Lỗi khi tải dữ liệu từ file JSON:", error);
         return { plantingPlan: [], costEstimate: [] };
