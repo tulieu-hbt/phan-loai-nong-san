@@ -1,166 +1,191 @@
-{
-"Thong tin Cay Trong":[
- {
-  "ID": "id_chuoi",
-  "Giong Cay": "Chuối",
-  "Phuong Thuc Trong": "Trồng chậu",
-  "Dien Tich": "1 m2",
-  "So Luong Cay": 1,
-  "Dieu Kien Sinh Truong": "Nhiệt độ 25-30°C"
- },
- {
-  "ID": "id_ca_chua",
-  "Giong Cay": "Cà chua",
-  "Phuong Thuc Trong": "Trồng chậu",
-  "Dien Tich": "1 m2",
-  "So Luong Cay": 2,
-  "Dieu Kien Sinh Truong": "Nhiệt độ 20-25°C"
- },
- {
-  "ID": "id_dau_bap",
-  "Giong Cay": "Đậu bắp",
-  "Phuong Thuc Trong": "Trồng thùng xốp",
-  "Dien Tich": "1 m2",
-  "So Luong Cay": 3,
-  "Dieu Kien Sinh Truong": "Nhiệt độ 25-30°C"
- },
- {
-  "ID": "id_ot",
-  "Giong Cay": "Ớt",
-  "Phuong Thuc Trong": "Trồng chậu",
-  "Dien Tich": "1 m2",
-  "So Luong Cay": 4,
-  "Dieu Kien Sinh Truong": "Nhiệt độ 25-30°C"
- },
- {
-  "ID": "id_xa_lach",
-  "Giong Cay": "Xà lách",
-  "Phuong Thuc Trong": "Trồng chậu",
-  "Dien Tich": "1 m2",
-  "So Luong Cay": 5,
-  "Dieu Kien Sinh Truong": "Nhiệt độ 20-25°C"
- },
- {
-  "ID": "id_ca_tim",
-  "Giong Cay": "Cà tím",
-  "Phuong Thuc Trong": "Trồng chậu",
-  "Dien Tich": "1 m2",
-  "So Luong Cay": 2,
-  "Dieu Kien Sinh Truong": "Nhiệt độ 20-25°C"
- },
- {
-  "ID": "id_ca_rot",
-  "Giong Cay": "Cà rốt",
-  "Phuong Thuc Trong": "Trồng thùng xốp",
-  "Dien Tich": "1 m2",
-  "So Luong Cay": 1,
-  "Dieu Kien Sinh Truong": "Nhiệt độ 15-20°C"
- },
- {
-  "ID": "id_dua_leo",
-  "Giong Cay": "Dưa leo",
-  "Phuong Thuc Trong": "Trồng chậu",
-  "Dien Tich": "1 m2",
-  "So Luong Cay": 2,
-  "Dieu Kien Sinh Truong": "Nhiệt độ 20-25°C"
- },
- {
-  "ID": "id_cai_xoong",
-  "Giong Cay": "Cải xoong",
-  "Phuong Thuc Trong": "Trồng chậu",
-  "Dien Tich": "1 m2",
-  "So Luong Cay": 3,
-  "Dieu Kien Sinh Truong": "Nhiệt độ 20-25°C"
- },
- {
-  "ID": "id_dau_cove",
-  "Giong Cay": "Đậu cô ve",
-  "Phuong Thuc Trong": "Trồng chậu",
-  "Dien Tich": "1 m2",
-  "So Luong Cay": 4,
-  "Dieu Kien Sinh Truong": "Nhiệt độ 20-25°C"
- }
-],
-"Ke hoach Cham soc":[
- {
-  "STT": 1,
-  "Cong Viec Can Lam": "Chuẩn bị đất và chậu",
-  "Thoi Gian Thuc Hien": "1 ngày",
-  "Vat Lieu, Dung Cu Can Thiet": "Đất, chậu"
- },
- {
-  "STT": 2,
-  "Cong Viec Can Lam": "Gieo hạt hoặc trồng cây con",
-  "Thoi Gian Thuc Hien": "1 tuần",
-  "Vat Lieu, Dung Cu Can Thiet": "Hạt giống hoặc cây con"
- },
- {
-  "STT": 3,
-  "Cong Viec Can Lam": "Tưới nước hàng ngày",
-  "Thoi Gian Thuc Hien": "Hàng ngày",
-  "Vat Lieu, Dung Cu Can Thiet": "Bình tưới"
- },
- {
-  "STT": 4,
-  "Cong Viec Can Lam": "Bón phân hàng tuần",
-  "Thoi Gian Thuc Hien": "Hàng tuần",
-  "Vat Lieu, Dung Cu Can Thiet": "Phân bón"
- },
- {
-  "STT": 5,
-  "Cong Viec Can Lam": "Kiểm tra sâu bệnh và bảo vệ cây",
-  "Thoi Gian Thuc Hien": "Hàng tháng",
-  "Vat Lieu, Dung Cu Can Thiet": "Thuốc trừ sâu, dụng cụ kiểm tra"
- }
-],
-"Chi Phi":[
- {
-  "STT": 1,
-  "Cac Loai Chi Phi": "Vật liệu, dụng cụ để trồng và chăm sóc cây",
-  "Don Vi Tinh": "Bộ",
-  "Don Gia (dong)": 50000,
-  "So Luong": 1,
-  "Thanh Tien (dong)": 50000
- },
- {
-  "STT": 2,
-  "Cac Loai Chi Phi": "Cây giống",
-  "Don Vi Tinh": "Cây",
-  "Don Gia (dong)": 20000,
-  "So Luong": 2,
-  "Thanh Tien (dong)": 40000
- },
- {
-  "STT": 3,
-  "Cac Loai Chi Phi": "Phân bón",
-  "Don Vi Tinh": "Kg",
-  "Don Gia (dong)": 10000,
-  "So Luong": 1,
-  "Thanh Tien (dong)": 10000
- },
- {
-  "STT": 4,
-  "Cac Loai Chi Phi": "Thuốc bảo vệ thực vật",
-  "Don Vi Tinh": "Lọ",
-  "Don Gia (dong)": 15000,
-  "So Luong": 1,
-  "Thanh Tien (dong)": 15000
- },
- {
-  "STT": 5,
-  "Cac Loai Chi Phi": "Chi phí gieo trồng, chăm sóc cây",
-  "Don Vi Tinh": "Lần",
-  "Don Gia (dong)": 5000,
-  "So Luong": 5,
-  "Thanh Tien (dong)": 25000
- },
- {
-  "STT": 6,
-  "Cac Loai Chi Phi": "Chi phí khác",
-  "Don Vi Tinh": "Lần",
-  "Don Gia (dong)": 10000,
-  "So Luong": 2,
-  "Thanh Tien (dong)": 20000
- }
-]
-}
+[
+  {
+    "nongsan": "chuối",
+    "plantingPlan": [
+      {
+        "STT": 1,
+        "Cong Viec Can Lam": "Chuẩn bị đất trồng (đất thịt, phân chuồng hoai mục, tro trấu)",
+        "Thoi Gian Thuc Hien": "1 ngày",
+        "Vat Lieu, Dung Cu Can Thiet": "Cuốc, xẻng, đất, phân chuồng, tro trấu",
+        "Ghi Chu": ""
+      },
+      {
+        "STT": 2,
+        "Cong Viec Can Lam": "Chọn giống chuối khỏe mạnh, không sâu bệnh",
+        "Thoi Gian Thuc Hien": "1 ngày",
+        "Vat Lieu, Dung Cu Can Thiet": "",
+        "Ghi Chu": "Nên chọn cây giống từ vườn ươm uy tín"
+      },
+      {
+        "STT": 3,
+        "Cong Viec Can Lam": "Trồng cây con vào hố đã chuẩn bị",
+        "Thoi Gian Thuc Hien": "1 ngày",
+        "Vat Lieu, Dung Cu Can Thiet": "Cuốc, xẻng",
+        "Ghi Chu": "Khoảng cách giữa các cây từ 2-3m"
+      },
+      {
+        "STT": 4,
+        "Cong Viec Can Lam": "Tưới nước đều đặn",
+        "Thoi Gian Thuc Hien": "Hàng ngày",
+        "Vat Lieu, Dung Cu Can Thiet": "Bình tưới",
+        "Ghi Chu": "Tưới 2 lần/ngày vào sáng sớm và chiều mát"
+      },
+      {
+        "STT": 5,
+        "Cong Viec Can Lam": "Bón phân định kỳ",
+        "Thoi Gian Thuc Hien": "2 tuần/lần",
+        "Vat Lieu, Dung Cu Can Thiet": "Phân hữu cơ, phân NPK",
+        "Ghi Chu": ""
+      },
+      {
+        "STT": 6,
+        "Cong Viec Can Lam": "Phòng trừ sâu bệnh",
+        "Thoi Gian Thuc Hien": "Thường xuyên",
+        "Vat Lieu, Dung Cu Can Thiet": "Thuốc trừ sâu sinh học",
+        "Ghi Chu": "Kiểm tra thường xuyên để phát hiện sớm sâu bệnh"
+      }
+    ],
+    "costEstimate": [
+      {
+        "STT": 1,
+        "Cac Loai Chi Phi": "Cây giống",
+        "Don Vi Tinh": "Cây",
+        "Don Gia (dong)": 20000,
+        "So Luong": 1,
+        "Thanh Tien (dong)": 20000,
+        "Ghi Chu": ""
+      },
+      {
+        "STT": 2,
+        "Cac Loai Chi Phi": "Phân bón",
+        "Don Vi Tinh": "Kg",
+        "Don Gia (dong)": 10000,
+        "So Luong": 5,
+        "Thanh Tien (dong)": 50000,
+        "Ghi Chu": ""
+      },
+      {
+        "STT": 3,
+        "Cac Loai Chi Phi": "Thuốc trừ sâu",
+        "Don Vi Tinh": "Lọ",
+        "Don Gia (dong)": 15000,
+        "So Luong": 2,
+        "Thanh Tien (dong)": 30000,
+        "Ghi Chu": ""
+      }
+    ]
+  },
+  {
+    "nongsan": "cà chua",
+    "plantingPlan": [
+      {
+        "STT": 1,
+        "Cong Viec Can Lam": "Chuẩn bị đất trồng (tơi xốp, giàu dinh dưỡng)",
+        "Thoi Gian Thuc Hien": "1 ngày",
+        "Vat Lieu, Dung Cu Can Thiet": "Đất, phân chuồng, xẻng, cuốc",
+        "Ghi Chu": ""
+      },
+      {
+        "STT": 2,
+        "Cong Viec Can Lam": "Gieo hạt hoặc trồng cây con",
+        "Thoi Gian Thuc Hien": "1-2 tuần",
+        "Vat Lieu, Dung Cu Can Thiet": "Hạt giống/cây con, khay ươm",
+        "Ghi Chu": "Ngâm hạt giống trước khi gieo"
+      },
+      {
+        "STT": 3,
+        "Cong Viec Can Lam": "Tưới nước thường xuyên",
+        "Thoi Gian Thuc Hien": "Hàng ngày",
+        "Vat Lieu, Dung Cu Can Thiet": "Bình tưới",
+        "Ghi Chu": "Tránh tưới quá nhiều nước"
+      },
+      {
+        "STT": 4,
+        "Cong Viec Can Lam": "Bón phân định kỳ",
+        "Thoi Gian Thuc Hien": "1 tuần/lần",
+        "Vat Lieu, Dung Cu Can Thiet": "Phân NPK, phân hữu cơ",
+        "Ghi Chu": ""
+      },
+      {
+        "STT": 5,
+        "Cong Viec Can Lam": "Làm giàn cho cà chua",
+        "Thoi Gian Thuc Hien": "Khi cây cao 20-30cm",
+        "Vat Lieu, Dung Cu Can Thiet": "Cọc tre, dây buộc",
+        "Ghi Chu": ""
+      },
+      {
+        "STT": 6,
+        "Cong Viec Can Lam": "Phòng trừ sâu bệnh",
+        "Thoi Gian Thuc Hien": "Thường xuyên",
+        "Vat Lieu, Dung Cu Can Thiet": "Thuốc trừ sâu sinh học",
+        "Ghi Chu": ""
+      }
+    ],
+    "costEstimate": [
+      {
+        "STT": 1,
+        "Cac Loai Chi Phi": "Hạt giống",
+        "Don Vi Tinh": "Gói",
+        "Don Gia (dong)": 10000,
+        "So Luong": 1,
+        "Thanh Tien (dong)": 10000,
+        "Ghi Chu": ""
+      },
+      {
+        "STT": 2,
+        "Cac Loai Chi Phi": "Phân bón",
+        "Don Vi Tinh": "Kg",
+        "Don Gia (dong)": 15000,
+        "So Luong": 3,
+        "Thanh Tien (dong)": 45000,
+        "Ghi Chu": ""
+      },
+      {
+        "STT": 3,
+        "Cac Loai Chi Phi": "Thuốc trừ sâu",
+        "Don Vi Tinh": "Lọ",
+        "Don Gia (dong)": 20000,
+        "So Luong": 1,
+        "Thanh Tien (dong)": 20000,
+        "Ghi Chu": ""
+      }
+    ]
+  },
+  {
+    "nongsan": "thanh long",
+    "plantingPlan": [
+      {
+        "STT": 1,
+        "Cong Viec Can Lam": "Chọn giống thanh long khỏe mạnh",
+        "Thoi Gian Thuc Hien": "1 ngày",
+        "Vat Lieu, Dung Cu Can Thiet": "",
+        "Ghi Chu": "Chọn cành hom từ cây mẹ khỏe mạnh"
+      },
+      {
+        "STT": 2,
+        "Cong Viec Can Lam": "Làm trụ trồng thanh long",
+        "Thoi Gian Thuc Hien": "1-2 ngày",
+        "Vat Lieu, Dung Cu Can Thiet": "Cột bê tông/gỗ, xi măng",
+        "Ghi Chu": "Trụ cao khoảng 1.5-2m"
+      },
+      {
+        "STT": 3,
+        "Cong Viec Can Lam": "Trồng cành hom",
+        "Thoi Gian Thuc Hien": "1 ngày",
+        "Vat Lieu, Dung Cu Can Thiet": "Xẻng, cuốc",
+        "Ghi Chu": "Trồng vào mùa mưa"
+      },
+      {
+        "STT": 4,
+        "Cong Viec Can Lam": "Tưới nước và bón phân",
+        "Thoi Gian Thuc Hien": "Định kỳ",
+        "Vat Lieu, Dung Cu Can Thiet": "Phân hữu cơ, phân NPK",
+        "Ghi Chu": "Tưới nước 2 lần/tuần, bón phân 1 tháng/lần"
+      },
+      {
+        "STT": 5,
+        "Cong Viec Can Lam": "Tỉa cành tạo tán",
+        "Thoi Gian Thuc Hien": "Thường xuyên",
+        "Vat Lieu, Dung Cu Can Thiet": "Kéo cắt cành",
+        "Ghi Chu": ""
+      },
