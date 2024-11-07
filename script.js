@@ -93,15 +93,17 @@ async function predict() {
         return;
     }
 
-    if (result) result.innerText = `Kết quả: ${predictedClass}`;
-    if (preservationInfo) preservationInfo.innerText = preservationTexts[predictedClass];
-    speak(preservationTexts[predictedClass]);
+    const nongsan = predictedClass; // Khai báo biến nongsan
+
+    if (result) result.innerText = `Kết quả: ${nongsan}`; // Sử dụng biến nongsan
+    if (preservationInfo) preservationInfo.innerText = preservationTexts[nongsan];
+    speak(preservationTexts[nongsan]);
 
     // Gọi hàm hiển thị kế hoạch và chi phí
-    fetchAndDisplayPlantingInfo(predictedClass); 
+    fetchAndDisplayPlantingInfo(nongsan);
 
     // Gọi hàm hiển thị thông tin thị trường
-    displayMarketData(predictedClass, marketInfoContainer);
+    displayMarketData(nongsan, marketInfoContainer);
 }
 
 // Hàm Text-to-Speech
@@ -115,10 +117,9 @@ function speak(text) {
     }
 }
 
-
 // Hàm lấy dữ liệu từ file JSON dựa trên loại nông sản
 async function fetchPlantingInfo(nongsan) {
-    const url = `https://tulieu-hbt.github.io/phan-loai-nong-san/assets/baocao.json`; 
+    const url = `https://tulieu-hbt.github.io/phan-loai-nong-san/assets/baocao.json`;
 
     try {
         const response = await fetch(url);
@@ -128,9 +129,9 @@ async function fetchPlantingInfo(nongsan) {
         const nongsanData = data.find(item => item.nongsan === nongsan);
 
         // Trả về plantingPlan và costEstimate từ đối tượng tìm được
-        return nongsanData ? { 
-            plantingPlan: nongsanData.plantingPlan, 
-            costEstimate: nongsanData.costEstimate 
+        return nongsanData ? {
+            plantingPlan: nongsanData.plantingPlan,
+            costEstimate: nongsanData.costEstimate
         } : { plantingPlan: [], costEstimate: [] }; // Trả về mảng rỗng nếu không tìm thấy
 
     } catch (error) {
@@ -150,16 +151,16 @@ function displayPlantingPlan(plantingPlan, container) {
 
     plantingPlan.forEach(task => {
         tasksHTML += `<tr>
-            <td>${task.STT || ""}</td>
-            <td>${task['Cong Viec Can Lam'] || ""}</td>
-            <td>${task['Thoi Gian Thuc Hien'] || ""}</td>
-            <td>${task['Vat Lieu, Dung Cu Can Thiet'] || ""}</td>
+            <td><span class="math-inline">\{task\.STT \|\| ""\}</td\>
+<td\></span>{task['Cong Viec Can Lam'] || ""}</td>
+            <td><span class="math-inline">\{task\['Thoi Gian Thuc Hien'\] \|\| ""\}</td\>
+<td\></span>{task['Vat Lieu, Dung Cu Can Thiet'] || ""}</td>
             <td>${task['Ghi Chu'] || ""}</td>
         </tr>`;
     });
 
     tasksHTML += "</table>";
-    container.innerHTML += tasksHTML;
+    container.innerHTML = tasksHTML; // Ghi đè nội dung container
 }
 
 // Hàm hiển thị chi phí trồng cây
@@ -176,12 +177,12 @@ function displayCostEstimate(costEstimate, container) {
         const itemTotal = (item['Don Gia (dong)'] || 0) * (item['So Luong'] || 0);
         totalCost += itemTotal;
         costHTML += `<tr>
-            <td>${item.STT || ""}</td>
-            <td>${item['Cac Loai Chi Phi'] || ""}</td>
-            <td>${item['Don Vi Tinh'] || ""}</td>
-            <td>${item['Don Gia (dong)'] || ""}</td>
-            <td>${item['So Luong'] || ""}</td>
-            <td>${itemTotal}</td>
+            <td><span class="math-inline">\{item\.STT \|\| ""\}</td\>
+<td\></span>{item['Cac Loai Chi Phi'] || ""}</td>
+            <td><span class="math-inline">\{item\['Don Vi Tinh'\] \|\| ""\}</td\>
+<td\></span>{item['Don Gia (dong)'] || ""}</td>
+            <td><span class="math-inline">\{item\['So Luong'\] \|\| ""\}</td\>
+<td\></span>{itemTotal}</td>
             <td>${item['Ghi Chu'] || ""}</td>
         </tr>`;
     });
@@ -192,7 +193,7 @@ function displayCostEstimate(costEstimate, container) {
         <td></td>
     </tr>`;
     costHTML += "</table>";
-    container.innerHTML += costHTML;
+    container.innerHTML = costHTML; // Ghi đè nội dung container
 }
 // Hàm hiển thị dữ liệu kế hoạch trồng cây
 function displayPlantingInfo(data, container) {
