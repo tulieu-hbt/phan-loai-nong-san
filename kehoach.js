@@ -92,3 +92,5 @@ async function displayMarketData(nongsan, container) {
     container.innerHTML = `<p>Giá thị trường hiện tại của ${nongsan}: ${marketData.price} VND/kg</p>
     <p>Cập nhật lần cuối: ${marketData.date}</p>`;
 }
+
+export { loadExcelData, displayPlantingPlan, displayCostEstimate, displayMarketData };
