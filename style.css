@@ -18,7 +18,7 @@ body {
 
 .container {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1200px; /* Giảm chiều rộng tối đa để phù hợp hơn */
     background-color: #ffffff;
     border-radius: 10px; /* Tăng border-radius để làm mềm các góc */
     padding: 30px;
@@ -49,7 +49,7 @@ h1 {
     border: 1px solid #ddd;
     border-radius: 10px;
     max-width: 48%; /* Đảm bảo cả hai khung hình có cùng kích thước */
-    height: 400px; /* Tăng chiều cao */
+    height: 300px; /* Điều chỉnh chiều cao để không quá cao */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,7 +58,7 @@ h1 {
 
 video#camera, .image-container img {
     width: 100%;
-    height: auto;
+    height: 100%;
     border-radius: 10px;
     border: 3px solid #3498db;
     object-fit: cover; /* Đảm bảo hình ảnh và video cùng tỷ lệ */
