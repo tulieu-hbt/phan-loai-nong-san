@@ -141,8 +141,6 @@ async function fetchPlantingInfo(nongsan) {
         return { plantingPlan: [], costEstimate: [] };
     }
 }
-
-// Hàm hiển thị kế hoạch trồng cây
 function displayPlantingPlan(plantingPlan, container) {
     if (!container) {
         console.error("Container is undefined");
@@ -153,10 +151,10 @@ function displayPlantingPlan(plantingPlan, container) {
 
     plantingPlan.forEach(task => {
         tasksHTML += `<tr>
-            <td><span class="math-inline">\{task\.STT \|\| ""\}</td\>
-<td\></span>{task['Cong Viec Can Lam'] || ""}</td>
-            <td><span class="math-inline">\{task\['Thoi Gian Thuc Hien'\] \|\| ""\}</td\>
-<td\></span>{task['Vat Lieu, Dung Cu Can Thiet'] || ""}</td>
+            <td>${task.STT || ""}</td>
+            <td>${task['Cong Viec Can Lam'] || ""}</td>
+            <td>${task['Thoi Gian Thuc Hien'] || ""}</td>
+            <td>${task['Vat Lieu, Dung Cu Can Thiet'] || ""}</td>
             <td>${task['Ghi Chu'] || ""}</td>
         </tr>`;
     });
@@ -165,7 +163,6 @@ function displayPlantingPlan(plantingPlan, container) {
     container.innerHTML = tasksHTML; // Ghi đè nội dung container
 }
 
-// Hàm hiển thị chi phí trồng cây
 function displayCostEstimate(costEstimate, container) {
     if (!container) {
         console.error("Container is undefined");
@@ -179,12 +176,12 @@ function displayCostEstimate(costEstimate, container) {
         const itemTotal = (item['Don Gia (dong)'] || 0) * (item['So Luong'] || 0);
         totalCost += itemTotal;
         costHTML += `<tr>
-            <td><span class="math-inline">\{item\.STT \|\| ""\}</td\>
-<td\></span>{item['Cac Loai Chi Phi'] || ""}</td>
-            <td><span class="math-inline">\{item\['Don Vi Tinh'\] \|\| ""\}</td\>
-<td\></span>{item['Don Gia (dong)'] || ""}</td>
-            <td><span class="math-inline">\{item\['So Luong'\] \|\| ""\}</td\>
-<td\></span>{itemTotal}</td>
+            <td>${item.STT || ""}</td>
+            <td>${item['Cac Loai Chi Phi'] || ""}</td>
+            <td>${item['Don Vi Tinh'] || ""}</td>
+            <td>${item['Don Gia (dong)'] || ""}</td>
+            <td>${item['So Luong'] || ""}</td>
+            <td>${itemTotal}</td>
             <td>${item['Ghi Chu'] || ""}</td>
         </tr>`;
     });
@@ -197,6 +194,8 @@ function displayCostEstimate(costEstimate, container) {
     costHTML += "</table>";
     container.innerHTML = costHTML; // Ghi đè nội dung container
 }
+
+
 // Hàm hiển thị dữ liệu kế hoạch trồng cây
 function displayPlantingInfo(data, container) {
     const { plantingPlan, costEstimate } = data;
