@@ -2,27 +2,15 @@
     {
         "nongsan": "chuối",
         "plantingPlan": [
-            {
-                "STT": 1,
-                "Cong Viec Can Lam": "Chuẩn bị đất",
-                "Thoi Gian Thuc Hien": "Tháng 1",
-                "Vat Lieu, Dung Cu Can Thiet": "Phân hữu cơ, vôi bột",
-                "Ghi Chu": "Xới đất kỹ trước khi bón phân"
-            },
-            {
-                "STT": 2,
-                "Cong Viec Can Lam": "Trồng cây giống",
-                "Thoi Gian Thuc Hien": "Tháng 2",
-                "Vat Lieu, Dung Cu Can Thiet": "Cây giống chuối",
-                "Ghi Chu": "Trồng đều khoảng cách 2m"
-            },
-            {
-                "STT": 3,
-                "Cong Viec Can Lam": "Bón phân lần 1",
-                "Thoi Gian Thuc Hien": "Tháng 3",
-                "Vat Lieu, Dung Cu Can Thiet": "Phân NPK",
-                "Ghi Chu": "Bón cách gốc 10cm"
-            }
+            { "STT": 1, "Chuan bi dat" 
+               "Cong Viec Can Lam": "Chuẩn bị đất", 
+                "Thoi Gian Thuc Hien": "Tháng 1", 
+                "Vat Lieu, Dung Cu Can Thiet": "Đất vườn, phân hữu cơ, vôi bột", 
+                "Ghi Chu": "Xới đất kỹ trước khi bón phân, phơi đất sau khi xử lý." 
+            }, 
+            { "STT": 2, 
+               "Cong Viec Can Lam": 
+                "Chuẩn bị giống", "Thoi Gian Thuc Hien": "Tháng 2", "Vat Lieu, Dung Cu Can Thiet": "Cây giống chuối, dung dịch thuốc trừ nấm", "Ghi Chu": "Chọn cây giống đồng đều về kích thước và độ tuổi." }, { "STT": 3, "Cong Viec Can Lam": "Gieo trồng", "Thoi Gian Thuc Hien": "Tháng 2", "Vat Lieu, Dung Cu Can Thiet": "Cây giống chuối, xẻng", "Ghi Chu": "Đảm bảo cây được trồng ở độ sâu hợp lý để rễ phát triển tốt." }, { "STT": 4, "Cong Viec Can Lam": "Chăm sóc", "Thoi Gian Thuc Hien": "Tháng 3 và thường xuyên", "Vat Lieu, Dung Cu Can Thiet": "Phân NPK, nước tưới, thuốc trừ sâu", "Ghi Chu": "Bón phân cách gốc 10cm, tưới nước vào buổi sáng hoặc chiều." }, { "STT": 5, "Cong Viec Can Lam": "Thu hoạch", "Thoi Gian Thuc Hien": "Tháng 6-7", "Vat Lieu, Dung Cu Can Thiet": "Dao, kéo", "Ghi Chu": "Thu hoạch vào buổi sáng hoặc chiều để đảm bảo chất lượng quả." }
         ],
         "costEstimate": [
             {
@@ -54,27 +42,31 @@
     {
         "nongsan": "cà chua",
         "plantingPlan": [
-            {
-                "STT": 1,
-                "Cong Viec Can Lam": "Làm đất và xử lý",
-                "Thoi Gian Thuc Hien": "Tháng 1",
-                "Vat Lieu, Dung Cu Can Thiet": "Phân hữu cơ, vôi bột",
-                "Ghi Chu": "Phơi đất sau khi xử lý"
-            },
-            {
-                "STT": 2,
-                "Cong Viec Can Lam": "Gieo hạt",
-                "Thoi Gian Thuc Hien": "Tháng 2",
-                "Vat Lieu, Dung Cu Can Thiet": "Hạt giống cà chua",
-                "Ghi Chu": "Gieo hạt vào bầu ươm"
-            },
-            {
-                "STT": 3,
-                "Cong Viec Can Lam": "Bón phân lần 1",
-                "Thoi Gian Thuc Hien": "Tháng 3",
-                "Vat Lieu, Dung Cu Can Thiet": "Phân bón NPK",
-                "Ghi Chu": "Bón cách gốc 5cm"
-            }
+            { "STT": "1. Chuẩn bị đất", 
+              "Cong Viec Can Lam": "Cà chua cần đất tơi xốp, thoát nước tốt, giàu dinh dưỡng. Trộn đất vườn với phân hữu cơ hoặc đất phù sa. Sử dụng phân chuồng hoai mục hoặc phân hữu cơ để tăng cường dinh dưỡng cho đất.", 
+              "Thoi Gian Thuc Hien": "Tháng 1", 
+              "Vat Lieu, Dung Cu Can Thiet": "Đất vườn, phân hữu cơ, vôi bột", 
+              "Ghi Chu": "Xới đất kỹ trước khi bón phân, phơi đất sau khi xử lý." }, 
+            { "STT": "2. Chuẩn bị giống", 
+              "Cong Viec Can Lam": "Chọn hạt giống chất lượng cao, ngâm hạt giống trong nước ấm khoảng 24 giờ trước khi gieo.", 
+               "Thoi Gian Thuc Hien": "Tháng 2", 
+               "Vat Lieu, Dung Cu Can Thiet": "Hạt giống cà chua, nước ấm", 
+               "Ghi Chu": "Chọn hạt giống đồng đều về kích thước và không bị sâu bệnh." },
+            { "STT": "3. Gieo trồng", 
+            "Cong Viec Can Lam": "Gieo hạt vào bầu ươm hoặc khay gieo hạt, giữ ẩm cho đất.", 
+            "Thoi Gian Thuc Hien": "Tháng 2", 
+            "Vat Lieu, Dung Cu Can Thiet": "Hạt giống cà chua, bầu ươm, khay gieo hạt", 
+            "Ghi Chu": "Đảm bảo khoảng cách gieo hạt phù hợp để cây có đủ không gian phát triển." }, 
+            { "STT": "4. Chăm sóc", 
+              "Cong Viec Can Lam": "Tưới nước đều đặn, bón phân lần 1 vào gốc cây. Kiểm tra và loại bỏ cỏ dại, sâu bệnh.", 
+              "Thoi Gian Thuc Hien": "Tháng 3 và thường xuyên", 
+               "Vat Lieu, Dung Cu Can Thiet": "Phân bón NPK, nước tưới, thuốc trừ sâu", 
+              "Ghi Chu": "Bón phân cách gốc 5cm, tưới nước vào buổi sáng hoặc chiều." }, 
+            { "STT": "5. Thu hoạch", 
+               "Cong Viec Can Lam": "Thu hoạch khi quả cà chua chín đỏ.", 
+               "Thoi Gian Thuc Hien": "Tháng 6", 
+               "Vat Lieu, Dung Cu Can Thiet": "Dao, kéo", 
+               "Ghi Chu": "Thu hoạch vào buổi sáng hoặc chiều để đảm bảo chất lượng quả." }
         ],
         "costEstimate": [
             {
