@@ -1,6 +1,7 @@
 let model;
 const URL = "model/";
 
+// Lấy các phần tử từ DOM
 const result = document.getElementById("result");
 const captureButton = document.getElementById("captureButton");
 const video = document.getElementById("camera");
@@ -94,9 +95,12 @@ async function predict() {
 
 // Tải dữ liệu JSON và tìm dữ liệu phù hợp với nông sản
 async function loadExcelData() {
-    const url = 'baocao.json';
+    const url = 'https://tulieu-hbt.github.io/phan-loai-nong-san/assets/baocao.json';
     try {
         const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         return await response.json();
     } catch (error) {
         console.error("Lỗi khi tải dữ liệu từ file JSON:", error);
