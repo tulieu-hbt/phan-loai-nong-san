@@ -1,76 +1,10 @@
 [
     {
-        "nongsan": "chuối",
-        "plantingPlan": [
-            {
-                "STT": "1. Chuẩn bị đất",
-                "Cong Viec Can Lam": "Chuối cần đất giàu dinh dưỡng, thoát nước tốt. Trộn đất vườn với phân hữu cơ hoặc đất phù sa. Sử dụng phân chuồng hoai mục hoặc phân hữu cơ để tăng cường dinh dưỡng cho đất.",
-                "Thoi Gian Thuc Hien": "Tháng 1",
-                "Vat Lieu, Dung Cu Can Thiet": "Đất vườn, phân hữu cơ, vôi bột",
-                "Ghi Chu": "Xới đất kỹ trước khi bón phân, phơi đất sau khi xử lý."
-            },
-            {
-                "STT": "2. Chuẩn bị giống",
-                "Cong Viec Can Lam": "Chọn cây giống khỏe mạnh, không bị sâu bệnh. Ngâm cây giống trong dung dịch thuốc trừ nấm.",
-                "Thoi Gian Thuc Hien": "Tháng 2",
-                "Vat Lieu, Dung Cu Can Thiet": "Cây giống chuối, dung dịch thuốc trừ nấm",
-                "Ghi Chu": "Chọn cây giống đồng đều về kích thước và độ tuổi."
-            },
-            {
-                "STT": "3. Gieo trồng",
-                "Cong Viec Can Lam": "Trồng cây giống đều khoảng cách 2m để đảm bảo không gian phát triển.",
-                "Thoi Gian Thuc Hien": "Tháng 2",
-                "Vat Lieu, Dung Cu Can Thiet": "Cây giống chuối, xẻng",
-                "Ghi Chu": "Đảm bảo cây được trồng ở độ sâu hợp lý để rễ phát triển tốt."
-            },
-            {
-                "STT": "4. Chăm sóc",
-                "Cong Viec Can Lam": "Tưới nước đều đặn, bón phân lần 1 vào gốc cây. Kiểm tra và loại bỏ cỏ dại, sâu bệnh.",
-                "Thoi Gian Thuc Hien": "Tháng 3 và thường xuyên",
-                "Vat Lieu, Dung Cu Can Thiet": "Phân NPK, nước tưới, thuốc trừ sâu",
-                "Ghi Chu": "Bón phân cách gốc 10cm, tưới nước vào buổi sáng hoặc chiều."
-            },
-            {
-                "STT": "5. Thu hoạch",
-                "Cong Viec Can Lam": "Thu hoạch khi quả chuối chín vàng.",
-                "Thoi Gian Thuc Hien": "Tháng 6-7",
-                "Vat Lieu, Dung Cu Can Thiet": "Dao, kéo",
-                "Ghi Chu": "Thu hoạch vào buổi sáng hoặc chiều để đảm bảo chất lượng quả."
-            }
-        ],
-        "costEstimate": [
-            {
-                "STT": 1,
-                "Cac Loai Chi Phi": "Giống chuối",
-                "Don Vi Tinh": "cây",
-                "Don Gia (dong)": 5000,
-                "So Luong": 100,
-                "Ghi Chu": ""
-            },
-            {
-                "STT": 2,
-                "Cac Loai Chi Phi": "Phân hữu cơ",
-                "Don Vi Tinh": "kg",
-                "Don Gia (dong)": 3000,
-                "So Luong": 50,
-                "Ghi Chu": ""
-            },
-            {
-                "STT": 3,
-                "Cac Loai Chi Phi": "Phân NPK",
-                "Don Vi Tinh": "kg",
-                "Don Gia (dong)": 8000,
-                "So Luong": 20,
-                "Ghi Chu": ""
-            }
-        ]
-    },
-    {
         "nongsan": "cà chua",
         "plantingPlan": [
             {
                 "STT": "1. Chuẩn bị đất",
-                "Cong Viec Can Lam": "Cà chua cần đất tơi xốp, thoát nước tốt, giàu dinh dưỡng. Trộn đất vườn với phân hữu cơ hoặc đất phù sa. Sử dụng phân chuồng hoai mục hoặc phân hữu cơ để tăng cường dinh dưỡng cho đất.",
+                "Cong Viec Can Lam": "Làm đất tơi xốp, thoát nước tốt. Trộn đất vườn với phân hữu cơ, đất phù sa, phân chuồng hoai mục tăng cường dinh dưỡng cho đất.",
                 "Thoi Gian Thuc Hien": "Tháng 1",
                 "Vat Lieu, Dung Cu Can Thiet": "Đất vườn, phân hữu cơ, vôi bột",
                 "Ghi Chu": "Xới đất kỹ trước khi bón phân, phơi đất sau khi xử lý."
@@ -128,6 +62,190 @@
                 "Don Gia (dong)": 8000,
                 "So Luong": 10,
                 "Ghi Chu": ""
+            }
+        ]
+    }
+]
+[
+    {
+        "nongsan": "trái bầu",
+        "plantingPlan": [
+            {
+                "STT": "1. Chuẩn bị đất",
+                "Cong Viec Can Lam": "Bầu cần đất tơi xốp, thoát nước tốt, giàu dinh dưỡng. Trộn đất vườn với phân hữu cơ.",
+                "Thoi Gian Thuc Hien": "Tháng 1",
+                "Vat Lieu, Dung Cu Can Thiet": "Đất vườn, phân hữu cơ, vôi bột",
+                "Ghi Chu": "Xới đất kỹ trước khi bón phân."
+            },
+            {
+                "STT": "2. Chuẩn bị giống",
+                "Cong Viec Can Lam": "Chọn hạt giống chất lượng, ngâm trong nước ấm 2 giờ.",
+                "Thoi Gian Thuc Hien": "Tháng 2",
+                "Vat Lieu, Dung Cu Can Thiet": "Hạt giống bầu, nước ấm",
+                "Ghi Chu": ""
+            },
+            {
+                "STT": "3. Gieo trồng",
+                "Cong Viec Can Lam": "Gieo hạt vào bầu ươm hoặc trực tiếp vào đất.",
+                "Thoi Gian Thuc Hien": "Tháng 2",
+                "Vat Lieu, Dung Cu Can Thiet": "Hạt giống, xẻng",
+                "Ghi Chu": "Đảm bảo độ ẩm cho hạt nảy mầm tốt."
+            },
+            {
+                "STT": "4. Chăm sóc",
+                "Cong Viec Can Lam": "Tưới nước thường xuyên, dựng giàn cho cây leo.",
+                "Thoi Gian Thuc Hien": "Tháng 3",
+                "Vat Lieu, Dung Cu Can Thiet": "Nước tưới, giàn tre",
+                "Ghi Chu": "Bón phân định kỳ 2 tuần một lần."
+            },
+            {
+                "STT": "5. Thu hoạch",
+                "Cong Viec Can Lam": "Thu hoạch khi quả to và căng tròn.",
+                "Thoi Gian Thuc Hien": "Tháng 5-6",
+                "Vat Lieu, Dung Cu Can Thiet": "Dao, kéo",
+                "Ghi Chu": ""
+            }
+        ],
+        "costEstimate": [
+            {
+                "STT": 1,
+                "Cac Loai Chi Phi": "Giống bầu",
+                "Don Vi Tinh": "gói",
+                "Don Gia (dong)": 15000,
+                "So Luong": 1,
+                "Ghi Chu": ""
+            },
+            {
+                "STT": 2,
+                "Cac Loai Chi Phi": "Phân hữu cơ",
+                "Don Vi Tinh": "kg",
+                "Don Gia (dong)": 3000,
+                "So Luong": 20,
+                "Ghi Chu": ""
+            },
+            {
+                "STT": 3,
+                "Cac Loai Chi Phi": "Giàn tre",
+                "Don Vi Tinh": "bộ",
+                "Don Gia (dong)": 50000,
+                "So Luong": 1,
+                "Ghi Chu": "Dựng giàn cho cây leo"
+            }
+        ]
+    },
+    {
+        "nongsan": "trái mướp",
+        "plantingPlan": [
+            {
+                "STT": "1. Chuẩn bị đất",
+                "Cong Viec Can Lam": "Mướp cần đất giàu dinh dưỡng, thoát nước tốt.",
+                "Thoi Gian Thuc Hien": "Tháng 1",
+                "Vat Lieu, Dung Cu Can Thiet": "Đất vườn, phân hữu cơ",
+                "Ghi Chu": ""
+            },
+            {
+                "STT": "2. Chuẩn bị giống",
+                "Cong Viec Can Lam": "Chọn hạt giống khỏe, ngâm nước ấm.",
+                "Thoi Gian Thuc Hien": "Tháng 2",
+                "Vat Lieu, Dung Cu Can Thiet": "Hạt giống mướp",
+                "Ghi Chu": ""
+            },
+            {
+                "STT": "3. Gieo trồng",
+                "Cong Viec Can Lam": "Gieo hạt cách nhau 30 cm.",
+                "Thoi Gian Thuc Hien": "Tháng 2",
+                "Vat Lieu, Dung Cu Can Thiet": "Xẻng",
+                "Ghi Chu": ""
+            },
+            {
+                "STT": "4. Chăm sóc",
+                "Cong Viec Can Lam": "Dựng giàn cho cây leo, tưới nước đều.",
+                "Thoi Gian Thuc Hien": "Tháng 3",
+                "Vat Lieu, Dung Cu Can Thiet": "Giàn cây, nước tưới",
+                "Ghi Chu": ""
+            },
+            {
+                "STT": "5. Thu hoạch",
+                "Cong Viec Can Lam": "Thu hoạch khi quả dài và xanh.",
+                "Thoi Gian Thuc Hien": "Tháng 6",
+                "Vat Lieu, Dung Cu Can Thiet": "Kéo",
+                "Ghi Chu": ""
+            }
+        ],
+        "costEstimate": [
+            {
+                "STT": 1,
+                "Cac Loai Chi Phi": "Giống mướp",
+                "Don Vi Tinh": "gói",
+                "Don Gia (dong)": 20000,
+                "So Luong": 1,
+                "Ghi Chu": ""
+            },
+            {
+                "STT": 2,
+                "Cac Loai Chi Phi": "Giàn cây",
+                "Don Vi Tinh": "bộ",
+                "Don Gia (dong)": 50000,
+                "So Luong": 1,
+                "Ghi Chu": "Cho cây leo"
+            }
+        ]
+    },
+    {
+        "nongsan": "trái ớt",
+        "plantingPlan": [
+            {
+                "STT": "1. Chuẩn bị đất",
+                "Cong Viec Can Lam": "Đất phải tơi xốp, có độ ẩm tốt.",
+                "Thoi Gian Thuc Hien": "Tháng 3",
+                "Vat Lieu, Dung Cu Can Thiet": "Đất trồng, phân hữu cơ",
+                "Ghi Chu": ""
+            },
+            {
+                "STT": "2. Chuẩn bị giống",
+                "Cong Viec Can Lam": "Chọn hạt giống khỏe mạnh.",
+                "Thoi Gian Thuc Hien": "Tháng 4",
+                "Vat Lieu, Dung Cu Can Thiet": "Hạt giống ớt",
+                "Ghi Chu": ""
+            },
+            {
+                "STT": "3. Gieo trồng",
+                "Cong Viec Can Lam": "Gieo hạt vào khay, tưới nước giữ ẩm.",
+                "Thoi Gian Thuc Hien": "Tháng 4",
+                "Vat Lieu, Dung Cu Can Thiet": "Khay gieo hạt",
+                "Ghi Chu": ""
+            },
+            {
+                "STT": "4. Chăm sóc",
+                "Cong Viec Can Lam": "Tưới nước đều, bón phân hàng tuần.",
+                "Thoi Gian Thuc Hien": "Tháng 5",
+                "Vat Lieu, Dung Cu Can Thiet": "Nước tưới, phân hữu cơ",
+                "Ghi Chu": ""
+            },
+            {
+                "STT": "5. Thu hoạch",
+                "Cong Viec Can Lam": "Thu hoạch khi quả chín đỏ.",
+                "Thoi Gian Thuc Hien": "Tháng 7",
+                "Vat Lieu, Dung Cu Can Thiet": "Kéo cắt",
+                "Ghi Chu": ""
+            }
+        ],
+        "costEstimate": [
+            {
+                "STT": 1,
+                "Cac Loai Chi Phi": "Giống ớt",
+                "Don Vi Tinh": "gói",
+                "Don Gia (dong)": 15000,
+                "So Luong": 1,
+                "Ghi Chu": ""
+            },
+            {
+                "STT": 2,
+                "Cac Loai Chi Phi": "Khay gieo hạt",
+                "Don Vi Tinh": "chiếc",
+                "Don Gia (dong)": 10000,
+                "So Luong": 5,
+                "Ghi Chu": "Giữ ẩm cho hạt"
             }
         ]
     }
