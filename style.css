@@ -18,10 +18,10 @@ body {
 
 .container {
     width: 100%;
-    max-width: 1200px; /* Giảm chiều rộng tối đa để phù hợp hơn */
+    max-width: 1000px; /* Giảm chiều rộng tối đa để phù hợp hơn */
     background-color: #ffffff;
     border-radius: 10px; /* Tăng border-radius để làm mềm các góc */
-    padding: 30px;
+    padding: 20px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Giảm độ mờ của bóng */
     text-align: center;
 }
@@ -29,7 +29,7 @@ body {
 h1 {
     color: #2c3e50;
     margin-bottom: 20px; /* Giảm khoảng cách bên dưới */
-    font-size: 36px; /* Tăng kích thước chữ */
+    font-size: 32px; /* Giảm kích thước chữ để phù hợp hơn */
     font-weight: 700; /* Tăng độ đậm */
     text-transform: uppercase; /* Chuyển chữ thành chữ in hoa */
     letter-spacing: 2px; /* Thêm khoảng cách giữa các chữ cái */
@@ -38,8 +38,8 @@ h1 {
 .camera-content {
     display: flex;
     justify-content: space-between;
-    gap: 10px; /* Giảm khoảng cách giữa hai khung hình */
-    margin-bottom: 30px;
+    gap: 20px; /* Tăng khoảng cách giữa hai khung hình */
+    margin-bottom: 20px; /* Giảm khoảng cách với các phần tử bên dưới */
 }
 
 .camera-section, .image-container {
@@ -65,12 +65,12 @@ video#camera, .image-container img {
 }
 
 .button-container {
-    margin-top: 20px;
+    margin-top: 10px; /* Giảm khoảng cách phía trên */
 }
 
 .capture-button {
-    padding: 15px 30px;
-    font-size: 18px;
+    padding: 10px 20px; /* Giảm kích thước nút */
+    font-size: 16px;
     color: #ffffff;
     background-color: #3498db;
     border: none;
@@ -86,20 +86,20 @@ video#camera, .image-container img {
 .result-text {
     font-weight: bold;
     color: #2c3e50;
-    font-size: 24px; /* Tăng kích thước chữ */
-    margin-top: 15px;
+    font-size: 20px; /* Giảm kích thước chữ */
+    margin-top: 10px;
     text-transform: uppercase; /* Chuyển chữ thành chữ in hoa */
 }
 
 .preservation-text {
     color: #555;
-    font-size: 20px; /* Tăng kích thước chữ */
-    margin-top: 10px;
+    font-size: 18px; /* Giảm kích thước chữ */
+    margin-top: 5px; /* Giảm khoảng cách phía trên */
 }
 
 .market-info-container, .planting-plan-container {
-    margin-top: 30px;
-    padding: 25px;
+    margin-top: 20px; /* Giảm khoảng cách phía trên */
+    padding: 15px; /* Giảm padding */
     border: 1px solid #ddd;
     border-radius: 10px;
     background-color: #fafafa;
@@ -107,8 +107,8 @@ video#camera, .image-container img {
 
 .market-info-container h2, .planting-plan-container h2 {
     color: #3498db;
-    margin-bottom: 15px;
-    font-size: 24px;
+    margin-bottom: 10px; /* Giảm khoảng cách phía dưới */
+    font-size: 20px; /* Giảm kích thước chữ */
     font-weight: 700; /* Tăng độ đậm */
     text-transform: uppercase; /* Chuyển chữ thành chữ in hoa */
 }
@@ -121,7 +121,7 @@ table {
 
 th, td {
     border: 1px solid #ddd;
-    padding: 10px;
+    padding: 8px; /* Giảm padding */
     text-align: left;
 }
 
