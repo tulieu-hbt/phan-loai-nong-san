@@ -14,7 +14,7 @@ const marketInfoContainer = document.getElementById("marketInfoContainer");
 async function setupCamera() {
     try {
         const stream = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: { exact: "environment" } },
+            video: { facingMode: "environment" },
             audio: false
         });
         video.srcObject = stream;
@@ -23,7 +23,7 @@ async function setupCamera() {
         });
     } catch (error) {
         console.error("Lỗi khi khởi tạo camera:", error);
-        result.innerText = "Không thể sử dụng camera! Hãy kiểm tra quyền truy cập camera của trình duyệt.";
+        result.innerText = "Không thể sử dụng camera!";
     }
 }
 
@@ -79,6 +79,7 @@ async function predict() {
 
     if (maxProbability < 0.7) {
         result.innerText = "Không nhận diện được nông sản.";
+        speak("Không nhận diện được nông sản.");
         preservationInfo.innerText = "";
         plantingPlanContainer.innerHTML = "";
         marketInfoContainer.innerHTML = "";
@@ -87,14 +88,26 @@ async function predict() {
 
     result.innerText = `Kết quả: ${predictedClass}`;
     preservationInfo.innerText = preservationTexts[predictedClass];
+    speak(preservationTexts[predictedClass]);
 
     // Hiển thị dữ liệu kế hoạch trồng cây và chi phí
     await fetchAndDisplayPlanData(predictedClass, plantingPlanContainer, marketInfoContainer);
 }
 
+// Hàm Text-to-Speech
+function speak(text) {
+    if ('speechSynthesis' in window) {
+        const synthesis = window.speechSynthesis;
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        utterance.lang = 'vi-VN';
+        synthesis.speak(utterance);
+    }
+}
+
 // Tải dữ liệu JSON và tìm dữ liệu phù hợp với nông sản
 async function loadExcelData() {
-    const url = 'https://tulieu-hbt.github.io/phan-loai-nong-san/assets/baocao.json';
+    const url = 'https://tulieu-hbt.github.io/phan-loai-nong-san/assets/baocao.json';  // Đảm bảo URL đúng
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -179,6 +192,65 @@ function displayCostEstimate(costEstimate, container) {
     container.innerHTML = costHTML;
 }
 
+// Hàm TTS (Text-to-Speech)
+function speak(text) {
+    if ('speechSynthesis' in window) {
+        const synthesis = window.speechSynthesis;
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        utterance.lang = 'vi-VN';
+        synthesis.speak(utterance);
+    }
+}
+
+// Hàm tải dữ liệu từ file JSON dựa trên loại nông sản
+async function fetchPlantingInfo(nongsan) {
+    const url = 'https://tulieu-hbt.github.io/phan-loai-nong-san/assets/baocao.json';
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        console.log("Dữ liệu JSON:", data);
+
+        // Tìm đối tượng có nongsan trùng với nongsan cần tìm
+        const nongsanData = data.find(item => item.nongsan === nongsan);
+
+        // Trả về plantingPlan và costEstimate từ đối tượng tìm được
+        return nongsanData ? {
+            plantingPlan: nongsanData.plantingPlan,
+            costEstimate: nongsanData.costEstimate
+        } : { plantingPlan: [], costEstimate: [] };
+
+    } catch (error) {
+        console.error("Lỗi khi tải dữ liệu từ file JSON:", error);
+        return { plantingPlan: [], costEstimate: [] };
+    }
+}
+
+// Hàm hiển thị dữ liệu kế hoạch trồng cây
+function displayPlantingInfo(data, container) {
+    const { plantingPlan, costEstimate } = data;
+
+    if (Array.isArray(plantingPlan) && Array.isArray(costEstimate)) {
+        displayPlantingPlan(plantingPlan, container);
+        displayCostEstimate(costEstimate, container);
+    } else {
+        container.innerHTML = "<p>Không có dữ liệu cho nông sản này.</p>";
+    }
+}
+
+// Hàm fetch dữ liệu và hiển thị kế hoạch trồng cây
+async function fetchAndDisplayPlantingInfo(nongsan) {
+    const data = await fetchPlantingInfo(nongsan);
+    if (data) {
+        displayPlantingPlan(data.plantingPlan, plantingPlanContainer);
+        displayCostEstimate(data.costEstimate, plantingPlanContainer); // Đảm bảo bảng chi phí cũng được hiển thị
+    }
+}
 // Hàm tạo dữ liệu giả lập cho giá thị trường (bổ sung dữ liệu)
 function generateMockMarketData(nongsan) {
     const mockPrices = {
@@ -188,8 +260,8 @@ function generateMockMarketData(nongsan) {
         "nho": { price: (10000 + Math.random() * 4000).toFixed(0), date: new Date().toLocaleDateString() },
         "chanh": { price: (8000 + Math.random() * 2000).toFixed(0), date: new Date().toLocaleDateString() }
     };
-    return mockPrices[nongsan] || { price: "Không có sẵn", date: new Date().toLocaleDateString()
-
+    return mockPrices[nongsan] || { price: "Không có sẵn", date: new Date().toLocaleDateString() };
+}
 
 // Hàm hiển thị thông tin giá thị trường lên giao diện
 async function displayMarketData(nongsan, container) {
@@ -209,4 +281,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     await init();
     captureButton.addEventListener("click", predict);
 });
-
