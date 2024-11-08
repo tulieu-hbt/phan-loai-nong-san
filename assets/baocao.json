@@ -4,73 +4,49 @@
         "plantingPlan": [
             {
                 "STT": 1,
-                "Cong Viec Can Lam": "Chuẩn bị đất trồng (đất thịt, phân chuồng hoai mục, tro trấu)",
-                "Thoi Gian Thuc Hien": "1 ngày",
-                "Vat Lieu, Dung Cu Can Thiet": "Cuốc, xẻng, đất, phân chuồng, tro trấu",
-                "Ghi Chu": ""
+                "Cong Viec Can Lam": "Chuẩn bị đất",
+                "Thoi Gian Thuc Hien": "Tháng 1",
+                "Vat Lieu, Dung Cu Can Thiet": "Phân hữu cơ, vôi bột",
+                "Ghi Chu": "Xới đất kỹ trước khi bón phân"
             },
             {
                 "STT": 2,
-                "Cong Viec Can Lam": "Chọn giống chuối khỏe mạnh, không sâu bệnh",
-                "Thoi Gian Thuc Hien": "1 ngày",
-                "Vat Lieu, Dung Cu Can Thiet": "",
-                "Ghi Chu": "Nên chọn cây giống từ vườn ươm uy tín"
+                "Cong Viec Can Lam": "Trồng cây giống",
+                "Thoi Gian Thuc Hien": "Tháng 2",
+                "Vat Lieu, Dung Cu Can Thiet": "Cây giống chuối",
+                "Ghi Chu": "Trồng đều khoảng cách 2m"
             },
             {
                 "STT": 3,
-                "Cong Viec Can Lam": "Trồng cây con vào hố đã chuẩn bị",
-                "Thoi Gian Thuc Hien": "1 ngày",
-                "Vat Lieu, Dung Cu Can Thiet": "Cuốc, xẻng",
-                "Ghi Chu": "Khoảng cách giữa các cây từ 2-3m"
-            },
-            {
-                "STT": 4,
-                "Cong Viec Can Lam": "Tưới nước đều đặn",
-                "Thoi Gian Thuc Hien": "Hàng ngày",
-                "Vat Lieu, Dung Cu Can Thiet": "Bình tưới",
-                "Ghi Chu": "Tưới 2 lần/ngày vào sáng sớm và chiều mát"
-            },
-            {
-                "STT": 5,
-                "Cong Viec Can Lam": "Bón phân định kỳ",
-                "Thoi Gian Thuc Hien": "2 tuần/lần",
-                "Vat Lieu, Dung Cu Can Thiet": "Phân hữu cơ, phân NPK",
-                "Ghi Chu": ""
-            },
-            {
-                "STT": 6,
-                "Cong Viec Can Lam": "Phòng trừ sâu bệnh",
-                "Thoi Gian Thuc Hien": "Thường xuyên",
-                "Vat Lieu, Dung Cu Can Thiet": "Thuốc trừ sâu sinh học",
-                "Ghi Chu": "Kiểm tra thường xuyên để phát hiện sớm sâu bệnh"
+                "Cong Viec Can Lam": "Bón phân lần 1",
+                "Thoi Gian Thuc Hien": "Tháng 3",
+                "Vat Lieu, Dung Cu Can Thiet": "Phân NPK",
+                "Ghi Chu": "Bón cách gốc 10cm"
             }
         ],
         "costEstimate": [
             {
                 "STT": 1,
-                "Cac Loai Chi Phi": "Cây giống",
-                "Don Vi Tinh": "Cây",
-                "Don Gia (dong)": 20000,
-                "So Luong": 1,
-                "Thanh Tien (dong)": 20000,
+                "Cac Loai Chi Phi": "Giống chuối",
+                "Don Vi Tinh": "cây",
+                "Don Gia (dong)": 5000,
+                "So Luong": 100,
                 "Ghi Chu": ""
             },
             {
                 "STT": 2,
-                "Cac Loai Chi Phi": "Phân bón",
-                "Don Vi Tinh": "Kg",
-                "Don Gia (dong)": 10000,
-                "So Luong": 5,
-                "Thanh Tien (dong)": 50000,
+                "Cac Loai Chi Phi": "Phân hữu cơ",
+                "Don Vi Tinh": "kg",
+                "Don Gia (dong)": 3000,
+                "So Luong": 50,
                 "Ghi Chu": ""
             },
             {
                 "STT": 3,
-                "Cac Loai Chi Phi": "Thuốc trừ sâu",
-                "Don Vi Tinh": "Lọ",
-                "Don Gia (dong)": 15000,
-                "So Luong": 2,
-                "Thanh Tien (dong)": 30000,
+                "Cac Loai Chi Phi": "Phân NPK",
+                "Don Vi Tinh": "kg",
+                "Don Gia (dong)": 8000,
+                "So Luong": 20,
                 "Ghi Chu": ""
             }
         ]
@@ -80,89 +56,101 @@
         "plantingPlan": [
             {
                 "STT": 1,
-                "Cong Viec Can Lam": "Chuẩn bị đất trồng (tơi xốp, giàu dinh dưỡng, thoát nước tốt)",
-                "Thoi Gian Thuc Hien": "1-2 ngày",
-                "Vat Lieu, Dung Cu Can Thiet": "Cuốc, xẻng, đất thịt, phân chuồng hoai mục, xơ dừa",
-                "Ghi Chu": "Nên phơi ải đất trước khi trồng"
+                "Cong Viec Can Lam": "Làm đất và xử lý",
+                "Thoi Gian Thuc Hien": "Tháng 1",
+                "Vat Lieu, Dung Cu Can Thiet": "Phân hữu cơ, vôi bột",
+                "Ghi Chu": "Phơi đất sau khi xử lý"
             },
             {
                 "STT": 2,
-                "Cong Viec Can Lam": "Gieo hạt/trồng cây con",
-                "Thoi Gian Thuc Hien": "1 ngày",
-                "Vat Lieu, Dung Cu Can Thiet": "Hạt giống/cây giống cà chua, khay ươm (nếu gieo hạt)",
-                "Ghi Chu": "Chọn giống cà chua phù hợp với điều kiện khí hậu"
+                "Cong Viec Can Lam": "Gieo hạt",
+                "Thoi Gian Thuc Hien": "Tháng 2",
+                "Vat Lieu, Dung Cu Can Thiet": "Hạt giống cà chua",
+                "Ghi Chu": "Gieo hạt vào bầu ươm"
             },
             {
                 "STT": 3,
-                "Cong Viec Can Lam": "Tưới nước",
-                "Thoi Gian Thuc Hien": "Hàng ngày",
-                "Vat Lieu, Dung Cu Can Thiet": "Bình tưới",
-                "Ghi Chu": "Tưới nước vừa đủ, tránh để đất quá khô hoặc quá ẩm"
-            },
-            {
-                "STT": 4,
-                "Cong Viec Can Lam": "Bón phân",
-                "Thoi Gian Thuc Hien": "2 tuần/lần",
-                "Vat Lieu, Dung Cu Can Thiet": "Phân hữu cơ, phân NPK",
-                "Ghi Chu": "Bón phân theo nhu cầu sinh trưởng của cây"
-            },
-            {
-                "STT": 5,
-                "Cong Viec Can Lam": "Làm giàn",
-                "Thoi Gian Thuc Hien": "Khi cây cao khoảng 30cm",
-                "Vat Lieu, Dung Cu Can Thiet": "Cọc tre/gỗ, dây buộc",
-                "Ghi Chu": "Giúp cây phát triển tốt và dễ dàng thu hoạch"
-            },
-            {
-                "STT": 6,
-                "Cong Viec Can Lam": "Phòng trừ sâu bệnh",
-                "Thoi Gian Thuc Hien": "Thường xuyên",
-                "Vat Lieu, Dung Cu Can Thiet": "Thuốc trừ sâu sinh học",
-                "Ghi Chu": "Quan sát thường xuyên để phát hiện và xử lý kịp thời"
-            },
-            {
-                "STT": 7,
-                "Cong Viec Can Lam": "Thu hoạch",
-                "Thoi Gian Thuc Hien": "Sau 2-3 tháng trồng",
-                "Vat Lieu, Dung Cu Can Thiet": "Kéo, rổ",
-                "Ghi Chu": "Thu hoạch khi quả chín đỏ"
+                "Cong Viec Can Lam": "Bón phân lần 1",
+                "Thoi Gian Thuc Hien": "Tháng 3",
+                "Vat Lieu, Dung Cu Can Thiet": "Phân bón NPK",
+                "Ghi Chu": "Bón cách gốc 5cm"
             }
         ],
         "costEstimate": [
             {
                 "STT": 1,
-                "Cac Loai Chi Phi": "Hạt giống/cây giống",
-                "Don Vi Tinh": "Gói/cây",
-                "Don Gia (dong)": 10000,
-                "So Luong": 1,
-                "Thanh Tien (dong)": 10000,
+                "Cac Loai Chi Phi": "Giống cà chua",
+                "Don Vi Tinh": "gói",
+                "Don Gia (dong)": 20000,
+                "So Luong": 2,
                 "Ghi Chu": ""
             },
             {
                 "STT": 2,
-                "Cac Loai Chi Phi": "Phân bón",
-                "Don Vi Tinh": "Kg",
-                "Don Gia (dong)": 15000,
-                "So Luong": 3,
-                "Thanh Tien (dong)": 45000,
+                "Cac Loai Chi Phi": "Phân hữu cơ",
+                "Don Vi Tinh": "kg",
+                "Don Gia (dong)": 3000,
+                "So Luong": 30,
                 "Ghi Chu": ""
             },
             {
                 "STT": 3,
-                "Cac Loai Chi Phi": "Thuốc trừ sâu",
-                "Don Vi Tinh": "Lọ",
-                "Don Gia (dong)": 20000,
-                "So Luong": 2,
-                "Thanh Tien (dong)": 40000,
+                "Cac Loai Chi Phi": "Phân NPK",
+                "Don Vi Tinh": "kg",
+                "Don Gia (dong)": 8000,
+                "So Luong": 10,
+                "Ghi Chu": ""
+            }
+        ]
+    },
+    {
+        "nongsan": "nho",
+        "plantingPlan": [
+            {
+                "STT": 1,
+                "Cong Viec Can Lam": "Chuẩn bị đất và giàn leo",
+                "Thoi Gian Thuc Hien": "Tháng 1",
+                "Vat Lieu, Dung Cu Can Thiet": "Phân hữu cơ, gỗ, dây leo",
+                "Ghi Chu": "Xây dựng giàn leo cho nho"
+            },
+            {
+                "STT": 2,
+                "Cong Viec Can Lam": "Trồng cây giống",
+                "Thoi Gian Thuc Hien": "Tháng 2",
+                "Vat Lieu, Dung Cu Can Thiet": "Cây giống nho",
+                "Ghi Chu": "Trồng cách nhau 2.5m"
+            },
+            {
+                "STT": 3,
+                "Cong Viec Can Lam": "Bón phân lần 1",
+                "Thoi Gian Thuc Hien": "Tháng 3",
+                "Vat Lieu, Dung Cu Can Thiet": "Phân NPK",
+                "Ghi Chu": "Bón cách gốc 10cm"
+            }
+        ],
+        "costEstimate": [
+            {
+                "STT": 1,
+                "Cac Loai Chi Phi": "Giống nho",
+                "Don Vi Tinh": "cây",
+                "Don Gia (dong)": 15000,
+                "So Luong": 50,
                 "Ghi Chu": ""
             },
             {
-                "STT": 4,
-                "Cac Loai Chi Phi": "Vật liệu làm giàn",
-                "Don Vi Tinh": "Bộ",
-                "Don Gia (dong)": 25000,
-                "So Luong": 1,
-                "Thanh Tien (dong)": 25000,
+                "STT": 2,
+                "Cac Loai Chi Phi": "Phân hữu cơ",
+                "Don Vi Tinh": "kg",
+                "Don Gia (dong)": 3000,
+                "So Luong": 60,
+                "Ghi Chu": ""
+            },
+            {
+                "STT": 3,
+                "Cac Loai Chi Phi": "Phân NPK",
+                "Don Vi Tinh": "kg",
+                "Don Gia (dong)": 8000,
+                "So Luong": 25,
                 "Ghi Chu": ""
             }
         ]
