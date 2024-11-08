@@ -10,22 +10,7 @@ const preservationInfo = document.getElementById("preservationInfo");
 const plantingPlanContainer = document.getElementById("plantingPlanContainer");
 const marketInfoContainer = document.getElementById("marketInfoContainer");
 
-video.addEventListener('loadedmetadata', () => {
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-});
-
-async function loadModel() {
-    const modelURL = `${URL}model.json`;
-    try {
-        model = await tf.loadLayersModel(modelURL);
-        if (result) result.innerText = "Mô hình đã sẵn sàng. Hãy đưa nông sản vào camera.";
-    } catch (error) {
-        console.error("Lỗi khi tải mô hình:", error);
-        if (result) result.innerText = "Không thể tải mô hình!";
-    }
-}
-
+// Khởi tạo camera
 async function setupCamera() {
     try {
         const stream = await navigator.mediaDevices.getUserMedia({
@@ -33,22 +18,41 @@ async function setupCamera() {
             audio: false
         });
         video.srcObject = stream;
+        return new Promise(resolve => {
+            video.onloadedmetadata = () => resolve(video);
+        });
     } catch (error) {
         console.error("Lỗi khi khởi tạo camera:", error);
-        if (result) result.innerText = "Không thể sử dụng camera!";
+        result.innerText = "Không thể sử dụng camera!";
     }
 }
 
-function saveCapturedImage() {
+// Tải mô hình TensorFlow
+async function loadModel() {
+    const modelURL = `${URL}model.json`;
+    try {
+        model = await tf.loadLayersModel(modelURL);
+        result.innerText = "Mô hình đã sẵn sàng. Hãy đưa nông sản vào camera.";
+    } catch (error) {
+        console.error("Lỗi khi tải mô hình:", error);
+        result.innerText = "Không thể tải mô hình!";
+    }
+}
+
+// Chụp ảnh từ video camera
+function captureImage() {
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
     const ctx = canvas.getContext("2d");
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     capturedImage.src = canvas.toDataURL("image/png");
 }
 
+// Dự đoán nông sản
 async function predict() {
     if (!model) return;
 
-    saveCapturedImage();
+    captureImage();
     const image = tf.browser.fromPixels(canvas);
     const resizedImage = tf.image.resizeBilinear(image, [224, 224]);
     const normalizedImage = resizedImage.div(255.0);
@@ -64,7 +68,8 @@ async function predict() {
         "chanh": "Chanh nên được bảo quản ở nhiệt độ phòng..."
     };
 
-    let maxProbability = 0, predictedClass = "";
+    let maxProbability = 0;
+    let predictedClass = "";
     predictions.forEach((prob, i) => {
         if (prob > maxProbability) {
             maxProbability = prob;
@@ -83,35 +88,101 @@ async function predict() {
     result.innerText = `Kết quả: ${predictedClass}`;
     preservationInfo.innerText = preservationTexts[predictedClass];
 
-    await fetchAndDisplayPlantingInfo(predictedClass);
-    displayMarketData(predictedClass, marketInfoContainer);
+    // Hiển thị dữ liệu kế hoạch trồng cây và chi phí
+    await fetchAndDisplayPlanData(predictedClass, plantingPlanContainer, marketInfoContainer);
 }
 
-async function fetchAndDisplayPlantingInfo(nongsan) {
-    const data = await fetchPlantingInfo(nongsan);
-    if (data.plantingPlan.length > 0 || data.costEstimate.length > 0) {
-        displayPlantingInfo(data, plantingPlanContainer);
-    } else {
-        plantingPlanContainer.innerHTML = "<p>Không có dữ liệu cho nông sản này.</p>";
-    }
-}
-
-async function fetchPlantingInfo(nongsan) {
+// Tải dữ liệu JSON và tìm dữ liệu phù hợp với nông sản
+async function loadExcelData() {
+    const url = 'baocao.json';
     try {
-        const response = await fetch('baocao.json');
-        const data = await response.json();
-        return data.find(item => item.nongsan === nongsan) || { plantingPlan: [], costEstimate: [] };
+        const response = await fetch(url);
+        return await response.json();
     } catch (error) {
         console.error("Lỗi khi tải dữ liệu từ file JSON:", error);
-        return { plantingPlan: [], costEstimate: [] };
+        return [];
     }
 }
 
+// Hàm hiển thị kế hoạch trồng cây và chi phí
+async function fetchAndDisplayPlanData(nongsan, plantingContainer, costContainer) {
+    const data = await loadExcelData();
+    const selectedData = data.find(item => item.nongsan === nongsan);
+
+    if (selectedData) {
+        displayPlantingPlan(selectedData.plantingPlan, plantingContainer);
+        displayCostEstimate(selectedData.costEstimate, costContainer);
+    } else {
+        plantingContainer.innerHTML = "<p>Không có dữ liệu cho kế hoạch trồng cây.</p>";
+        costContainer.innerHTML = "<p>Không có dữ liệu cho chi phí trồng cây.</p>";
+    }
+}
+
+// Hiển thị bảng kế hoạch trồng cây
+function displayPlantingPlan(plantingPlan, container) {
+    if (!Array.isArray(plantingPlan) || plantingPlan.length === 0) {
+        container.innerHTML = "<p>Không có dữ liệu kế hoạch trồng cây hợp lệ.</p>";
+        return;
+    }
+
+    let tasksHTML = "<h3>Kế hoạch trồng và chăm sóc cây trồng</h3>";
+    tasksHTML += "<table><tr><th>STT</th><th>Công việc cần làm</th><th>Thời gian thực hiện</th><th>Vật liệu, dụng cụ cần thiết</th><th>Ghi chú</th></tr>";
+
+    plantingPlan.forEach(task => {
+        tasksHTML += `<tr>
+            <td>${task.STT || ""}</td>
+            <td>${task['Cong Viec Can Lam'] || ""}</td>
+            <td>${task['Thoi Gian Thuc Hien'] || ""}</td>
+            <td>${task['Vat Lieu, Dung Cu Can Thiet'] || ""}</td>
+            <td>${task['Ghi Chu'] || ""}</td>
+        </tr>`;
+    });
+
+    tasksHTML += "</table>";
+    container.innerHTML = tasksHTML;
+}
+
+// Hiển thị bảng chi phí trồng cây
+function displayCostEstimate(costEstimate, container) {
+    if (!Array.isArray(costEstimate) || costEstimate.length === 0) {
+        container.innerHTML = "<p>Không có dữ liệu chi phí trồng cây hợp lệ.</p>";
+        return;
+    }
+
+    let costHTML = "<h3>Bảng tính chi phí trồng và chăm sóc cây trồng</h3>";
+    costHTML += "<table><tr><th>STT</th><th>Các loại chi phí</th><th>Đơn vị tính</th><th>Đơn giá (đồng)</th><th>Số lượng</th><th>Thành tiền (đồng)</th><th>Ghi chú</th></tr>";
+
+    let totalCost = 0;
+    costEstimate.forEach(item => {
+        const itemTotal = (item['Don Gia (dong)'] || 0) * (item['So Luong'] || 0);
+        totalCost += itemTotal;
+        costHTML += `<tr>
+            <td>${item.STT || ""}</td>
+            <td>${item['Cac Loai Chi Phi'] || ""}</td>
+            <td>${item['Don Vi Tinh'] || ""}</td>
+            <td>${item['Don Gia (dong)'] || ""}</td>
+            <td>${item['So Luong'] || ""}</td>
+            <td>${itemTotal}</td>
+            <td>${item['Ghi Chu'] || ""}</td>
+        </tr>`;
+    });
+
+    costHTML += `<tr class="total-row">
+        <td colspan="5">Tổng cộng</td>
+        <td>${totalCost}</td>
+        <td></td>
+    </tr>`;
+    costHTML += "</table>";
+    container.innerHTML = costHTML;
+}
+
+// Khởi tạo các chức năng chính
 async function init() {
     await loadModel();
     await setupCamera();
 }
 
+// Chạy khi trang đã tải
 document.addEventListener("DOMContentLoaded", async () => {
     await init();
     captureButton.addEventListener("click", predict);
