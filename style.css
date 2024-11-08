@@ -15,7 +15,6 @@ body {
     min-height: 100vh;
 }
 
-/* Container chính */
 .container {
     width: 95%;
     max-width: 1400px;
@@ -32,7 +31,6 @@ h1 {
     font-size: 32px;
 }
 
-/* Khu vực camera và hình chụp */
 .camera-content {
     display: flex;
     justify-content: space-between;
@@ -61,7 +59,6 @@ video#camera, .image-container img {
     border: 3px solid #3498db;
 }
 
-/* Nút chụp ảnh và phân loại, đặt bên dưới camera */
 .button-container {
     margin-top: 20px;
 }
@@ -81,7 +78,6 @@ video#camera, .image-container img {
     background-color: #2980b9;
 }
 
-/* Phần kết quả */
 .result-text {
     font-weight: bold;
     color: #2c3e50;
@@ -95,7 +91,6 @@ video#camera, .image-container img {
     margin-top: 10px;
 }
 
-/* Khu vực hiển thị kế hoạch trồng cây và thông tin thị trường */
 .market-info-container, .planting-plan-container {
     margin-top: 20px;
     padding: 20px;
@@ -110,66 +105,8 @@ video#camera, .image-container img {
     font-size: 22px;
 }
 
-/* Bảng kế hoạch và thông tin thị trường */
-.planting-plan-container table, .market-info-container table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-.planting-plan-container th, .market-info-container th,
-.planting-plan-container td, .market-info-container td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-}
-
-.planting-plan-container th, .market-info-container th {
-    background-color: #3498db;
-    color: white;
-    font-weight: bold;
-}
-
-.planting-plan-container td, .market-info-container td {
-    background-color: #ffffff;
-}
-
 @media (max-width: 768px) {
     .camera-content {
         flex-direction: column;
     }
 }
-
-/*Thông tin được lấy từ excel*/
-/* Định dạng cho bảng dữ liệu kế hoạch và chi phí */
-.planting-plan-container, .market-info-container {
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #fafafa;
-}
-
-.planting-plan-container h3, .market-info-container h3 {
-    color: #3498db;
-    margin-bottom: 15px;
-    font-size: 22px;
-}
-
-.planting-plan-container table, .market-info-container table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-.planting-plan-container th, .market-info-container th,
-.planting-plan-container td, .market-info-container td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-}
-
-/* Màu nền và định dạng cho các tiêu đề cột */
-.planting-plan-container th, .market-info-container th {
-    background-color: #3498db;
-    color
