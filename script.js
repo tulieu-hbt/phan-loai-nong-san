@@ -48,8 +48,6 @@ async function setupCamera() {
     }
 }
 
-// Hàm lưu ảnh chụp vào th
-
 // Hàm lưu ảnh chụp vào thẻ img có id="capturedImage"
 function saveCapturedImage() {
     if (!capturedImage) {
@@ -95,9 +93,9 @@ async function predict() {
         return;
     }
 
-    const nongsan = predictedClass; // Khai báo biến nongsan
+    const nongsan = predictedClass;
 
-    if (result) result.innerText = `Kết quả: ${nongsan}`; // Sử dụng biến nongsan
+    if (result) result.innerText = `Kết quả: ${nongsan}`;
     if (preservationInfo) preservationInfo.innerText = preservationTexts[nongsan];
     speak(preservationTexts[nongsan]);
 
@@ -112,7 +110,7 @@ async function predict() {
 function speak(text) {
     if ('speechSynthesis' in window) {
         const synthesis = window.speechSynthesis;
-        const utterance = new SpeechSynthesisUtterance(text);   
+        const utterance = new SpeechSynthesisUtterance(text);   
 
         utterance.lang = 'vi-VN';
         synthesis.speak(utterance);
@@ -127,6 +125,8 @@ async function fetchPlantingInfo(nongsan) {
         const response = await fetch(url);
         const data = await response.json();
 
+        console.log("Dữ liệu JSON:", data);
+
         // Tìm đối tượng có nongsan trùng với nongsan cần tìm
         const nongsanData = data.find(item => item.nongsan === nongsan);
 
@@ -134,14 +134,17 @@ async function fetchPlantingInfo(nongsan) {
         return nongsanData ? {
             plantingPlan: nongsanData.plantingPlan,
             costEstimate: nongsanData.costEstimate
-        } : { plantingPlan: [], costEstimate: [] }; // Trả về mảng rỗng nếu không tìm thấy
+        } : { plantingPlan: [], costEstimate: [] };
 
     } catch (error) {
         console.error("Lỗi khi tải dữ liệu từ file JSON:", error);
         return { plantingPlan: [], costEstimate: [] };
     }
 }
+
+// Hàm hiển thị kế hoạch trồng cây
 function displayPlantingPlan(plantingPlan, container) {
+    console.log("Kế hoạch trồng cây:", plantingPlan);
     if (!container) {
         console.error("Container is undefined");
         return;
@@ -160,10 +163,12 @@ function displayPlantingPlan(plantingPlan, container) {
     });
 
     tasksHTML += "</table>";
-    container.innerHTML = tasksHTML; // Ghi đè nội dung container
+    container.innerHTML = tasksHTML;
 }
 
+// Hàm hiển thị chi phí trồng cây
 function displayCostEstimate(costEstimate, container) {
+    console.log("Chi phí trồng cây:", costEstimate);
     if (!container) {
         console.error("Container is undefined");
         return;
@@ -192,9 +197,8 @@ function displayCostEstimate(costEstimate, container) {
         <td></td>
     </tr>`;
     costHTML += "</table>";
-    container.innerHTML = costHTML; // Ghi đè nội dung container
+    container.innerHTML = costHTML;
 }
-
 
 // Hàm hiển thị dữ liệu kế hoạch trồng cây
 function displayPlantingInfo(data, container) {
@@ -243,4 +247,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     await init();
     if (captureButton) captureButton.addEventListener("click", predict);
 });
-
