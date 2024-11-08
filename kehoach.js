@@ -16,8 +16,8 @@ async function loadExcelData() {
     }
 }
 
-// Hàm hiển thị kế hoạch trồng cây
 function displayPlantingPlan(plantingPlan, container) {
+    console.log("Kế hoạch trồng cây:", plantingPlan); // Kiểm tra dữ liệu kế hoạch trồng cây
     if (!container) {
         console.error("Container is undefined");
         return;
@@ -38,6 +38,7 @@ function displayPlantingPlan(plantingPlan, container) {
     tasksHTML += "</table>";
     container.innerHTML = tasksHTML; // Ghi đè nội dung của container
 }
+
 
 // Hàm hiển thị chi phí trồng cây
 function displayCostEstimate(costEstimate, container) {
