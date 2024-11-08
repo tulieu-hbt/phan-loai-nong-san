@@ -15,13 +15,15 @@ async function loadExcelData() {
         return []; // Trả về một mảng rỗng nếu có lỗi
     }
 }
-// Hàm hiển kế hoạch trồng cây
+
+// Hàm hiển thị kế hoạch trồng cây
 function displayPlantingPlan(plantingPlan, container) {
-    console.log("Kế hoạch trồng cây:", plantingPlan); // Kiểm tra dữ liệu kế hoạch trồng cây
-    if (!container) {
-        console.error("Container is undefined");
+    if (!Array.isArray(plantingPlan)) {
+        console.error("Dữ liệu plantingPlan không phải là một mảng:", plantingPlan);
+        container.innerHTML = "<p>Không có dữ liệu kế hoạch trồng cây hợp lệ.</p>";
         return;
     }
+
     let tasksHTML = "<h3>Kế hoạch trồng và chăm sóc cây trồng</h3>";
     tasksHTML += "<table><tr><th>STT</th><th>Công việc cần làm</th><th>Thời gian thực hiện</th><th>Vật liệu, dụng cụ cần thiết</th><th>Ghi chú</th></tr>";
 
@@ -39,14 +41,14 @@ function displayPlantingPlan(plantingPlan, container) {
     container.innerHTML = tasksHTML; // Ghi đè nội dung của container
 }
 
-
 // Hàm hiển thị chi phí trồng cây
 function displayCostEstimate(costEstimate, container) {
-    console.log("Chi phí trồng cây:", costEstimate); // Kiểm tra dữ liệu chi phí trồng cây
-    if (!container) {
-        console.error("Container is undefined");
+    if (!Array.isArray(costEstimate)) {
+        console.error("Dữ liệu costEstimate không phải là một mảng:", costEstimate);
+        container.innerHTML = "<p>Không có dữ liệu chi phí trồng cây hợp lệ.</p>";
         return;
     }
+
     let costHTML = "<h3>Bảng tính chi phí trồng và chăm sóc cây trồng</h3>";
     costHTML += "<table><tr><th>STT</th><th>Các loại chi phí</th><th>Đơn vị tính</th><th>Đơn giá (đồng)</th><th>Số lượng</th><th>Thành tiền (đồng)</th><th>Ghi chú</th></tr>";
 
@@ -73,7 +75,6 @@ function displayCostEstimate(costEstimate, container) {
     costHTML += "</table>";
     container.innerHTML = costHTML; // Ghi đè nội dung của container
 }
-
 
 // Hàm tạo dữ liệu giả lập cho giá thị trường (bổ sung dữ liệu)
 function generateMockMarketData(nongsan) {
