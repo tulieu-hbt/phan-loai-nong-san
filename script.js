@@ -14,7 +14,7 @@ const marketInfoContainer = document.getElementById("marketInfoContainer");
 async function setupCamera() {
     try {
         const stream = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: { exact: "environment" } },
+            video: { facingMode: "environment" },
             audio: false
         });
         video.srcObject = stream;
@@ -144,6 +144,18 @@ function displayPlantingPlan(plantingPlan, container) {
     tasksHTML += "</table>";
     container.innerHTML = tasksHTML;
 }
+
+// Hiển thị bảng chi phí trồng cây
+function displayCostEstimate(costEstimate, container) {
+    if (!Array.isArray(costEstimate) || costEstimate.length === 0) {
+        container.innerHTML = "<p>Không có dữ liệu chi phí trồng cây hợp lệ.</p>";
+        return;
+    }
+
+    let costHTML = "<h3>Bảng tính chi phí trồng và chăm sóc cây trồng</h3>";
+    costHTML += "<table><tr><th>STT</th><th>Các loại chi phí</th><th>Đơn vị tính</th><th>Đơn giá (đồng)</th><th>Số lượng</th><th>Thành tiền (đồng)</th><th>Ghi chú</th></tr>";
+
+
 
 // Hiển thị bảng chi phí trồng cây
 function displayCostEstimate(costEstimate, container) {
