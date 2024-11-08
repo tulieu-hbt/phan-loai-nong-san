@@ -62,8 +62,8 @@ async function predict() {
     const classLabels = ["thanh long", "chuối", "cà chua", "nho", "chanh"];
     const preservationTexts = {
         "thanh long": "Bảo quản thanh long ở nơi thoáng mát...",
-        "chuối": "Chuối nên được bảo quản ở nhiệt độ phòng, sau đây là bản tham khảo về cách trồng chuối ...",
-        "cà chua": "Cà chua nên được bảo quản ở nhiệt độ phòng...",
+        "chuối": "Chuối nên được bảo quản ở nhiệt độ phòng sau khi thu hoạch. Bạn có thể tham khảo về cách trồng chuối ...",
+        "cà chua": "Cà chua nên được bảo quản ở nhiệt độ phòng sau khi thu hoạch. Bạn có thể tham khảo về cách trồng ca chua để bổ sung bữa cơm gia đình ...",
         "nho": "Nho nên được bảo quản trong tủ lạnh...",
         "chanh": "Chanh nên được bảo quản ở nhiệt độ phòng..."
     };
