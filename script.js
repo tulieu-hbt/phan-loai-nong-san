@@ -78,7 +78,7 @@ async function predict() {
         }
     });
 
-    if (maxProbability < 0.7) {
+    if (maxProbability < 0.6) {
         result.innerText = "Không nhận diện được nông sản.";
         preservationInfo.innerText = "";
         plantingPlanContainer.innerHTML = "";
