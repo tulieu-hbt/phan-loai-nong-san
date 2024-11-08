@@ -212,6 +212,7 @@ function displayPlantingInfo(data, container) {
     }
 }
 
+
 // Hàm fetch dữ liệu và hiển thị kế hoạch trồng cây
 async function fetchAndDisplayPlantingInfo(nongsan) {
     const data = await fetchPlantingInfo(nongsan);
