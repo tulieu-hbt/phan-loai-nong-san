@@ -49,7 +49,7 @@ h1 {
     border: 1px solid #ddd;
     border-radius: 10px;
     max-width: 48%; /* Đảm bảo cả hai khung hình có cùng kích thước */
-    height: 300px; /* Điều chỉnh chiều cao để không quá cao */
+    height: 250px; /* Điều chỉnh chiều cao để không quá cao */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,7 +58,7 @@ h1 {
 
 video#camera, .image-container img {
     width: 100%;
-    height: 100%;
+    height: auto;
     border-radius: 10px;
     border: 3px solid #3498db;
     object-fit: cover; /* Đảm bảo hình ảnh và video cùng tỷ lệ */
