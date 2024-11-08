@@ -1,7 +1,6 @@
 let model;
 const URL = "model/";
 
-// Lấy các phần tử từ DOM
 const result = document.getElementById("result");
 const captureButton = document.getElementById("captureButton");
 const video = document.getElementById("camera");
@@ -11,13 +10,11 @@ const preservationInfo = document.getElementById("preservationInfo");
 const plantingPlanContainer = document.getElementById("plantingPlanContainer");
 const marketInfoContainer = document.getElementById("marketInfoContainer");
 
-// Thiết lập kích thước canvas giống với video
 video.addEventListener('loadedmetadata', () => {
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
 });
 
-// Hàm tải mô hình
 async function loadModel() {
     const modelURL = `${URL}model.json`;
     try {
@@ -29,7 +26,6 @@ async function loadModel() {
     }
 }
 
-// Hàm khởi tạo camera với cấu hình phù hợp
 async function setupCamera() {
     try {
         const stream = await navigator.mediaDevices.getUserMedia({
@@ -48,7 +44,6 @@ async function setupCamera() {
     }
 }
 
-// Hàm lưu ảnh chụp vào thẻ img có id="capturedImage"
 function saveCapturedImage() {
     if (!capturedImage) {
         console.error("Element with ID 'capturedImage' not found.");
@@ -59,7 +54,6 @@ function saveCapturedImage() {
     capturedImage.src = canvas.toDataURL("image/png");
 }
 
-// Hàm dự đoán
 async function predict() {
     if (!model) return;
 
@@ -93,20 +87,17 @@ async function predict() {
         return;
     }
 
-    const nongsan = predictedClass; // Khai báo biến nongsan
+    const nongsan = predictedClass;
 
-    if (result) result.innerText = `Kết quả: ${nongsan}`; // Sử dụng biến nongsan
+    if (result) result.innerText = `Kết quả: ${nongsan}`;
     if (preservationInfo) preservationInfo.innerText = preservationTexts[nongsan];
     speak(preservationTexts[nongsan]);
 
-    // Gọi hàm hiển thị kế hoạch và chi phí
     fetchAndDisplayPlantingInfo(nongsan);
 
-    // Gọi hàm hiển thị thông tin thị trường
     displayMarketData(nongsan, marketInfoContainer);
 }
 
-// Hàm Text-to-Speech
 function speak(text) {
     if ('speechSynthesis' in window) {
         const synthesis = window.speechSynthesis;
@@ -116,22 +107,17 @@ function speak(text) {
     }
 }
 
-// Hàm lấy dữ liệu từ file JSON dựa trên loại nông sản
 async function fetchPlantingInfo(nongsan) {
-    const url = `https://tulieu-hbt.github.io/phan-loai-nong-san/assets/baocao.json`;
-
     try {
-        const response = await fetch(url);
+        const response = await fetch('baocao.json');
         const data = await response.json();
 
-        // Tìm đối tượng có nongsan trùng với nongsan cần tìm
         const nongsanData = data.find(item => item.nongsan === nongsan);
 
-        // Trả về plantingPlan và costEstimate từ đối tượng tìm được
         return nongsanData ? {
             plantingPlan: nongsanData.plantingPlan,
             costEstimate: nongsanData.costEstimate
-        } : { plantingPlan: [], costEstimate: [] }; // Trả về mảng rỗng nếu không tìm thấy
+        } : { plantingPlan: [], costEstimate: [] };
 
     } catch (error) {
         console.error("Lỗi khi tải dữ liệu từ file JSON:", error);
@@ -139,63 +125,69 @@ async function fetchPlantingInfo(nongsan) {
     }
 }
 
-// Hàm hiển thị kế hoạch trồng cây
 function displayPlantingPlan(plantingPlan, container) {
     if (!container) {
         console.error("Container is undefined");
         return;
     }
-    let tasksHTML = "<h3>Kế hoạch trồng và chăm sóc cây trồng</h3>";
-    tasksHTML += "<table><tr><th>STT</th><th>Công việc cần làm</th><th>Thời gian thực hiện</th><th>Vật liệu, dụng cụ cần thiết</th><th>Ghi chú</th></tr>";
 
-    plantingPlan.forEach(task => {
-        tasksHTML += `<tr>
-            <td><span class="math-inline">\{task\.STT \|\| ""\}</td\>
-<td\></span>{task['Cong Viec Can Lam'] || ""}</td>
-            <td><span class="math-inline">\{task\['Thoi Gian Thuc Hien'\] \|\| ""\}</td\>
-<td\></span>{task['Vat Lieu, Dung Cu Can Thiet'] || ""}</td>
-            <td>${task['Ghi Chu'] || ""}</td>
-        </tr>`;
+    const table = document.createElement('table');
+    const headerRow = table.insertRow();
+    ['STT', 'Công việc cần làm', 'Thời gian thực hiện', 'Vật liệu, dụng cụ cần thiết', 'Ghi chú'].forEach(headerText => {
+        const headerCell = headerRow.insertCell();
+        headerCell.textContent = headerText;
     });
 
-    tasksHTML += "</table>";
-    container.innerHTML = tasksHTML; // Ghi đè nội dung container
+    plantingPlan.forEach(task => {
+        const row = table.insertRow();
+        ['STT', 'Cong Viec Can Lam', 'Thoi Gian Thuc Hien', 'Vat Lieu, Dung Cu Can Thiet', 'Ghi Chu'].forEach(key => {
+            const cell = row.insertCell();
+            cell.textContent = task[key] || '';
+        });
+    });
+
+    container.innerHTML = '<h3>Kế hoạch trồng và chăm sóc cây trồng</h3>';
+    container.appendChild(table);
 }
 
-// Hàm hiển thị chi phí trồng cây
 function displayCostEstimate(costEstimate, container) {
     if (!container) {
         console.error("Container is undefined");
         return;
     }
-    let costHTML = "<h3>Bảng tính chi phí trồng và chăm sóc cây trồng</h3>";
-    costHTML += "<table><tr><th>STT</th><th>Các loại chi phí</th><th>Đơn vị tính</th><th>Đơn giá (đồng)</th><th>Số lượng</th><th>Thành tiền (đồng)</th><th>Ghi chú</th></tr>";
+
+    const table = document.createElement('table');
+    const headerRow = table.insertRow();
+    ['STT', 'Các loại chi phí', 'Đơn vị tính', 'Đơn giá (đồng)', 'Số lượng', 'Thành tiền (đồng)', 'Ghi chú'].forEach(headerText => {
+        const headerCell = headerRow.insertCell();
+        headerCell.textContent = headerText;
+    });
 
     let totalCost = 0;
     costEstimate.forEach(item => {
+        const row = table.insertRow();
+        ['STT', 'Cac Loai Chi Phi', 'Don Vi Tinh', 'Don Gia (dong)', 'So Luong', 'Ghi Chu'].forEach(key => {
+            const cell = row.insertCell();
+            cell.textContent = item[key] || '';
+        });
         const itemTotal = (item['Don Gia (dong)'] || 0) * (item['So Luong'] || 0);
         totalCost += itemTotal;
-        costHTML += `<tr>
-            <td><span class="math-inline">\{item\.STT \|\| ""\}</td\>
-<td\></span>{item['Cac Loai Chi Phi'] || ""}</td>
-            <td><span class="math-inline">\{item\['Don Vi Tinh'\] \|\| ""\}</td\>
-<td\></span>{item['Don Gia (dong)'] || ""}</td>
-            <td><span class="math-inline">\{item\['So Luong'\] \|\| ""\}</td\>
-<td\></span>{itemTotal}</td>
-            <td>${item['Ghi Chu'] || ""}</td>
-        </tr>`;
+        const totalCell = row.insertCell();
+        totalCell.textContent = itemTotal;
     });
 
-    costHTML += `<tr class="total-row">
-        <td colspan="5">Tổng cộng</td>
-        <td>${totalCost}</td>
-        <td></td>
-    </tr>`;
-    costHTML += "</table>";
-    container.innerHTML = costHTML; // Ghi đè nội dung container
+    // Thêm dòng tổng cộng
+    const totalRow = table.insertRow();
+    const totalLabelCell = totalRow.insertCell();
+    totalLabelCell.colSpan = 5;
+    totalLabelCell.textContent = 'Tổng cộng';
+    const totalValueCell = totalRow.insertCell();
+    totalValueCell.textContent = totalCost;
+
+    container.innerHTML = '<h3>Bảng tính chi phí trồng và chăm sóc cây trồng</h3>';
+    container.appendChild(table);
 }
 
-// Hàm hiển thị dữ liệu kế hoạch trồng cây
 // Hàm hiển thị dữ liệu kế hoạch trồng cây
 function displayPlantingInfo(data, container) {
     const { plantingPlan, costEstimate } = data;
