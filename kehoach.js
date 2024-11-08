@@ -17,7 +17,6 @@ async function loadExcelData() {
 }
 
 // Hàm hiển thị kế hoạch trồng cây
-// Hàm hiển thị kế hoạch trồng cây
 function displayPlantingPlan(plantingPlan, container) {
     if (!container) {
         console.error("Container is undefined");
@@ -37,9 +36,8 @@ function displayPlantingPlan(plantingPlan, container) {
     });
 
     tasksHTML += "</table>";
-    container.innerHTML += tasksHTML;
+    container.innerHTML = tasksHTML; // Ghi đè nội dung của container
 }
-
 
 // Hàm hiển thị chi phí trồng cây
 function displayCostEstimate(costEstimate, container) {
@@ -75,6 +73,7 @@ function displayCostEstimate(costEstimate, container) {
     costHTML += "</table>";
     container.innerHTML = costHTML; // Ghi đè nội dung của container
 }
+
 
 // Hàm tạo dữ liệu giả lập cho giá thị trường (bổ sung dữ liệu)
 function generateMockMarketData(nongsan) {
