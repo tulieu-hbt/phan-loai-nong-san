@@ -79,6 +79,7 @@ async function predict() {
 
     if (maxProbability < 0.7) {
         result.innerText = "Không nhận diện được nông sản.";
+        speak("Không nhận diện được nông sản.");
         preservationInfo.innerText = "";
         plantingPlanContainer.innerHTML = "";
         marketInfoContainer.innerHTML = "";
@@ -87,19 +88,31 @@ async function predict() {
 
     result.innerText = `Kết quả: ${predictedClass}`;
     preservationInfo.innerText = preservationTexts[predictedClass];
-
-    // Đọc kết quả bằng giọng nói
     speak(preservationTexts[predictedClass]);
 
     // Hiển thị dữ liệu kế hoạch trồng cây và chi phí
     await fetchAndDisplayPlanData(predictedClass, plantingPlanContainer, marketInfoContainer);
 }
 
+// Hàm Text-to-Speech
+function speak(text) {
+    if ('speechSynthesis' in window) {
+        const synthesis = window.speechSynthesis;
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        utterance.lang = 'vi-VN';
+        synthesis.speak(utterance);
+    }
+}
+
 // Tải dữ liệu JSON và tìm dữ liệu phù hợp với nông sản
 async function loadExcelData() {
-    const url = 'https://tulieu-hbt.github.io/phan-loai-nong-san/assets/baocao.json';
+    const url = 'https://tulieu-hbt.github.io/phan-loai-nong-san/assets/baocao.json';  // Đảm bảo URL đúng
     try {
         const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         return await response.json();
     } catch (error) {
         console.error("Lỗi khi tải dữ liệu từ file JSON:", error);
@@ -121,7 +134,6 @@ async function fetchAndDisplayPlanData(nongsan, plantingContainer, costContainer
     }
 }
 
-// Hiển thị bảng kế hoạch trồng cây
 // Hiển thị bảng kế hoạch trồng cây
 function displayPlantingPlan(plantingPlan, container) {
     if (!Array.isArray(plantingPlan) || plantingPlan.length === 0) {
