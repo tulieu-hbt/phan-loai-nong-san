@@ -200,80 +200,25 @@ function displayCostEstimate(costEstimate, container) {
     container.innerHTML = costHTML;
 }
 
-// Hàm tải dữ liệu từ file JSON
-async function loadExcelData() {
-    const url = 'https://tulieu-hbt.github.io/phan-loai-nong-san/assets/baocao.json';  // Đảm bảo URL đúng
+// Hàm hiển thị dữ liệu kế hoạch trồng cây
+function displayPlantingInfo(data, container) {
+    const { plantingPlan, costEstimate } = data;
 
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-
-        // Kiểm tra dữ liệu
-        console.log("Dữ liệu từ file JSON:", data); 
-
-        return data;
-    } catch (error) {
-        console.error("Lỗi khi tải dữ liệu từ file JSON:", error);
-        return []; // Trả về một mảng rỗng nếu có lỗi
+    if (Array.isArray(plantingPlan) && Array.isArray(costEstimate)) {
+        displayPlantingPlan(plantingPlan, container);
+        displayCostEstimate(costEstimate, container);
+    } else {
+        container.innerHTML = "<p>Không có dữ liệu cho nông sản này.</p>";
     }
 }
 
-// Hàm hiển thị kế hoạch trồng cây
-function displayPlantingPlan(plantingPlan, container) {
-    if (!container) {
-        console.error("Container is undefined");
-        return;
+// Hàm fetch dữ liệu và hiển thị kế hoạch trồng cây
+async function fetchAndDisplayPlantingInfo(nongsan) {
+    const data = await fetchPlantingInfo(nongsan);
+    if (data) {
+        displayPlantingPlan(data.plantingPlan, plantingPlanContainer);
+        displayCostEstimate(data.costEstimate, plantingPlanContainer); // Đảm bảo bảng chi phí cũng được hiển thị
     }
-    let tasksHTML = "<h3>Kế hoạch trồng và chăm sóc cây trồng</h3>";
-    tasksHTML += "<table><tr><th>STT</th><th>Công việc cần làm</th><th>Thời gian thực hiện</th><th>Vật liệu, dụng cụ cần thiết</th><th>Ghi chú</th></tr>";
-
-    plantingPlan.forEach(task => {
-        tasksHTML += `<tr>
-            <td>${task.STT || ""}</td>
-            <td>${task['Cong Viec Can Lam'] || ""}</td>
-            <td>${task['Thoi Gian Thuc Hien'] || ""}</td>
-            <td>${task['Vat Lieu, Dung Cu Can Thiet'] || ""}</td>
-            <td>${task['Ghi Chu'] || ""}</td>
-        </tr>`;
-    });
-
-    tasksHTML += "</table>";
-    container.innerHTML = tasksHTML; // Ghi đè nội dung của container
-}
-
-// Hàm hiển thị chi phí trồng cây
-function displayCostEstimate(costEstimate, container) {
-    if (!Array.isArray(costEstimate)) {
-        console.error("Dữ liệu costEstimate không phải là một mảng:", costEstimate);
-        container.innerHTML = "<p>Không có dữ liệu chi phí trồng cây hợp lệ.</p>";
-        return;
-    }
-
-    let costHTML = "<h3>Bảng tính chi phí trồng và chăm sóc cây trồng</h3>";
-    costHTML += "<table><tr><th>STT</th><th>Các loại chi phí</th><th>Đơn vị tính</th><th>Đơn giá (đồng)</th><th>Số lượng</th><th>Thành tiền (đồng)</th><th>Ghi chú</th></tr>";
-
-    let totalCost = 0;
-    costEstimate.forEach(item => {
-        const itemTotal = (item['Don Gia (dong)'] || 0) * (item['So Luong'] || 0);
-        totalCost += itemTotal;
-        costHTML += `<tr>
-            <td>${item.STT || ""}</td>
-            <td>${item['Cac Loai Chi Phi'] || ""}</td>
-            <td>${item['Don Vi Tinh'] || ""}</td>
-            <td>${item['Don Gia (dong)'] || ""}</td>
-            <td>${item['So Luong'] || ""}</td>
-            <td>${itemTotal}</td>
-            <td>${item['Ghi Chu'] || ""}</td>
-        </tr>`;
-    });
-
-    costHTML += `<tr class="total-row">
-        <td colspan="5">Tổng cộng</td>
-        <td>${totalCost}</td>
-        <td></td>
-    </tr>`;
-    costHTML += "</table>";
-    container.innerHTML = costHTML; // Ghi đè nội dung của container
 }
 
 // Hàm tạo dữ liệu giả lập cho giá thị trường (bổ sung dữ liệu)
@@ -294,3 +239,14 @@ async function displayMarketData(nongsan, container) {
     container.innerHTML = `<p>Giá thị trường hiện tại của ${nongsan}: ${marketData.price} VND/kg</p>
     <p>Cập nhật lần cuối: ${marketData.date}</p>`;
 }
+
+// Khởi tạo
+async function init() {
+    await loadModel();
+    await setupCamera();
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+    await init();
+    if (captureButton) captureButton.addEventListener("click", predict);
+});
