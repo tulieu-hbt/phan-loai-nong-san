@@ -74,7 +74,6 @@ function displayCostEstimate(costEstimate, container) {
     container.innerHTML = costHTML; // Ghi đè nội dung của container
 }
 
-
 // Hàm tạo dữ liệu giả lập cho giá thị trường (bổ sung dữ liệu)
 function generateMockMarketData(nongsan) {
     const mockPrices = {
