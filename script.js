@@ -93,14 +93,14 @@ async function predict() {
         return;
     }
 
-    const nongsan = predictedClass;
+    const nongsan = predictedClass; // Khai báo biến nongsan
 
-    if (result) result.innerText = `Kết quả: ${nongsan}`;
+    if (result) result.innerText = `Kết quả: ${nongsan}`; // Sử dụng biến nongsan
     if (preservationInfo) preservationInfo.innerText = preservationTexts[nongsan];
     speak(preservationTexts[nongsan]);
 
-    // Gọi hàm fetchAndDisplayPlantingInfo để hiển thị kế hoạch và chi phí
-    await fetchAndDisplayPlantingInfo(nongsan);
+    // Gọi hàm hiển thị kế hoạch và chi phí
+    fetchAndDisplayPlantingInfo(nongsan);
 
     // Gọi hàm hiển thị thông tin thị trường
     displayMarketData(nongsan, marketInfoContainer);
@@ -110,8 +110,7 @@ async function predict() {
 function speak(text) {
     if ('speechSynthesis' in window) {
         const synthesis = window.speechSynthesis;
-        const utterance = new SpeechSynthesisUtterance(text);   
-
+        const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = 'vi-VN';
         synthesis.speak(utterance);
     }
@@ -125,8 +124,6 @@ async function fetchPlantingInfo(nongsan) {
         const response = await fetch(url);
         const data = await response.json();
 
-        console.log("Dữ liệu JSON:", data);
-
         // Tìm đối tượng có nongsan trùng với nongsan cần tìm
         const nongsanData = data.find(item => item.nongsan === nongsan);
 
@@ -134,7 +131,7 @@ async function fetchPlantingInfo(nongsan) {
         return nongsanData ? {
             plantingPlan: nongsanData.plantingPlan,
             costEstimate: nongsanData.costEstimate
-        } : { plantingPlan: [], costEstimate: [] };
+        } : { plantingPlan: [], costEstimate: [] }; // Trả về mảng rỗng nếu không tìm thấy
 
     } catch (error) {
         console.error("Lỗi khi tải dữ liệu từ file JSON:", error);
@@ -144,7 +141,6 @@ async function fetchPlantingInfo(nongsan) {
 
 // Hàm hiển thị kế hoạch trồng cây
 function displayPlantingPlan(plantingPlan, container) {
-    console.log("Kế hoạch trồng cây:", plantingPlan);
     if (!container) {
         console.error("Container is undefined");
         return;
@@ -154,21 +150,20 @@ function displayPlantingPlan(plantingPlan, container) {
 
     plantingPlan.forEach(task => {
         tasksHTML += `<tr>
-            <td>${task.STT || ""}</td>
-            <td>${task['Cong Viec Can Lam'] || ""}</td>
-            <td>${task['Thoi Gian Thuc Hien'] || ""}</td>
-            <td>${task['Vat Lieu, Dung Cu Can Thiet'] || ""}</td>
+            <td><span class="math-inline">\{task\.STT \|\| ""\}</td\>
+<td\></span>{task['Cong Viec Can Lam'] || ""}</td>
+            <td><span class="math-inline">\{task\['Thoi Gian Thuc Hien'\] \|\| ""\}</td\>
+<td\></span>{task['Vat Lieu, Dung Cu Can Thiet'] || ""}</td>
             <td>${task['Ghi Chu'] || ""}</td>
         </tr>`;
     });
 
     tasksHTML += "</table>";
-    container.innerHTML = tasksHTML;
+    container.innerHTML = tasksHTML; // Ghi đè nội dung container
 }
 
 // Hàm hiển thị chi phí trồng cây
 function displayCostEstimate(costEstimate, container) {
-    console.log("Chi phí trồng cây:", costEstimate);
     if (!container) {
         console.error("Container is undefined");
         return;
@@ -181,12 +176,12 @@ function displayCostEstimate(costEstimate, container) {
         const itemTotal = (item['Don Gia (dong)'] || 0) * (item['So Luong'] || 0);
         totalCost += itemTotal;
         costHTML += `<tr>
-            <td>${item.STT || ""}</td>
-            <td>${item['Cac Loai Chi Phi'] || ""}</td>
-            <td>${item['Don Vi Tinh'] || ""}</td>
-            <td>${item['Don Gia (dong)'] || ""}</td>
-            <td>${item['So Luong'] || ""}</td>
-            <td>${itemTotal}</td>
+            <td><span class="math-inline">\{item\.STT \|\| ""\}</td\>
+<td\></span>{item['Cac Loai Chi Phi'] || ""}</td>
+            <td><span class="math-inline">\{item\['Don Vi Tinh'\] \|\| ""\}</td\>
+<td\></span>{item['Don Gia (dong)'] || ""}</td>
+            <td><span class="math-inline">\{item\['So Luong'\] \|\| ""\}</td\>
+<td\></span>{itemTotal}</td>
             <td>${item['Ghi Chu'] || ""}</td>
         </tr>`;
     });
@@ -197,9 +192,10 @@ function displayCostEstimate(costEstimate, container) {
         <td></td>
     </tr>`;
     costHTML += "</table>";
-    container.innerHTML = costHTML;
+    container.innerHTML = costHTML; // Ghi đè nội dung container
 }
 
+// Hàm hiển thị dữ liệu kế hoạch trồng cây
 // Hàm hiển thị dữ liệu kế hoạch trồng cây
 function displayPlantingInfo(data, container) {
     const { plantingPlan, costEstimate } = data;
@@ -212,17 +208,13 @@ function displayPlantingInfo(data, container) {
     }
 }
 
-
 // Hàm fetch dữ liệu và hiển thị kế hoạch trồng cây
 async function fetchAndDisplayPlantingInfo(nongsan) {
     const data = await fetchPlantingInfo(nongsan);
-    if (data) {
-        displayPlantingPlan(data.plantingPlan, plantingPlanContainer);
-        displayCostEstimate(data.costEstimate, plantingPlanContainer); // Đảm bảo bảng chi phí cũng được hiển thị
-    }
+    displayPlantingInfo(data, plantingPlanContainer);
 }
 
-// Hàm tạo dữ liệu giả lập cho giá thị trường (bổ sung dữ liệu)
+// Hàm tạo dữ liệu giả lập cho giá thị trường
 function generateMockMarketData(nongsan) {
     const mockPrices = {
         "chuối": { price: (5000 + Math.random() * 2000).toFixed(0), date: new Date().toLocaleDateString() },
