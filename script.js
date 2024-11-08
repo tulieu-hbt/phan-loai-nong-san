@@ -281,3 +281,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     await init();
     captureButton.addEventListener("click", predict);
 });
+
