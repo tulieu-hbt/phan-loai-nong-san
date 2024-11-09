@@ -204,6 +204,11 @@ tr:nth-child(even) td {
     color: #2c3e50;
 }
 
+td.stt-nowrap {
+    white-space: nowrap;
+    display: inline-block; /* Hoặc inline */
+}
+
 @media (max-width: 768px) {
     .camera-content {
         flex-direction: column;
