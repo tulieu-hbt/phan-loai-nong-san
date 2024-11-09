@@ -90,4 +90,4 @@ async function displayMarketData(nongsan, container) {
     <p>Cập nhật lần cuối: ${marketData.date}</p>`;
 }
 
-export { loadExcelData, displayPlantingPlan, displayCostEstimate, displayMarketData };
+//export { loadExcelData, displayPlantingPlan, displayCostEstimate, displayMarketData };
