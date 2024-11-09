@@ -1,6 +1,12 @@
 [
     {
         "nongsan": "cà chua",
+        "gioiThieu":{
+            "giongCay": "Bạn muốn trồng cà chua ?",
+            "phuongThucTrong": "Trồng trong thùng xốp hoặc chậu lớn",
+            "dienTichSoLuong": "Tùy vào diện tích ban công hoặc sân thượng, bạn chọn số lượng cây phù hợp",
+            "dieuKienSinhTruong": "Cây cà chua cần dất tơi xốp, thoát nước tốt, ánh sáng đầy đủ"
+        },
         "plantingPlan": [
             {
                 "STT": "1. Chuẩn bị đất",
