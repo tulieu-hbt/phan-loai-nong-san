@@ -113,14 +113,15 @@ video#camera, .image-container img {
     font-weight: 700;
     text-transform: uppercase;
 }
-table th.STT, table td.STT { 
+table th.stt, table td.stt { 
     width: 100px; /* Đặt độ rộng mong muốn */ 
     white-space: nowrap; 
 }
-table {
+table ,table th.stt, table td.stt {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
+    white-space: nowrap;
 }
 
 th, td {
