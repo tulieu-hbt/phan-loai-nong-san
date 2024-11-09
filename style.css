@@ -98,7 +98,7 @@ video#camera, .image-container img {
     margin-top: 10px;
 }
 
-.market-info-container, .planting-plan-container {
+.market-info-container, .planting-plan-container, .info-container {
     margin-top: 30px;
     padding: 20px;
     border: 1px solid #ddd;
@@ -106,7 +106,7 @@ video#camera, .image-container img {
     background-color: #fafafa;
 }
 
-.market-info-container h2, .planting-plan-container h2 {
+.market-info-container h2, .planting-plan-container h2, .info-container h2 {
     color: #3498db;
     margin-bottom: 15px;
     font-size: 24px;
@@ -143,6 +143,62 @@ tr:nth-child(even) td {
 }
 
 .total-row td {
+    font-weight: bold;
+    background-color: #e9f5ff;
+    color: #2c3e50;
+}
+
+.info-container {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fafafa;
+}
+
+.info-container h3 {
+    color: #3498db;
+    margin-bottom: 15px;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.info-container p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.info-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.info-container th, .info-container td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.info-container th {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.info-container td {
+    background-color: #ffffff;
+}
+
+.info-container tr:nth-child(even) td {
+    background-color: #f2f2f2;
+}
+
+.info-container .total-row td {
     font-weight: bold;
     background-color: #e9f5ff;
     color: #2c3e50;
