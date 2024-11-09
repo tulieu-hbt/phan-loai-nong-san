@@ -135,6 +135,7 @@ async function fetchAndDisplayPlanData(nongsan, plantingContainer, costContainer
 }
 
 // Hiển thị bảng kế hoạch trồng cây
+//<td>${task.STT || ""}</td>
 function displayPlantingPlan(plantingPlan, container) {
     if (!Array.isArray(plantingPlan) || plantingPlan.length === 0) {
         container.innerHTML = "<p>Không có dữ liệu kế hoạch trồng cây hợp lệ.</p>";
@@ -146,7 +147,7 @@ function displayPlantingPlan(plantingPlan, container) {
 
     plantingPlan.forEach(task => {
         tasksHTML += `<tr>
-            <td>${task.STT || ""}</td>
+            <td class="stt">${task.STT || ""}</td>
             <td>${task['Cong Viec Can Lam'] || ""}</td>
             <td>${task['Thoi Gian Thuc Hien'] || ""}</td>
             <td>${task['Vat Lieu, Dung Cu Can Thiet'] || ""}</td>
