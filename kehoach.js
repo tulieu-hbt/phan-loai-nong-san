@@ -26,7 +26,8 @@ function displayPlantingPlan(plantingPlan, container) {
     tasksHTML += "<table><tr><th>STT</th><th>Công việc cần làm</th><th>Thời gian thực hiện</th><th>Vật liệu, dụng cụ cần thiết</th><th>Ghi chú</th></tr>";
     plantingPlan.forEach(task => {
         tasksHTML += `<tr>
-            <td>${task.STT || ""}</td>
+            //*<td>${task.STT || ""}</td>
+            <td style="white-space: nowrap;">${task.STT || ""}</td>
             <td>${task['Cong Viec Can Lam'] || ""}</td>
             <td>${task['Thoi Gian Thuc Hien'] || ""}</td>
             <td>${task['Vat Lieu, Dung Cu Can Thiet'] || ""}</td>
