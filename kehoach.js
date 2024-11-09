@@ -15,7 +15,8 @@ async function loadExcelData() {
         return []; // Trả về một mảng rỗng nếu có lỗi
     }
 }
-
+// <td style="white-space: nowrap;">${task.STT || ""}</td>
+//<td>${task.STT || ""}</td> --> kehoach.js ban đầu
 // Hàm hiển thị kế hoạch trồng cây
 function displayPlantingPlan(plantingPlan, container) {
     if (!container) {
@@ -26,7 +27,8 @@ function displayPlantingPlan(plantingPlan, container) {
     tasksHTML += "<table><tr><th>STT</th><th>Công việc cần làm</th><th>Thời gian thực hiện</th><th>Vật liệu, dụng cụ cần thiết</th><th>Ghi chú</th></tr>";
     plantingPlan.forEach(task => {
         tasksHTML += `<tr>
-            <td style="white-space: nowrap;">${task.STT || ""}</td>
+           
+            <td class="stt-nowrap">${task.STT || ""}</td>
             <td>${task['Cong Viec Can Lam'] || ""}</td>
             <td>${task['Thoi Gian Thuc Hien'] || ""}</td>
             <td>${task['Vat Lieu, Dung Cu Can Thiet'] || ""}</td>
