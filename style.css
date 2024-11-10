@@ -1,4 +1,4 @@
-/* Tổng quan */
+/* CSS để loại bỏ khoảng trống không cần thiết */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -48,7 +48,7 @@ h1 {
     background-color: #f8f8f8;
     border: 1px solid #ddd;
     border-radius: 10px;
-    height: 400px; /* Tăng chiều cao */
+    height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -98,6 +98,28 @@ video#camera, .image-container img {
     margin-top: 10px;
 }
 
+.introduction {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fafafa;
+}
+
+.introduction h3 {
+    color: #3498db;
+    margin-bottom: 15px;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.introduction p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
 .market-info-container, .planting-plan-container, .info-container {
     margin-top: 30px;
     padding: 20px;
@@ -124,6 +146,7 @@ th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    white-space: normal;
 }
 
 th {
@@ -149,24 +172,24 @@ tr:nth-child(even) td {
 }
 
 th.stt, td.stt {
-    width: 120px; /* Tăng độ rộng cho cột STT */
-    white-space: nowrap; /* Đảm bảo nội dung không xuống dòng */
+    width: 120px;
+    white-space: nowrap;
 }
 
 td.congViec, th.congViec {
-    width: 220px; /* Độ rộng phù hợp cho cột Công việc */
+    width: 220px;
 }
 
 td.thoiGian, th.thoiGian {
-    width: 150px; /* Độ rộng phù hợp cho cột Thời gian */
+    width: 150px;
 }
 
 td.vatLieu, th.vatLieu {
-    width: 200px; /* Độ rộng phù hợp cho cột Vật liệu */
+    width: 200px;
 }
 
 td.ghiChu, th.ghiChu {
-    width: 300px; /* Độ rộng phù hợp cho cột Ghi chú */
+    width: 300px;
 }
 
 @media (max-width: 768px) {
@@ -176,6 +199,6 @@ td.ghiChu, th.ghiChu {
 
     .camera-section, .image-container {
         max-width: 100%;
-        height: 300px; /* Điều chỉnh chiều cao cho thiết bị di động */
+        height: 300px;
     }
 }
