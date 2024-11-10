@@ -15,7 +15,7 @@ async function loadExcelData() {
         return []; // Trả về một mảng rỗng nếu có lỗi
     }
 }
-// Hàm hiển thị thông tin giới thiệu
+// Hàm hiển thị thông tin giới thiệu- Thêm thông tin
 function displayIntroduction(gioiThieu, container) {
     if (!gioiThieu || typeof gioiThieu !== "object") {
         console.error("Không có thông tin giới thiệu");
@@ -30,6 +30,21 @@ function displayIntroduction(gioiThieu, container) {
         <p><strong>Điều kiện sinh trưởng:</strong> ${gioiThieu.dieuKienSinhTruong || ""}</p>
     `;
     container.innerHTML = introHTML + container.innerHTML; // Thêm thông tin giới thiệu trước nội dung hiện có
+}
+// Hàm hiển thị dữ liệu kế hoạch trồng cây và chi phí- Thêm thông tin
+async function fetchAndDisplayPlanData(nongsan, introContainer, plantingContainer, costContainer) {
+    const data = await loadExcelData();
+    const selectedData = data.find(item => item.nongsan === nongsan);
+
+    if (selectedData) {
+        displayIntroduction(selectedData.gioiThieu, introContainer); // Hiển thị thông tin giới thiệu
+        displayPlantingPlan(selectedData.plantingPlan, plantingContainer);
+        displayCostEstimate(selectedData.costEstimate, costContainer);
+    } else {
+        introContainer.innerHTML = "<p>Không có dữ liệu giới thiệu.</p>";
+        plantingContainer.innerHTML = "<p>Không có dữ liệu cho kế hoạch trồng cây.</p>";
+        costContainer.innerHTML = "<p>Không có dữ liệu cho chi phí trồng cây.</p>";
+    }
 }
 
 
