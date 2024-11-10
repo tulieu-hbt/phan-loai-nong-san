@@ -9,7 +9,7 @@ const capturedImage = document.getElementById("capturedImage");
 const preservationInfo = document.getElementById("preservationInfo");
 const plantingPlanContainer = document.getElementById("plantingPlanContainer");
 const marketInfoContainer = document.getElementById("marketInfoContainer");
-
+const introContainer = document.getElementById("introductionContainer"); // Thêm dòng này
 // Khởi tạo camera
 async function setupCamera() {
     try {
