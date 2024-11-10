@@ -156,7 +156,7 @@ th.stt, td.stt {
 }
 
 td.congViec, th.congViec {
-    width: 200px; /* Độ rộng phù hợp cho cột Công việc */
+    width: 150px; /* Độ rộng phù hợp cho cột Công việc */
 }
 
 td.thoiGian, th.thoiGian {
