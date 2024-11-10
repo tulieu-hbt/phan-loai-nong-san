@@ -150,7 +150,7 @@ tr:nth-child(even) td {
 }
 
 th.stt, td.stt {
-    width: 50px; /* Độ rộng phù hợp cho cột STT */
+    width: 80px; /* Độ rộng phù hợp cho cột STT */
 }
 
 td.congViec, th.congViec {
@@ -158,7 +158,7 @@ td.congViec, th.congViec {
 }
 
 td.thoiGian, th.thoiGian {
-    width: 150px; /* Độ rộng phù hợp cho cột Thời gian */
+    width: 120px; /* Độ rộng phù hợp cho cột Thời gian */
 }
 
 td.vatLieu, th.vatLieu {
