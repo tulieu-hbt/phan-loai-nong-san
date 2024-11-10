@@ -15,17 +15,21 @@ const introContainer = document.getElementById("introductionContainer");
 
 // Khởi tạo camera
 async function setupCamera() {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        console.error("Trình duyệt không hỗ trợ truy cập camera.");
+        result.innerText = "Trình duyệt không hỗ trợ truy cập camera.";
+        return;
+    }
+
     try {
-        // Kiểm tra các quyền truy cập camera trên các thiết bị khác nhau
         const stream = await navigator.mediaDevices.getUserMedia({
-            video: { 
-                facingMode: { ideal: "environment" },
+            video: {
+                facingMode: "environment",
                 width: { ideal: 1280 },
                 height: { ideal: 720 }
             },
             audio: false
         });
-
         video.srcObject = stream;
         return new Promise(resolve => {
             video.onloadedmetadata = () => resolve(video);
@@ -35,14 +39,7 @@ async function setupCamera() {
         result.innerText = "Không thể sử dụng camera!";
     }
 }
-/* Cập nhật 1 */
-if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    console.error("Trình duyệt không hỗ trợ truy cập camera.");
-    result.innerText = "Trình duyệt không hỗ trợ truy cập camera.";
-} else {
-    // Chạy setupCamera
-    setupCamera();
-}
+
 
 // Tải mô hình TensorFlow
 async function loadModel() {
@@ -124,13 +121,8 @@ function speak(text) {
 
 // Khởi tạo
 async function init() {
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        await loadModel();
-        await setupCamera();
-    } else {
-        console.error("Trình duyệt không hỗ trợ truy cập camera.");
-        result.innerText = "Trình duyệt không hỗ trợ truy cập camera.";
-    }
+    await loadModel();
+    await setupCamera();
 }
 
 // Chạy khi trang đã tải
@@ -138,5 +130,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     await init();
     captureButton.addEventListener("click", predict);
 });
+
 
 
