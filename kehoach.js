@@ -15,6 +15,23 @@ async function loadExcelData() {
         return []; // Trả về một mảng rỗng nếu có lỗi
     }
 }
+// Hàm hiển thị thông tin giới thiệu
+function displayIntroduction(gioiThieu, container) {
+    if (!gioiThieu || typeof gioiThieu !== "object") {
+        console.error("Không có thông tin giới thiệu");
+        return;
+    }
+
+    let introHTML = `
+        <h3>Giới thiệu về cây trồng</h3>
+        <p><strong>Giống cây:</strong> ${gioiThieu.giongCay || ""}</p>
+        <p><strong>Phương thức trồng:</strong> ${gioiThieu.phuongThucTrong || ""}</p>
+        <p><strong>Diện tích & Số lượng:</strong> ${gioiThieu.dienTichSoLuong || ""}</p>
+        <p><strong>Điều kiện sinh trưởng:</strong> ${gioiThieu.dieuKienSinhTruong || ""}</p>
+    `;
+    container.innerHTML = introHTML + container.innerHTML; // Thêm thông tin giới thiệu trước nội dung hiện có
+}
+
 
 function displayPlantingPlan(plantingPlan, container) {
     if (!container) {
