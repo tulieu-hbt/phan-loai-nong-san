@@ -127,7 +127,7 @@ table th, table td {
 }
 
 table th.stt, table td.stt {
-    width: 100px; /* Đặt độ rộng mong muốn */
+    width: 80px; /* Đặt độ rộng mong muốn */
     white-space: nowrap;
 }
 
