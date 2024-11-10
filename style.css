@@ -1,4 +1,4 @@
-/* CSS để loại bỏ khoảng trống không cần thiết */
+/* Tổng quan */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -191,7 +191,7 @@ td.vatLieu, th.vatLieu {
 td.ghiChu, th.ghiChu {
     width: 300px;
 }
-/*<! Set up cho điện thoại ---->*/
+
 @media (max-width: 768px) {
     .camera-content {
         flex-direction: column;
@@ -206,5 +206,22 @@ td.ghiChu, th.ghiChu {
     video#camera, .image-container img {
         width: 100%;
         height: auto;
+    }
+
+    th, td {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+@media (min-width: 769px) {
+    th, td {
+        padding: 10px;
+        font-size: 16px;
     }
 }
