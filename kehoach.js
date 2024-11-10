@@ -84,8 +84,10 @@ function displayCostEstimate(costEstimate, container) {
 // Hàm hiển thị thông tin giới thiệu
 function displayIntroduction(gioiThieu, container) {
     if (!gioiThieu || typeof gioiThieu !== "object") {
+        console.error("Không có thông tin giới thiệu");
         return;
     }
+
     let introHTML = `
         <h3>Giới thiệu về cây trồng</h3>
         <p><strong>Giống cây:</strong> ${gioiThieu.giongCay || ""}</p>
@@ -97,19 +99,30 @@ function displayIntroduction(gioiThieu, container) {
 }
 
 // Hàm hiển thị dữ liệu kế hoạch trồng cây và chi phí
-async function fetchAndDisplayPlanData(nongsan, plantingContainer, costContainer) {
+async function fetchAndDisplayPlanData(nongsan, introContainer, plantingContainer, costContainer) {
     const data = await loadExcelData();
     const selectedData = data.find(item => item.nongsan === nongsan);
 
     if (selectedData) {
-        displayIntroduction(selectedData.gioiThieu, plantingContainer); // Hiển thị thông tin giới thiệu
+        displayIntroduction(selectedData.gioiThieu, introContainer); // Hiển thị thông tin giới thiệu
         displayPlantingPlan(selectedData.plantingPlan, plantingContainer);
         displayCostEstimate(selectedData.costEstimate, costContainer);
     } else {
+        introContainer.innerHTML = "<p>Không có dữ liệu giới thiệu.</p>";
         plantingContainer.innerHTML = "<p>Không có dữ liệu cho kế hoạch trồng cây.</p>";
         costContainer.innerHTML = "<p>Không có dữ liệu cho chi phí trồng cây.</p>";
     }
 }
+
+// Khởi tạo dữ liệu khi trang được tải
+document.addEventListener("DOMContentLoaded", async () => {
+    const introContainer = document.getElementById("introductionContainer");
+    const planContainer = document.getElementById("planContainer");
+    const costContainer = document.getElementById("costContainer");
+
+    await fetchAndDisplayPlanData("cà chua", introContainer, planContainer, costContainer);
+});
+
 
 // Hàm tạo dữ liệu giả lập cho giá thị trường (bổ sung dữ liệu)
 unction generateMockMarketData(nongsan) {
