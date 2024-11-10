@@ -15,7 +15,37 @@ async function loadExcelData() {
         return []; // Trả về một mảng rỗng nếu có lỗi
     }
 }
+//--Thêm
+async function fetchAndDisplayPlanData(nongsan, plantingContainer, costContainer) {
+    const data = await loadExcelData();
+    const selectedData = data.find(item => item.nongsan === nongsan);
 
+    if (selectedData) {
+        displayIntroduction(selectedData.gioiThieu, plantingContainer); // Hiển thị thông tin giới thiệu
+        displayPlantingPlan(selectedData.plantingPlan, plantingContainer);
+        displayCostEstimate(selectedData.costEstimate, costContainer);
+    } else {
+        plantingContainer.innerHTML = "<p>Không có dữ liệu cho kế hoạch trồng cây.</p>";
+        costContainer.innerHTML = "<p>Không có dữ liệu cho chi phí trồng cây.</p>";
+    }
+}
+
+// Hàm hiển thị thông tin giới thiệu
+function displayIntroduction(gioiThieu, container) {
+    if (!gioiThieu || typeof gioiThieu !== "object") {
+        return;
+    }
+    let introHTML = `
+        <h3>Giới thiệu về cây trồng</h3>
+        <p><strong>Giống cây:</strong> ${gioiThieu.giongCay || ""}</p>
+        <p><strong>Phương thức trồng:</strong> ${gioiThieu.phuongThucTrong || ""}</p>
+        <p><strong>Diện tích & Số lượng:</strong> ${gioiThieu.dienTichSoLuong || ""}</p>
+        <p><strong>Điều kiện sinh trưởng:</strong> ${gioiThieu.dieuKienSinhTruong || ""}</p>
+    `;
+    container.innerHTML = introHTML + container.innerHTML; // Thêm thông tin giới thiệu trước nội dung hiện có
+}
+
+//--Thêm
 function displayPlantingPlan(plantingPlan, container) {
     if (!container) {
         console.error("Container is undefined");
