@@ -15,37 +15,8 @@ async function loadExcelData() {
         return []; // Trả về một mảng rỗng nếu có lỗi
     }
 }
-//--Thêm
-async function fetchAndDisplayPlanData(nongsan, plantingContainer, costContainer) {
-    const data = await loadExcelData();
-    const selectedData = data.find(item => item.nongsan === nongsan);
 
-    if (selectedData) {
-        displayIntroduction(selectedData.gioiThieu, plantingContainer); // Hiển thị thông tin giới thiệu
-        displayPlantingPlan(selectedData.plantingPlan, plantingContainer);
-        displayCostEstimate(selectedData.costEstimate, costContainer);
-    } else {
-        plantingContainer.innerHTML = "<p>Không có dữ liệu cho kế hoạch trồng cây.</p>";
-        costContainer.innerHTML = "<p>Không có dữ liệu cho chi phí trồng cây.</p>";
-    }
-}
-
-// Hàm hiển thị thông tin giới thiệu
-function displayIntroduction(gioiThieu, container) {
-    if (!gioiThieu || typeof gioiThieu !== "object") {
-        return;
-    }
-    let introHTML = `
-        <h3>Giới thiệu về cây trồng</h3>
-        <p><strong>Giống cây:</strong> ${gioiThieu.giongCay || ""}</p>
-        <p><strong>Phương thức trồng:</strong> ${gioiThieu.phuongThucTrong || ""}</p>
-        <p><strong>Diện tích & Số lượng:</strong> ${gioiThieu.dienTichSoLuong || ""}</p>
-        <p><strong>Điều kiện sinh trưởng:</strong> ${gioiThieu.dieuKienSinhTruong || ""}</p>
-    `;
-    container.innerHTML = introHTML + container.innerHTML; // Thêm thông tin giới thiệu trước nội dung hiện có
-}
-
-//--Thêm
+// Hàm hiển thị kế hoạch trồng cây
 function displayPlantingPlan(plantingPlan, container) {
     if (!container) {
         console.error("Container is undefined");
@@ -74,7 +45,6 @@ function displayPlantingPlan(plantingPlan, container) {
     tasksHTML += "</table>";
     container.innerHTML = tasksHTML; // Ghi đè nội dung của container
 }
-
 
 // Hàm hiển thị chi phí trồng cây
 function displayCostEstimate(costEstimate, container) {
@@ -111,6 +81,36 @@ function displayCostEstimate(costEstimate, container) {
     container.innerHTML = costHTML; // Ghi đè nội dung của container
 }
 
+// Hàm hiển thị thông tin giới thiệu
+function displayIntroduction(gioiThieu, container) {
+    if (!gioiThieu || typeof gioiThieu !== "object") {
+        return;
+    }
+    let introHTML = `
+        <h3>Giới thiệu về cây trồng</h3>
+        <p><strong>Giống cây:</strong> ${gioiThieu.giongCay || ""}</p>
+        <p><strong>Phương thức trồng:</strong> ${gioiThieu.phuongThucTrong || ""}</p>
+        <p><strong>Diện tích & Số lượng:</strong> ${gioiThieu.dienTichSoLuong || ""}</p>
+        <p><strong>Điều kiện sinh trưởng:</strong> ${gioiThieu.dieuKienSinhTruong || ""}</p>
+    `;
+    container.innerHTML = introHTML + container.innerHTML; // Thêm thông tin giới thiệu trước nội dung hiện có
+}
+
+// Hàm hiển thị dữ liệu kế hoạch trồng cây và chi phí
+async function fetchAndDisplayPlanData(nongsan, plantingContainer, costContainer) {
+    const data = await loadExcelData();
+    const selectedData = data.find(item => item.nongsan === nongsan);
+
+    if (selectedData) {
+        displayIntroduction(selectedData.gioiThieu, plantingContainer); // Hiển thị thông tin giới thiệu
+        displayPlantingPlan(selectedData.plantingPlan, plantingContainer);
+        displayCostEstimate(selectedData.costEstimate, costContainer);
+    } else {
+        plantingContainer.innerHTML = "<p>Không có dữ liệu cho kế hoạch trồng cây.</p>";
+        costContainer.innerHTML = "<p>Không có dữ liệu cho chi phí trồng cây.</p>";
+    }
+}
+
 // Hàm tạo dữ liệu giả lập cho giá thị trường (bổ sung dữ liệu)
 function generateMockMarketData(nongsan) {
     const mockPrices = {
@@ -130,4 +130,14 @@ async function displayMarketData(nongsan, container) {
     <p>Cập nhật lần cuối: ${marketData.date}</p>`;
 }
 
-//export { loadExcelData, displayPlantingPlan, displayCostEstimate, displayMarketData };
+// Khởi tạo
+async function init() {
+    await loadModel();
+    await setupCamera();
+}
+
+// Chạy khi trang đã tải
+document.addEventListener("DOMContentLoaded", async () => {
+    await init();
+    captureButton.addEventListener("click", predict);
+});
