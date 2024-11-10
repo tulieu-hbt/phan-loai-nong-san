@@ -143,13 +143,14 @@ function displayPlantingPlan(plantingPlan, container) {
     }
 
     let tasksHTML = "<h3>Kế hoạch trồng và chăm sóc cây trồng</h3>";
-    tasksHTML += '<tr>
-              <td class="stt">STT</td>
-              <td>Công việc cần làm</td>
-              <td>Thời gian thực hiện</td>
-              <td>Vật liệu, dụng cụ cần thiết</td>
-              <td>Ghi chú</td>
-             </tr>';
+    tasksHTML += `<table>
+        <tr>
+            <th class="stt">STT</th>
+            <th>Công việc cần làm</th>
+            <th>Thời gian thực hiện</th>
+            <th>Vật liệu, dụng cụ cần thiết</th>
+            <th>Ghi chú</th>
+        </tr>`;
 
     plantingPlan.forEach(task => {
         tasksHTML += `<tr>
