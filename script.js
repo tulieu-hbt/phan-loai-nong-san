@@ -91,7 +91,7 @@ async function predict() {
     speak(preservationTexts[predictedClass]);
 
     // Hiển thị dữ liệu kế hoạch trồng cây và chi phí
-    await fetchAndDisplayPlanData(predictedClass, plantingPlanContainer, marketInfoContainer);
+    await fetchAndDisplayPlanData(predictedClass, introContainer, plantingPlanContainer, marketInfoContainer);
 }
 
 // Hàm Text-to-Speech
