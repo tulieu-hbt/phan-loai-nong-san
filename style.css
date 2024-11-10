@@ -124,11 +124,16 @@ table th, table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+}
+
+table th.stt, table td.stt {
+    width: 100px; /* Đặt độ rộng mong muốn */
     white-space: nowrap;
 }
 
-table th.stt, table td.stt { 
-    width: 100px; /* Đặt độ rộng mong muốn */ 
+table td.notes {
+    word-wrap: break-word; /* Cho phép chia nhỏ từ */
+    word-break: break-word; /* Cho phép chia nhỏ từ */
 }
 
 th {
@@ -158,64 +163,4 @@ tr:nth-child(even) td {
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
-    background-color: #fafafa;
-}
-
-.info-container h3 {
-    color: #3498db;
-    margin-bottom: 15px;
-    font-size: 24px;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.info-container p {
-    font-size: 18px;
-    color: #555;
-    margin-bottom: 10px;
-}
-
-.info-container table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-.info-container th, .info-container td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-.info-container th {
-    background-color: #3498db;
-    color: white;
-    font-weight: bold;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-.info-container td {
-    background-color: #ffffff;
-}
-
-.info-container tr:nth-child(even) td {
-    background-color: #f2f2f2;
-}
-
-.info-container .total-row td {
-    font-weight: bold;
-    background-color: #e9f5ff;
-    color: #2c3e50;
-}
-
-@media (max-width: 768px) {
-    .camera-content {
-        flex-direction: column;
-    }
-
-    .camera-section, .image-container {
-        max-width: 100%;
-        height: 300px; /* Điều chỉnh chiều cao cho thiết bị di động */
-    }
-}
+    background
