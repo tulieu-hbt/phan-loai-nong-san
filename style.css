@@ -150,15 +150,15 @@ tr:nth-child(even) td {
 }
 
 th.stt, td.stt {
-    width: 80px; /* Độ rộng phù hợp cho cột STT */
+    width: 80px; /* Tăng độ rộng cho cột STT */
 }
 
 td.congViec, th.congViec {
-    width: 250px; /* Độ rộng phù hợp cho cột Công việc */
+    width: 220px; /* Độ rộng phù hợp cho cột Công việc */
 }
 
 td.thoiGian, th.thoiGian {
-    width: 120px; /* Độ rộng phù hợp cho cột Thời gian */
+    width: 150px; /* Độ rộng phù hợp cho cột Thời gian */
 }
 
 td.vatLieu, th.vatLieu {
@@ -166,7 +166,7 @@ td.vatLieu, th.vatLieu {
 }
 
 td.ghiChu, th.ghiChu {
-    width: 250px; /* Độ rộng phù hợp cho cột Ghi chú */
+    width: 300px; /* Độ rộng phù hợp cho cột Ghi chú */
 }
 
 @media (max-width: 768px) {
