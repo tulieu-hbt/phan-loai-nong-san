@@ -124,7 +124,6 @@ th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
-    white-space: normal; /* Đảm bảo thông tin không bị cắt ngắn */
 }
 
 th {
@@ -150,7 +149,8 @@ tr:nth-child(even) td {
 }
 
 th.stt, td.stt {
-    width: 80px; /* Tăng độ rộng cho cột STT */
+    width: 120px; /* Tăng độ rộng cho cột STT */
+    white-space: nowrap; /* Đảm bảo nội dung không xuống dòng */
 }
 
 td.congViec, th.congViec {
