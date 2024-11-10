@@ -114,6 +114,16 @@ async function fetchAndDisplayPlanData(nongsan, introContainer, plantingContaine
     }
 }
 
+// Khởi tạo dữ liệu khi trang được tải
+document.addEventListener("DOMContentLoaded", async () => {
+    const introContainer = document.getElementById("introductionContainer");
+    const planContainer = document.getElementById("planContainer");
+    const costContainer = document.getElementById("costContainer");
+
+    await fetchAndDisplayPlanData("cà chua", introContainer, planContainer, costContainer);
+});
+
+// Hàm tạo dữ liệu giả lập cho giá thị trường (bổ sung dữ liệu)
 // Hàm tạo dữ liệu giả lập cho giá thị trường (bổ sung dữ liệu)
 function generateMockMarketData(nongsan) {
     const mockPrices = {
@@ -132,12 +142,3 @@ async function displayMarketData(nongsan, container) {
     container.innerHTML = `<p>Giá thị trường hiện tại của ${nongsan}: ${marketData.price} VND/kg</p>
     <p>Cập nhật lần cuối: ${marketData.date}</p>`;
 }
-
-// Khởi tạo dữ liệu khi trang được tải
-document.addEventListener("DOMContentLoaded", async () => {
-    const introContainer = document.getElementById("introductionContainer");
-    const planContainer = document.getElementById("planContainer");
-    const costContainer = document.getElementById("costContainer");
-
-    await fetchAndDisplayPlanData("cà chua", introContainer, planContainer, costContainer);
-});
