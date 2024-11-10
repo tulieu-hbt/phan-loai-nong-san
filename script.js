@@ -15,19 +15,9 @@ const introContainer = document.getElementById("introductionContainer");
 
 // Khởi tạo camera
 async function setupCamera() {
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        console.error("Trình duyệt không hỗ trợ truy cập camera.");
-        result.innerText = "Trình duyệt không hỗ trợ truy cập camera.";
-        return;
-    }
-
     try {
         const stream = await navigator.mediaDevices.getUserMedia({
-            video: {
-                facingMode: "environment",
-                width: { ideal: 1280 },
-                height: { ideal: 720 }
-            },
+            video: { facingMode: "environment" },
             audio: false
         });
         video.srcObject = stream;
@@ -39,7 +29,6 @@ async function setupCamera() {
         result.innerText = "Không thể sử dụng camera!";
     }
 }
-
 
 // Tải mô hình TensorFlow
 async function loadModel() {
@@ -130,6 +119,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     await init();
     captureButton.addEventListener("click", predict);
 });
-
-
-
