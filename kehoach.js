@@ -22,14 +22,15 @@ function displayPlantingPlan(plantingPlan, container) {
         return;
     }
     let tasksHTML = "<h3>Kế hoạch trồng và chăm sóc cây trồng</h3>";
-    tasksHTML += '<table><tr>
-                <tr>
-                 <th class="stt">STT</th>
-                 <th>Công việc cần làm</th>
-                 <th>Thời gian thực hiện</th>
-                 <th>Vật liệu, dụng cụ cần thiết</th>
-                 <th>Ghi chú</th>
-               </tr>';
+    tasksHTML += `<table>
+        <tr>
+            <th class="stt">STT</th>
+            <th>Công việc cần làm</th>
+            <th>Thời gian thực hiện</th>
+            <th>Vật liệu, dụng cụ cần thiết</th>
+            <th>Ghi chú</th>
+        </tr>`;
+
     plantingPlan.forEach(task => {
         tasksHTML += `<tr>
             <td class="stt">${task.STT || ""}</td>
@@ -39,9 +40,11 @@ function displayPlantingPlan(plantingPlan, container) {
             <td>${task['Ghi Chu'] || ""}</td>
         </tr>`;
     });
+
     tasksHTML += "</table>";
     container.innerHTML = tasksHTML; // Ghi đè nội dung của container
 }
+
 
 // Hàm hiển thị chi phí trồng cây
 function displayCostEstimate(costEstimate, container) {
