@@ -66,7 +66,7 @@ video#camera, .image-container img {
 .button-container {
     margin-top: 20px;
     display: flex;
-    justify-content: center;
+justify-content: center;
 }
 
 .capture-button {
@@ -120,20 +120,11 @@ table {
     margin-top: 10px;
 }
 
-table th, table td {
+th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
-}
-
-table th.stt, table td.stt {
-    width: 80px; /* Đặt độ rộng mong muốn */
     white-space: nowrap;
-}
-
-table td.notes {
-    word-wrap: break-word; /* Cho phép chia nhỏ từ */
-    word-break: break-word; /* Cho phép chia nhỏ từ */
 }
 
 th {
@@ -146,6 +137,8 @@ th {
 
 td {
     background-color: #ffffff;
+    overflow: hidden; /* Giới hạn nội dung không cho vượt ra ngoài */
+    text-overflow: ellipsis; /* Hiển thị dấu "..." khi nội dung bị cắt */
 }
 
 tr:nth-child(even) td {
@@ -158,9 +151,33 @@ tr:nth-child(even) td {
     color: #2c3e50;
 }
 
-.info-container {
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background
+th.stt, td.stt {
+    width: 50px; /* Độ rộng phù hợp cho cột STT */
+}
+
+td.congViec, th.congViec {
+    width: 200px; /* Độ rộng phù hợp cho cột Công việc */
+}
+
+td.thoiGian, th.thoiGian {
+    width: 150px; /* Độ rộng phù hợp cho cột Thời gian */
+}
+
+td.vatLieu, th.vatLieu {
+    width: 200px; /* Độ rộng phù hợp cho cột Vật liệu */
+}
+
+td.ghiChu, th.ghiChu {
+    width: 250px; /* Độ rộng phù hợp cho cột Ghi chú */
+}
+
+@media (max-width: 768px) {
+    .camera-content {
+        flex-direction: column;
+    }
+
+    .camera-section, .image-container {
+        max-width: 100%;
+        height: 300px; /* Điều chỉnh chiều cao cho thiết bị di động */
+    }
+}
