@@ -160,11 +160,11 @@ td.congViec, th.congViec {
 }
 
 td.thoiGian, th.thoiGian {
-    width: 150px; /* Độ rộng phù hợp cho cột Thời gian */
+    width: 100px; /* Độ rộng phù hợp cho cột Thời gian */
 }
 
 td.vatLieu, th.vatLieu {
-    width: 200px; /* Độ rộng phù hợp cho cột Vật liệu */
+    width: 250px; /* Độ rộng phù hợp cho cột Vật liệu */
 }
 
 td.ghiChu, th.ghiChu {
