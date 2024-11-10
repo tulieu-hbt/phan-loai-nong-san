@@ -112,7 +112,7 @@ async function fetchAndDisplayPlanData(nongsan, plantingContainer, costContainer
 }
 
 // Hàm tạo dữ liệu giả lập cho giá thị trường (bổ sung dữ liệu)
-function generateMockMarketData(nongsan) {
+unction generateMockMarketData(nongsan) {
     const mockPrices = {
         "chuối": { price: (5000 + Math.random() * 2000).toFixed(0), date: new Date().toLocaleDateString() },
         "cà chua": { price: (15000 + Math.random() * 3000).toFixed(0), date: new Date().toLocaleDateString() },
@@ -129,15 +129,3 @@ async function displayMarketData(nongsan, container) {
     container.innerHTML = `<p>Giá thị trường hiện tại của ${nongsan}: ${marketData.price} VND/kg</p>
     <p>Cập nhật lần cuối: ${marketData.date}</p>`;
 }
-
-// Khởi tạo
-async function init() {
-    await loadModel();
-    await setupCamera();
-}
-
-// Chạy khi trang đã tải
-document.addEventListener("DOMContentLoaded", async () => {
-    await init();
-    captureButton.addEventListener("click", predict);
-});
