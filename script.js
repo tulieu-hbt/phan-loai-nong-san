@@ -16,10 +16,16 @@ const introContainer = document.getElementById("introductionContainer");
 // Khởi tạo camera
 async function setupCamera() {
     try {
+        // Kiểm tra các quyền truy cập camera trên các thiết bị khác nhau
         const stream = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: "environment" },
+            video: { 
+                facingMode: { ideal: "environment" },
+                width: { ideal: 1280 },
+                height: { ideal: 720 }
+            },
             audio: false
         });
+
         video.srcObject = stream;
         return new Promise(resolve => {
             video.onloadedmetadata = () => resolve(video);
@@ -29,6 +35,7 @@ async function setupCamera() {
         result.innerText = "Không thể sử dụng camera!";
     }
 }
+
 
 // Tải mô hình TensorFlow
 async function loadModel() {
