@@ -191,14 +191,20 @@ td.vatLieu, th.vatLieu {
 td.ghiChu, th.ghiChu {
     width: 300px;
 }
-
+/*<! Set up cho điện thoại ---->*/
 @media (max-width: 768px) {
     .camera-content {
         flex-direction: column;
+        align-items: center;
     }
 
     .camera-section, .image-container {
         max-width: 100%;
-        height: 300px;
+        height: auto;
+    }
+
+    video#camera, .image-container img {
+        width: 100%;
+        height: auto;
     }
 }
