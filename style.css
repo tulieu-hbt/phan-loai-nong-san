@@ -131,7 +131,7 @@ video#camera, .image-container img {
 }
 
 .info-container h2 {
-    margin-top: 20px; /* Thêm khoảng cách trên */
+    margin-top: 40px; /* Thêm khoảng cách trên */
     margin-bottom: 20px; /* Thêm khoảng cách dưới */
 }
 
@@ -142,7 +142,7 @@ video#camera, .image-container img {
 
 th, td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 12px; /* Tăng padding để cột STT không xuống hàng */
     text-align: left;
 }
 
@@ -193,5 +193,5 @@ tr:nth-child(even) td {
 /* Đảm bảo các dòng chữ ở cột STT không bị xuống hàng */
 th.stt, td.stt {
     white-space: nowrap;
-    width: 5%; /* Đặt chiều rộng cụ thể để đủ hiển thị thông tin */
+    width: 1%; /* Đặt chiều rộng cụ thể để đủ hiển thị thông tin */
 }
