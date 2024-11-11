@@ -130,6 +130,11 @@ video#camera, .image-container img {
     border-collapse: collapse;
 }
 
+.info-container h2 {
+    margin-top: 20px; /* Thêm khoảng cách trên */
+    margin-bottom: 20px; /* Thêm khoảng cách dưới */
+}
+
 .info-container table {
     width: 100%;
     border-collapse: collapse;
