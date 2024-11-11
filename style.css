@@ -96,8 +96,8 @@ video#camera, .image-container img {
     color: #555;
     font-size: 18px;
     margin-top: 20px;
-    text-align: left;
-    line-height: 1.6;
+    text-align: left; /* Căn trái cho văn bản mô tả */
+    line-height: 1.6; /* Dãn dòng để dễ đọc hơn */
 }
 
 .introduction {
@@ -107,7 +107,7 @@ video#camera, .image-container img {
     border-radius: 10px;
     background-color: #fafafa;
     text-align: left;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Thêm khoảng cách dưới giữa các bảng thông tin */
 }
 
 .introduction h3 {
@@ -130,12 +130,11 @@ video#camera, .image-container img {
 }
 
 .info-container h2 {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 30px;  /* Khoảng cách trên */
+    margin-bottom: 30px;  /* Khoảng cách dưới */
     padding-top: 10px; /* Dãn trên thêm */
     padding-bottom: 10px; /* Dãn dưới thêm */
-    border-top: 2px solid #3498db;
-    border-bottom: 2px solid #3498db;
+    display: inline-block;
 }
 
 .info-container table {
@@ -145,7 +144,7 @@ video#camera, .image-container img {
 
 th, td {
     border: 1px solid #ddd;
-    padding: 12px;
+    padding: 12px; /* Tăng padding để cột STT không xuống hàng */
     text-align: left;
 }
 
@@ -193,8 +192,7 @@ tr:nth-child(even) td {
     }
 }
 
-/* Đảm bảo các dòng chữ ở cột STT không bị xuống hàng */
 th.stt, td.stt {
     white-space: nowrap;
-    width: 1%; /* Đặt chiều rộng cụ thể để đủ hiển thị thông tin */
+    width: 1%;
 }
