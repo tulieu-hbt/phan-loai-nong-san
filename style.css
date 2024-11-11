@@ -125,14 +125,13 @@ video#camera, .image-container img {
 }
 
 .info-container {
-    margin-bottom: 20px; /* Thêm khoảng cách dưới giữa các bảng thông tin */
+    margin-bottom: 40px; /* Thêm khoảng cách dưới giữa các bảng thông tin */
     width: 100%;
-    border-collapse: collapse;
 }
 
 .info-container h2 {
-    margin-top: 40px; /* Thêm khoảng cách trên */
-    margin-bottom: 20px; /* Thêm khoảng cách dưới */
+    margin-top: 20px; /* Khoảng cách trên đều nhau */
+    margin-bottom: 20px; /* Khoảng cách dưới đều nhau */
 }
 
 .info-container table {
