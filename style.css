@@ -95,18 +95,19 @@ video#camera, .image-container img {
 .preservation-text {
     color: #555;
     font-size: 18px;
-    margin: 20px 0; /* Thêm khoảng cách trên dưới để đều đẹp */
+    margin-top: 20px;
     text-align: left; /* Căn trái cho văn bản mô tả */
     line-height: 1.6; /* Dãn dòng để dễ đọc hơn */
 }
 
 .introduction {
-    margin: 20px 0; /* Thêm khoảng cách đều giữa các bảng */
+    margin-top: 20px;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
     background-color: #fafafa;
     text-align: left;
+    margin-bottom: 20px; /* Thêm khoảng cách dưới giữa các bảng thông tin */
 }
 
 .introduction h3 {
@@ -124,21 +125,20 @@ video#camera, .image-container img {
 }
 
 .info-container {
-    width: 100%; /* Đảm bảo độ rộng bảng đồng nhất */
-    margin: 20px 0; /* Thêm khoảng cách đều giữa các bảng */
+    margin-bottom: 20px; /* Thêm khoảng cách dưới giữa các bảng thông tin */
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .info-container table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
 }
 
 th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
-    white-space: nowrap; /* Đảm bảo không xuống hàng */
 }
 
 th {
@@ -183,4 +183,10 @@ tr:nth-child(even) td {
         padding: 12px;
         font-size: 14px;
     }
+}
+
+/* Đảm bảo các dòng chữ ở cột STT không bị xuống hàng */
+th.stt, td.stt {
+    white-space: nowrap;
+    width: 5%; /* Đặt chiều rộng cụ thể để đủ hiển thị thông tin */
 }
