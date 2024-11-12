@@ -127,25 +127,18 @@ video#camera, .image-container img {
 .info-container {
     margin-bottom: 40px;
     width: 100%;
-    padding: 20px;
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    border-radius: 10px;
 }
 
 .info-container h2 {
-    margin-top: 0;
+    margin-top: 20px;
     margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #3498db;
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
 }
 
 .info-container table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
 }
 
 th, td {
