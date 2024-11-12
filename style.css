@@ -1,4 +1,4 @@
-/* Tổng quan */
+/* CSS để loại bỏ khoảng trống không cần thiết */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -18,7 +18,7 @@ body {
 
 .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     background-color: #ffffff;
     border-radius: 10px;
     padding: 20px;
@@ -106,7 +106,6 @@ video#camera, .image-container img {
     border: 1px solid #ddd;
     border-radius: 10px;
     background-color: #fafafa;
-    text-align: left;
 }
 
 .introduction h3 {
@@ -123,7 +122,23 @@ video#camera, .image-container img {
     margin-bottom: 10px;
 }
 
-.info-container table {
+.market-info-container, .planting-plan-container, .info-container {
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fafafa;
+}
+
+.market-info-container h2, .planting-plan-container h2, .info-container h2 {
+    color: #3498db;
+    margin-bottom: 15px;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
@@ -133,6 +148,7 @@ th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    white-space: normal;
 }
 
 th {
@@ -157,24 +173,34 @@ tr:nth-child(even) td {
     color: #2c3e50;
 }
 
+th.stt, td.stt {
+    width: 120px;
+    white-space: nowrap;
+}
+
+td.congViec, th.congViec {
+    width: 220px;
+}
+
+td.thoiGian, th.thoiGian {
+    width: 150px;
+}
+
+td.vatLieu, th.vatLieu {
+    width: 200px;
+}
+
+td.ghiChu, th.ghiChu {
+    width: 300px;
+}
+
 @media (max-width: 768px) {
     .camera-content {
         flex-direction: column;
-        align-items: center;
     }
 
     .camera-section, .image-container {
         max-width: 100%;
-        height: auto;
-    }
-
-    video#camera, .image-container img {
-        width: 100%;
-        height: auto;
-    }
-
-    th, td {
-        padding: 12px;
-        font-size: 14px;
+        height: 300px;
     }
 }
