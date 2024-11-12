@@ -127,13 +127,21 @@ video#camera, .image-container img {
 .info-container {
     margin-bottom: 40px;
     width: 100%;
+    text-align: left;
 }
 
 .info-container h2 {
-    margin-top: 40px;  /* Khoảng cách trên đều nhau */
-    margin-bottom: 40px;  /* Khoảng cách dưới đều nhau */
-    padding-top: 10px; /* Dãn trên thêm */
-    padding-bottom: 10px; /* Dãn dưới thêm */
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    text-transform: uppercase;
+    background-color: #e9f5ff;
+    border-radius: 5px;
+    padding-left: 10px;
 }
 
 .info-container table {
