@@ -130,14 +130,11 @@ video#camera, .image-container img {
 }
 
 .info-container h2 {
-    margin-top: 40px;  /* Khoảng cách trên */
-    margin-bottom: 40px;  /* Khoảng cách dưới */
-    padding-top: 20px; /* Dãn trên thêm */
-    padding-bottom: 20px; /* Dãn dưới thêm */
+    margin-top: 30px;  /* Khoảng cách trên */
+    margin-bottom: 30px;  /* Khoảng cách dưới */
+    padding-top: 10px; /* Dãn trên thêm */
+    padding-bottom: 10px; /* Dãn dưới thêm */
     display: inline-block;
-    background-color: #f2f2f2;
-    border-radius: 10px;
-    width: 100%;
 }
 
 .info-container table {
