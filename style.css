@@ -42,27 +42,20 @@ h1 {
     margin-bottom: 20px;
 }
 
-.camera-section,
-.image-container {
+.camera-section, .image-container {
     flex: 1;
     padding: 10px;
     background-color: #f8f8f8;
     border: 1px solid #ddd;
     border-radius: 10px;
     height: 400px;
-    display: none; /* Ẩn khung hình ban đầu */
+    display: flex; /* Hiển thị khung hình ban đầu */
     justify-content: center;
     align-items: center;
     position: relative;
 }
 
-.camera-section.active,
-.image-container.active {
-    display: flex; /* Hiển thị khi active */
-}
-
-video#camera,
-.image-container img {
+video#camera, .image-container img {
     width: 100%;
     height: 100%;
     border-radius: 10px;
@@ -103,8 +96,8 @@ video#camera,
     color: #555;
     font-size: 18px;
     margin-top: 10px;
-    text-align: left;
-    line-height: 1.6;
+    text-align: left; /* Căn trái cho văn bản mô tả */
+    line-height: 1.6; /* Dãn dòng để dễ đọc hơn */
 }
 
 .introduction {
@@ -121,19 +114,15 @@ video#camera,
     font-size: 24px;
     font-weight: 700;
     text-transform: uppercase;
-    text-align: left;
 }
 
 .introduction p {
     font-size: 18px;
     color: #555;
     margin-bottom: 10px;
-    text-align: left;
 }
 
-.market-info-container,
-.planting-plan-container,
-.info-container {
+.market-info-container, .planting-plan-container, .info-container {
     margin-top: 30px;
     padding: 20px;
     border: 1px solid #ddd;
@@ -141,15 +130,12 @@ video#camera,
     background-color: #fafafa;
 }
 
-.market-info-container h2,
-.planting-plan-container h2,
-.info-container h2 {
+.market-info-container h2, .planting-plan-container h2, .info-container h2 {
     color: #3498db;
     margin-bottom: 15px;
     font-size: 24px;
     font-weight: 700;
     text-transform: uppercase;
-    text-align: left;
 }
 
 table {
@@ -187,29 +173,24 @@ tr:nth-child(even) td {
     color: #2c3e50;
 }
 
-th.stt,
-td.stt {
+th.stt, td.stt {
     width: 120px;
     white-space: nowrap;
 }
 
-td.congViec,
-th.congViec {
+td.congViec, th.congViec {
     width: 220px;
 }
 
-td.thoiGian,
-th.thoiGian {
+td.thoiGian, th.thoiGian {
     width: 150px;
 }
 
-td.vatLieu,
-th.vatLieu {
+td.vatLieu, th.vatLieu {
     width: 200px;
 }
 
-td.ghiChu,
-th.ghiChu {
+td.ghiChu, th.ghiChu {
     width: 300px;
 }
 
@@ -218,8 +199,7 @@ th.ghiChu {
         flex-direction: column;
     }
 
-    .camera-section,
-    .image-container {
+    .camera-section, .image-container {
         max-width: 100%;
         height: 300px;
     }
