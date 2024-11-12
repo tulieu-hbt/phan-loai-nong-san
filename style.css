@@ -42,21 +42,18 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* Ẩn khung hình chờ ban đầu */
 .camera-section, .image-container {
     flex: 1;
     padding: 10px;
-    background-color: #f8f8f8;
     border: 1px solid #ddd;
     border-radius: 10px;
     height: 400px;
-    display: none; /* Ẩn ban đầu */
+    display: none; /* Ẩn khung hình ban đầu */
     justify-content: center;
     align-items: center;
     position: relative;
 }
 
-/* Hiển thị khi được kích hoạt */
 .camera-section.active, .image-container.active {
     display: flex; /* Hiển thị khi active */
 }
