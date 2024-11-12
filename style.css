@@ -130,6 +130,7 @@ video#camera, .image-container img {
     text-align: left;
 }
 
+/* Khoảng cách giữa tiêu đề và bảng */
 .info-container h2 {
     margin-top: 40px;
     margin-bottom: 20px;
@@ -142,13 +143,14 @@ video#camera, .image-container img {
     background-color: #e9f5ff;
     border-radius: 5px;
     padding-left: 10px;
+    text-align: left;
 }
 
-/* Điều chỉnh căn lề và chiều rộng bảng */
+/* Điều chỉnh chiều rộng bảng */
 .info-container table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    margin-top: 20px; /* Tạo khoảng cách giữa bảng và tiêu đề */
 }
 
 th, td {
@@ -179,28 +181,25 @@ tr:nth-child(even) td {
     color: #2c3e50;
 }
 
-/* Đặt chiều rộng cụ thể cho từng cột của cả hai bảng */
+/* Đảm bảo các bảng có cùng chiều rộng */
 th.stt, td.stt {
-    width: 5%;
+    width: 10%;
 }
 
-th.task, td.task,
-th.cost-type, td.cost-type {
-    width: 30%;
+th.task, td.task {
+    width: 35%;
 }
 
-th.time, td.time,
-th.unit, td.unit {
+th.time, td.time {
     width: 15%;
 }
 
-th.material, td.material,
-th.price, td.price {
-    width: 25%;
+th.material, td.material {
+    width: 20%;
 }
 
 th.notes, td.notes {
-    width: 25%;
+    width: 20%;
 }
 
 @media (max-width: 768px) {
