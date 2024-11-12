@@ -1,49 +1,49 @@
 /* Tổng quan */
 * {
-    box-sizing: border-box; /* Đảm bảo padding và border không ảnh hưởng đến kích thước của phần tử */
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif; /* Font chữ mặc định cho toàn trang */
+    font-family: Arial, sans-serif;
 }
 
 body {
-    background-color: #f5f5f5; /* Màu nền cho toàn bộ trang */
-    color: #333; /* Màu chữ mặc định */
+    background-color: #f5f5f5;
+    color: #333;
     display: flex;
-    justify-content: center; /* Căn giữa nội dung theo chiều ngang */
-    align-items: center; /* Căn giữa nội dung theo chiều dọc */
-    min-height: 100vh; /* Chiều cao tối thiểu của trang */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     padding: 20px;
 }
 
 .container {
     width: 100%;
-    max-width: 1200px; /* Chiều rộng tối đa của container */
-    background-color: #ffffff; /* Màu nền của container */
-    border-radius: 10px; /* Bo góc cho container */
+    max-width: 1200px;
+    background-color: #ffffff;
+    border-radius: 10px;
     padding: 20px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Đổ bóng cho container */
-    text-align: center; /* Căn giữa văn bản */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 h1 {
     color: #2c3e50;
     margin-bottom: 20px;
     font-size: 32px;
-    font-weight: 700; /* Độ đậm của chữ */
-    text-transform: uppercase; /* Chuyển đổi chữ thường thành chữ in hoa */
-    letter-spacing: 2px; /* Khoảng cách giữa các chữ cái */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .camera-content {
     display: flex;
-    justify-content: space-between; /* Khoảng cách giữa các phần tử được chia đều */
+    justify-content: space-between;
     gap: 20px;
     margin-bottom: 20px;
 }
 
 .camera-section, .image-container {
-    flex: 1; /* Để các phần tử chia đều chiều rộng */
+    flex: 1;
     padding: 10px;
     background-color: #f8f8f8;
     border: 1px solid #ddd;
@@ -127,31 +127,39 @@ video#camera, .image-container img {
 .info-container {
     margin-bottom: 40px;
     width: 100%;
+    text-align: left;
 }
 
+/* Khoảng cách giữa tiêu đề và bảng */
 .info-container h2 {
-    margin-top: 20px;
+    margin-top: 40px;
     margin-bottom: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    text-transform: uppercase;
+    background-color: #e9f5ff;
+    border-radius: 5px;
+    padding-left: 10px;
+    text-align: left;
 }
 
+/* Điều chỉnh chiều rộng bảng */
 .info-container table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed; /* Đảm bảo các cột có độ rộng cố định */
+    margin-top: 20px; /* Tạo khoảng cách giữa bảng và tiêu đề */
 }
 
-.info-container th, .info-container td {
+th, td {
     border: 1px solid #ddd;
     padding: 12px;
     text-align: left;
-    word-wrap: break-word; /* Đảm bảo văn bản xuống dòng nếu quá dài */
 }
 
-.info-container th {
+th {
     background-color: #3498db;
     color: white;
     font-weight: bold;
@@ -159,18 +167,39 @@ video#camera, .image-container img {
     text-transform: uppercase;
 }
 
-.info-container td {
+td {
     background-color: #ffffff;
 }
 
-tr:nth-child(even) .info-container td {
+tr:nth-child(even) td {
     background-color: #f2f2f2;
 }
 
-.total-row .info-container td {
+.total-row td {
     font-weight: bold;
     background-color: #e9f5ff;
     color: #2c3e50;
+}
+
+/* Đảm bảo các bảng có cùng chiều rộng */
+th.stt, td.stt {
+    width: 10%;
+}
+
+th.task, td.task {
+    width: 35%;
+}
+
+th.time, td.time {
+    width: 15%;
+}
+
+th.material, td.material {
+    width: 20%;
+}
+
+th.notes, td.notes {
+    width: 20%;
 }
 
 @media (max-width: 768px) {
@@ -189,13 +218,8 @@ tr:nth-child(even) .info-container td {
         height: auto;
     }
 
-    .info-container th, .info-container td {
+    th, td {
         padding: 12px;
         font-size: 14px;
     }
-}
-
-.info-container th.stt, .info-container td.stt {
-    white-space: nowrap;
-    width: 5%;
 }
