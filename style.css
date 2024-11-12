@@ -95,9 +95,9 @@ video#camera, .image-container img {
 .preservation-text {
     color: #555;
     font-size: 18px;
-    margin-top: 20px;
-    text-align: left;
-    line-height: 1.6;
+    margin-top: 10px;
+    text-align: left; /* Căn trái cho văn bản mô tả */
+    line-height: 1.6; /* Dãn dòng để dễ đọc hơn */
 }
 
 .introduction {
@@ -107,7 +107,6 @@ video#camera, .image-container img {
     border-radius: 10px;
     background-color: #fafafa;
     text-align: left;
-    margin-bottom: 20px;
 }
 
 .introduction h3 {
@@ -124,38 +123,15 @@ video#camera, .image-container img {
     margin-bottom: 10px;
 }
 
-.info-container {
-    margin-bottom: 40px;
-    width: 100%;
-    text-align: left;
-}
-
-/* Khoảng cách giữa tiêu đề và bảng */
-.info-container h2 {
-    margin-top: 40px;
-    margin-bottom: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size: 24px;
-    font-weight: bold;
-    color: #2c3e50;
-    text-transform: uppercase;
-    background-color: #e9f5ff;
-    border-radius: 5px;
-    padding-left: 10px;
-    text-align: left;
-}
-
-/* Điều chỉnh chiều rộng bảng */
 .info-container table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px; /* Tạo khoảng cách giữa bảng và tiêu đề */
+    margin-top: 10px;
 }
 
 th, td {
     border: 1px solid #ddd;
-    padding: 12px;
+    padding: 8px;
     text-align: left;
 }
 
@@ -179,27 +155,6 @@ tr:nth-child(even) td {
     font-weight: bold;
     background-color: #e9f5ff;
     color: #2c3e50;
-}
-
-/* Đảm bảo các bảng có cùng chiều rộng */
-th.stt, td.stt {
-    width: 10%;
-}
-
-th.task, td.task {
-    width: 35%;
-}
-
-th.time, td.time {
-    width: 15%;
-}
-
-th.material, td.material {
-    width: 20%;
-}
-
-th.notes, td.notes {
-    width: 20%;
 }
 
 @media (max-width: 768px) {
