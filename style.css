@@ -132,8 +132,11 @@ video#camera, .image-container img {
 .info-container h2 {
     margin-top: 20px;
     margin-bottom: 20px;
-    padding: 20px 0;
-    border-bottom: 1px solid #ddd;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f8f8f8;
 }
 
 .info-container table {
