@@ -177,6 +177,27 @@ tr:nth-child(even) td {
     color: #2c3e50;
 }
 
+/* Điều chỉnh cột của cả hai bảng */
+th.stt, td.stt {
+    width: 5%;
+}
+
+th.task, td.task {
+    width: 30%;
+}
+
+th.time, td.time {
+    width: 15%;
+}
+
+th.material, td.material {
+    width: 25%;
+}
+
+th.notes, td.notes {
+    width: 25%;
+}
+
 @media (max-width: 768px) {
     .camera-content {
         flex-direction: column;
@@ -197,9 +218,4 @@ tr:nth-child(even) td {
         padding: 12px;
         font-size: 14px;
     }
-}
-
-th.stt, td.stt {
-    white-space: nowrap;
-    width: 5%;
 }
