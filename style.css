@@ -144,9 +144,11 @@ video#camera, .image-container img {
     padding-left: 10px;
 }
 
+/* Điều chỉnh căn lề và chiều rộng bảng */
 .info-container table {
     width: 100%;
     border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
 th, td {
@@ -177,20 +179,23 @@ tr:nth-child(even) td {
     color: #2c3e50;
 }
 
-/* Điều chỉnh cột của cả hai bảng */
+/* Đặt chiều rộng cụ thể cho từng cột của cả hai bảng */
 th.stt, td.stt {
     width: 5%;
 }
 
-th.task, td.task {
+th.task, td.task,
+th.cost-type, td.cost-type {
     width: 30%;
 }
 
-th.time, td.time {
+th.time, td.time,
+th.unit, td.unit {
     width: 15%;
 }
 
-th.material, td.material {
+th.material, td.material,
+th.price, td.price {
     width: 25%;
 }
 
