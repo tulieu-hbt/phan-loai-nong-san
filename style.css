@@ -23,7 +23,7 @@ body {
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    text-align: center; /* Đảm bảo canh giữa nội dung trong container */
 }
 
 h1 {
@@ -49,14 +49,10 @@ h1 {
     border: 1px solid #ddd;
     border-radius: 10px;
     height: 400px;
-    display: none; /* Ẩn khung hình ban đầu */
+    display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-}
-
-.camera-section.active, .image-container.active {
-    display: flex; /* Hiển thị khi active */
 }
 
 video#camera, .image-container img {
@@ -100,8 +96,8 @@ video#camera, .image-container img {
     color: #555;
     font-size: 18px;
     margin-top: 10px;
-    text-align: left;
-    line-height: 1.6;
+    text-align: left; /* Căn trái cho văn bản mô tả */
+    line-height: 1.6; /* Dãn dòng để dễ đọc hơn */
 }
 
 .introduction {
@@ -118,12 +114,14 @@ video#camera, .image-container img {
     font-size: 24px;
     font-weight: 700;
     text-transform: uppercase;
+    text-align: left; /* Căn trái cho tiêu đề trong phần introduction */
 }
 
 .introduction p {
     font-size: 18px;
     color: #555;
     margin-bottom: 10px;
+    text-align: left; /* Căn trái cho văn bản mô tả */
 }
 
 .market-info-container, .planting-plan-container, .info-container {
@@ -140,6 +138,7 @@ video#camera, .image-container img {
     font-size: 24px;
     font-weight: 700;
     text-transform: uppercase;
+    text-align: left; /* Căn trái cho tiêu đề trong các phần khác */
 }
 
 table {
